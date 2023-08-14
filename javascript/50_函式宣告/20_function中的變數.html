@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <script>
+        // // 10. 底下程式碼會在控制台出現什麼訊息？
+        // console.group('10. func');
+        // var func = function () {
+        //     var a = 1;
+        //     console.log(`inside : ${a}`);
+        // };
+        // func();
+
+        // try {
+        //     console.log(`outside : ${a}`);
+        // } catch (error) {
+        //     console.log(`outside : ${error}`);
+        // }
+        // console.groupEnd();
+
+
+        // 20. 底下程式碼會在控制台出現什麼訊息？
+        var x = 1;
+
+        var func1 = function () {
+            var y = 2;
+
+            var func2 = function () {
+                var x = 999;
+                var z = 3;
+                console.group('20. func2 - 1');
+                console.log(x); // 999
+                console.log(y); // 2
+                console.log(z); // 3
+                console.groupEnd();
+            }
+            func2();
+
+            console.group('20. func2 - 2');
+            console.log(x); // 1
+            console.log(y); // 2
+            console.log(z); // not defined
+            console.groupEnd();
+        }
+        func1();
+        //func變數生成範圍:內層可以取外層，外層不可取內層。例如教室內的老師出教室別人就不認識，但教室外的初川南進教室，大家都認識(迷之音:只有你認識吧)
+    </script>
+</body>
+
+</html>

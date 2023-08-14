@@ -1,0 +1,81 @@
+﻿@model TestModel //綁定這個View所需要使用的Model，但一個View只能綁定一個Model
+@{
+    @* Model.TangText = "OMG"; *@
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+
+
+
+
+<h4>Url.Action()轉址測試----------</</h4><br>
+<a href="@Url.Action("Tang",new { memo = "Benson"})">任務明細</a>
+<br>
+
+<h4>Html.BeginForm測試----------</</h4><br>
+@using (Html.BeginForm("Tang2","Home",FormMethod.Post,new { enctype="multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="text" id="in1" name="in1">
+    <button type="submit">按我喔</button>
+}
+<br>
+
+<h4>Html.TextBox測試----------</</h4><br>
+@Html.TextBox("isHtmlTextBoxId","100",new{@class="isHtmlClass"})
+<br>
+
+<h4>Html.TextBoxFor測試----------透過model去Binding xxxx這個屬性</h4>
+@Html.TextBoxFor(model => model.TangText, new { @class = "form", @placeholder = "TextBoxFor" })
+<br>
+
+<h4>Html.ActionLink測試----------</</h4><br>
+@Html.ActionLink("連結到Tang這個Action", "Tang")
+<br>
+
+<h4>Html.Partial測試----------</h4>
+@Html.Partial("Privacy")
+@* 沒有@Html.Action可用了!!!!! *@
+
+<h4>Html.Partial測試----------將HTML字串使用非Html編碼輸出</h4><br>
+@{
+    string test = "<h1>TTTOOOOPPPPP</h1>";
+}
+@Html.Raw(test)
+<br>
+@test
+<br>
+@Html.Encode(Html.Raw(test))
+<br>
+
+<h4>Html.EditorFor-----測試-----</h4>
+@Html.EditorFor(model => model.TangText, new { htmlAttributes = new { @class = "form-control" } }) 
+@Html.ValidationMessageFor(model => model.TangText, "", new { @class = "text-danger" })
+<br>
+
+<h4>Html.DropDownList-----測試-----</h4>
+@Html.DropDownList("isHtmlDropDownListId", (IEnumerable<SelectListItem>)ViewBag.CompanyId)
+@* @Html.DropDownListFor(model => model.) *@
+<br>
+
+<h4>Html.DropDownList-----測試2-----</h4>
+@Html.DropDownList("myidddd", (SelectList)ViewBag.CCPP)
+<br>
+
+<h4>Html.DropDownListFor-----測試-----</h4>
+@Html.DropDownListFor(m => m.p.id, Model.lst)
+<br>
+
+<h4>Html.DropDownListFor-----測試2-----</h4>
+@Html.DropDownListFor(m => m.p.id, (IEnumerable<SelectListItem>)ViewBag.CompanyId)
+<br>
+
+<h4>Html.Label-----測試-----</h4>
+@Html.Label("這是Label喔"):"顯示Label文字"
+<br>
+
+<h4>Html.DisplayFor-----測試-----</h4>
+@Html.DisplayFor(x => x.p.Name)
+<br>

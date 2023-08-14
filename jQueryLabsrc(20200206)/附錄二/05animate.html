@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>05animate.html</title>
+    <style>
+        #imgbird {
+            position: relative;
+            left: 500px;
+            top: 300px;
+        }
+    </style>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#imgbird").mouseover(function () {
+                // $("#imgbird").mouseover(function(){   
+                //animate()
+                //使用者滑入imgbird的圖片後,使用3秒鐘的時間完成下列動作
+                //向左移動到100px的位置(left:100)
+                //向上移動到0px的位置(top:0)
+                //寬度調整成-150px(width:-150)
+                //不透明度調整成0.3(opacity:0.3)
+                //瀏覽網頁看看效果                    
+
+                $(this).animate({
+                    left: "100px",
+                    top: "0px",
+                    width: "-=150px",
+                    opacity: "0.3"
+                },3000,
+                function () {
+                    $(this).hide();
+                });
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <img id="imgbird" src="images/birdfly.gif" alt="bird flying">
+</body>
+
+</html>

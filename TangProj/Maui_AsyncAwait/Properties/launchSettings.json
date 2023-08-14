@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "Windows Machine": {
+      "commandName": "MsixPackage",
+      "nativeDebugging": false
+    }
+  },
+  "MyProject": {
+    "commandName": "Project",
+    "launchBrowser": false,
+    "applicationUrl": "",
+    "environmentVariables": {
+      "ASPNETCORE_ENVIRONMENT": "Development"
+    }
+  }
+}

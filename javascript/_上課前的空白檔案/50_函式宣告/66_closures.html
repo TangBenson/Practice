@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3>讓函式擁有自己的變數，變數不會隨著函式結束而消失</h3>
+    <h3><a href="https://www.w3schools.com/js/js_function_closures.asp" target="_blank">JavaScript Closures</a></h3>
+
+
+    <script>
+        // 10. 底下這一段code，執行出來 qty 的結果是 100 還是 999？
+        var qty = 100
+
+        function test() {
+            var qty = 999;
+            showQty();
+        }
+
+        function showQty() {
+            console.log(`10. qty ==>　${qty}`); // 100 
+        }
+
+        test();
+
+
+
+        // 20. 底下這一段code，執行出來 num 的結果是 10 還是 undefined ？
+        function test2() {
+            var num = 10;
+
+            function showNum() {
+                console.log(`20. A. num ==> ${this.num}`); // 99，function 裡面的 this會指向 global 
+                console.log(`20. B. num ==> ${num}`);      // 10
+            }
+            showNum();
+        }
+
+        test2();
+
+        // 30. 底下這一段code，執行出來的結果是什麼？
+        var hp = 1000;
+
+        function boss() {
+            hp = hp - 10;
+            console.log(`30. boss: ${hp}`);
+        }
+
+        function monster() {
+            hp = 300;
+            console.log(`30. monster: ${hp}`);
+        }
+
+        boss();
+        monster();
+        boss();
+
+
+        // 40. 改寫 30 ，讓 function 擁有 自己的 hp 變數
+
+
+        // 50. 改寫 40，透過 return function(){} 來達到變數生命的延續
+
+
+        // 60. 底下的結果執行出來會是多少？
+        function a(x) {
+            function b(y) {
+                return x + y;
+            }
+            return b;
+        }
+        console.log(a(8)(7));
+
+
+        // 70. 底下的結果執行出來會是多少？
+        function a(x) {
+            return function b(y) {
+                return x * y;
+            };
+        }
+        console.log(a(2)(9));
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>08animatestop.html</title>
+    <style>
+        #imgdiv{position: absolute;
+            left: 700px;top:300px;border:1px dashed green;}       
+    </style>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/jquery.color.js"></script>
+    <script>
+        $(function(){
+            $("#imgdiv").mouseover(function(){                                                
+                $(this).animate({left:"100px",
+                                top:"0px",
+                                width:"100px",
+                                opacity:"0.3"},3000);
+
+                $(this).animate({
+                                "backgroundColor":"yellow",
+                                "borderColor":"red",
+                                // "borderStyle": "double",
+                                "borderWidth": "10px"},3000);
+            }); 
+
+
+            //$(this).stop()：立即停止目前執行的動畫，在queue中的動畫會再繼續執行
+            //$(this).stop(true) : 停止目前執行中的動畫及queue中的動畫
+            //$(this).stop(true,true) :立刻停止執行中的動畫且完成到最後
+            $("#btn1").click(function(){
+                $("#imgdiv").stop();
+            });  
+            $("#btn2").click(function(){
+                $("#imgdiv").stop(true);
+            });
+            $("#btn3").click(function(){
+                $("#imgdiv").stop(true,true);
+            });               
+        });
+    </script>
+
+</head>
+<body>     
+    <input type="button" id="btn1" value="停止動畫">  
+    <input type="button" id="btn2" value="停止動畫">
+    <input type="button" id="btn3" value="停止動畫">
+    <hr> 
+    <div  id="imgdiv">
+        <img  src="images/dogrunning.gif" alt="bird flying">
+    </div>
+</body>   
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>02elementAttribute.html</title>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#btn1").click(function () {
+                //一般屬性用attr讀取和設定，checked 用prop讀取和設定
+                //一般屬性和checked用removeAttr,自定屬性用removeProp
+
+                // console.log($("#ida").attr("href"));      //http://jquery.com
+                // console.log($("#ida").prop("href"));      //http://jquery.com
+                // console.log($("#ida").css("href"));       //undefined
+                // console.log($("input").attr("checked"));  //checked
+                // console.log($("input").prop("checked"));  //true 
+                // console.log($("input").css("checked"));   //undefined 
+
+                $("#ida").attr("href", "http://iiiedu.org.tw"); //(o)
+                $("#ida").prop("href", "http://iiiedu.org.tw"); //(o)
+                $("#ida").css("href", "http://iiiedu.org.tw");  //(x)
+                $(":checked").attr("checked", false); //(x)讀出為undefined
+                alert($(":checked").prop("checked"));  //undefined
+                $(":checked").prop("checked", false); //(o)
+                $(":checked").css("checked", false);   //(x)
+
+                $("#ida").removeAttr("href");  //(o)
+                $("#ida").removeProp("href");   //(x)
+                $(":checked").removeAttr("checked");//(o)
+                $(":checked").removeProp("checked");  //(x)
+
+                //attr() vs prop()
+
+                // console.log($(":checkbox:eq(1)").attr('checked'));   //??       checked
+                // console.log($(":checkbox:eq(2)").attr('checked'));   //checked   checked
+                // console.log($(":checkbox:eq(3)").attr('checked'));   //true      checked
+                // console.log($(":checkbox:eq(4)").attr('checked'));   //on        checked
+                // console.log($(":checkbox:eq(5)").attr('checked'));   //yes      checked
+                // console.log($(":checkbox:eq(6)").attr('checked'));   //undefined
+
+                // console.log($(":checkbox:eq(1)").prop('checked'));   //true
+                // console.log($(":checkbox:eq(2)").prop('checked'));   //true
+                // console.log($(":checkbox:eq(3)").prop('checked'));   //true
+                // console.log($(":checkbox:eq(4)").prop('checked'));   //true
+                // console.log($(":checkbox:eq(5)").prop('checked'));   //true
+                // console.log($(":checkbox:eq(6)").prop('checked'));   //false
+
+            });
+
+            $("#btn2").click(function () {
+                // console.log($("input").prop("checked")); //true            
+                // console.log($("option").prop("selected")); //取第一個的值  false              
+                // console.log($("option").val());  //取第一個的值  1
+                // console.log($(":selected").val()); //3 
+                // console.log($(":selected").text());  //jQueryJava
+                // 印出第2個option的文字內容
+
+                // 印出option的已選取(selected)的文字內容
+                $(':selected').each(function (index) {
+                    console.log(index + ":" + $(this).text())
+                })
+            });
+
+
+            $("#btn3").click(function () {
+                // $("#ida").attr("href","http://iiiedu.org.tw");
+                // $("#ida").text("iiiedu");
+
+                $("#ida").attr("href", "http://iiiedu.org.tw").text("iiiedu");
+                $(":checked").attr("checked", false);
+            });
+
+            $("#btn4").click(function () {
+                $("#ida").attr("href", "http://iiiedu.org.tw").text("iiiedu");
+                $(":checked").prop("checked", false);
+                //這個也行
+                // $(":checked").attr("checked", false);
+            });
+
+            $("#btn5").click(function () {
+                $("#ida").removeAttr("href");
+
+                $("option").each(function () {
+                    console.log("get:" + $(this).attr("value"));
+                });
+                $("option").removeAttr("value");
+                $("option").each(function () {
+                    console.log("remove:" + $(this).attr("value"));
+                });
+            });
+
+            $("#btn6").click(function () {
+                // 自定屬性
+                console.log($("#ida").prop("customs", "abc").prop("customs"));
+                $("#ida").removeProp("customs");
+                console.log($("#ida").prop("customs"));
+
+                console.log("---------------");
+                console.log($("#ida").prop("customs", "123")
+                    .removeProp("customs")
+                    .prop("customs")
+                );
+            });
+
+        });
+    </script>
+
+</head>
+
+<body>
+    <a id="ida" href="http://jquery.com" title="web">jquery</a><br>
+    <input type="checkbox" value="reading" id="idchk" checked="checked">reading<br>
+    <input type="checkbox" value="a1" name="a" checked />A1
+    <input type="checkbox" value="a2" name="a" checked="checked" />A2
+    <input type="checkbox" value="a3" name="a" checked="true" />A3
+    <input type="checkbox" value="a4" name="a" checked="on" />A4
+    <input type="checkbox" value="a5" name="a" checked="yes" />A5
+    <input type="checkbox" value="a6" name="a" />A6<br>
+
+    <select id="idsel" multiple="multiple">
+        <option id="opt1" value="1">HTML</option>
+        <option id="opt2" value="2">JavaScript</option>
+        <option id="opt3" value="3" selected="selected">jQuery</option>
+        <option id="opt4" value="4">python</option>
+        <option id="opt5" value="5" selected="selected">Java</option>
+        <option id="opt6" value="6">C#</option>
+    </select>
+    <hr>
+    <input type="button" id="btn1" value="attr(name)">
+    <input type="button" id="btn2" value="prop(name)">
+    <input type="button" id="btn3" value="attr(name,value)">
+    <input type="button" id="btn4" value="prop(name,boolean)">
+    <input type="button" id="btn5" value="removeAtt(name)">
+    <input type="button" id="btn6" value="removeProp(name)">
+
+</body>
+
+</html>

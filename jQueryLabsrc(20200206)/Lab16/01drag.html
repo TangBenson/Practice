@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <title>01drag.html</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .picture {
+            margin: 20px auto;
+            width: 800px;
+            height: 540px;
+            background: url(images/slide1.jpg);
+            /* cover主要用於背景圖小於所在的內容 */
+            background-size: cover;
+            position: relative;
+        }
+
+        .cover {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            background: rgb(178, 98, 32);
+            /* 定義透明效果 */
+            opacity: .5;
+        }
+
+        .drag {
+            position: absolute;
+            width: 10px;
+            height: 100%;
+            background: lightseagreen;
+            /* background:red; */
+            left: 50%;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="picture">
+        <div class="cover"></div>
+        <div class="drag" id="drag"></div>
+    </div>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script>
+        $("#drag").draggable({
+            //在哪一軸拖曳
+            axis: "x",
+            // 能拖曳的範圍
+            containment: "parent",
+            //被拖曳物件是否要出現卷軸
+            scroll: false,
+            drag: function () {
+                var dragPos = $(this).css("left");
+                $(".cover").css("width", dragPos);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>02scroll.html</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css//bootstrap.min.css">
+    <style>
+        body {
+            height: 300vh;
+        }
+
+        .read_progress {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 20px;
+            background: rgba(0, 0, 0, .3);
+        }
+
+        .read_progress_bar {
+            height: 20px;
+            background: red;
+            width: 0%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="read_progress">
+        <div id="read_progress_bar" class="read_progress_bar"></div>
+    </div>
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            var winh = $(window).height()
+            var bodyh = $('body').height();
+            // console.log(winh);
+            // console.log(bodyh);
+            var h = bodyh - winh;
+            //scroll偵測滑鼠捲動
+            $(window).scroll(function () {
+                // console.log($(this).scrollTop());
+                // $(this).scrollTop()/bodyh-winh
+                // console.log(Math.round((($(this).scrollTop()/h)*100))+"%");
+                $('#read_progress_bar').width(Math.round((($(this).scrollTop() / h) * 100)) + "%");
+
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <h3><a href="http://www.w3schools.com/js/js_arrays.asp">JavaScript Arrays</a></h3>
+    <h3><a href="http://www.w3schools.com/js/js_array_methods.asp">JavaScript Array Methods</a></h3>
+
+    <h3>陣列使用時機：相同的資料型態（雖然javascript可以不需要相同，但還是盡量避免）</h3>
+    <h3>具有一致的意義、需要參與同樣的運算</h3>
+    <h3>陣列就像置物櫃一樣，透過index，可以存放物品，可以取出</h3>
+
+    <script>
+        var weekList = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+        
+        // 試試看， 底下三種屬於陣列的函式
+        // 1. 陣列.valueOf()
+        console.log(weekList.valueOf());
+        //console.log(weekList);
+
+        // 2. 陣列.toString()
+        console.log(weekList.toString());
+
+        // 3. 陣列.join("#")
+        console.log(weekList.join('*'));
+
+        // 4. 移除第一個元素
+        weekList.shift();
+        console.log(weekList.join("#"));
+
+        // 5. 移除最後一個元素
+        weekList.pop();
+        console.log(weekList.join("#"));
+
+        // 6. 有哪三種方法可以加入元素?
+        weekList.unshift('sunday');
+        console.log(weekList.join("#"));
+
+        weekList.push('saturday');
+        console.log(weekList.join("#"));
+
+        weekList[weekList.length] = 'apple';
+        console.log(weekList.join("#"));
+        
+    </script>
+
+</body>
+</html>

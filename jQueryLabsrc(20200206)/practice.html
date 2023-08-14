@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>練習</title>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <style>
+        .lv1,
+        .lv2,
+        .lv3 {
+            /* border-style: dashed;
+            border-color: cadetblue;
+            border: 1px; */
+            background-color: cadetblue;
+            display: flex;
+            justify-content: center;
+            height: 20%;
+            /* margin-bottom: 50px; */
+        }
+
+        /* #canvas1,
+        #canvas2 {
+            background-color: darkkhaki;
+            display: block;
+            margin: 0 auto;
+        } */
+
+        .lv1-1,
+        .lv2-1,
+        .lv3-1 {
+            /* border-style: solid;
+            border-color: rgb(245, 15, 15);
+            border: 1px; */
+            background-color: coral;
+            margin-left: 20px;
+
+        }
+
+        /* 我用jquery寫了同樣的hover功能，但其實css這邊寫比較簡短.... */
+        /* .lv1-1:hover{
+            background-color: cornsilk;
+        } */
+
+        /* 置頂bar區 */
+        header {
+            /* 設定hight %數沒用，高度還是看img，但px卻有用 */
+            /* height: 20%; */
+            /* a tag不同於div，不能用margin，所以置中只能在父元素設定text-align */
+            text-align: center;
+            border-bottom: solid black 1px;
+        }
+
+        header a img {
+            /* background-color: red; */
+            width: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 置頂bar區 -->
+    <header>
+        <a href="https://www.iii.org.tw/"><img src="img/iii.png" alt="前往資策會官網"></a>
+    </header>
+    <!-- <div id="d1">
+        <a href="">地1個a</a>
+        <a href="">地1個aa</a>
+        <div>
+            <a href="">a中a</a>
+        </div>
+    </div>
+    <a href="">地2個a</a>
+    <a href="">地2個aa</a>
+    <div id="d2">
+        <a href="">地3個a</a>
+    </div> -->
+    <div class="lv1">
+        <div class="lv1-1">
+            <h3>1-1</h3>
+        </div>
+    </div>
+    <!-- <canvas id="canvas1" width="1000" height="40"></canvas> -->
+    <div class="lv2">
+        <div class="lv2-1">
+            <h3>2-1</h3>
+        </div>
+        <div class="lv2-1">
+            <h3>2-2</h3>
+        </div>
+    </div>
+    <!-- <canvas id="canvas2" width="1000" height="40"></canvas> -->
+    <div class="lv3">
+        <div class="lv3-1">
+            <h3>3-1</h3>
+        </div>
+        <div class="lv3-1">
+            <h3>3-2</h3>
+        </div>
+        <div class="lv3-1">
+            <h3>3-3</h3>
+        </div>
+        <div class="lv3-1">
+            <h3>3-4</h3>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            //初始化
+            $('.lv2').hide();
+            $('.lv3').hide();
+            $('#canvas1').hide();
+            $('#canvas2').hide();
+            var lv2 = 'N';
+            var lv3 = 'N';
+
+            //畫連結線
+            // var g = document.getElementById('canvas1').getContext("2d");
+            // g.beginPath();
+            // // g.strokeStyle = "#CCC";
+            // g.moveTo($('.lv1').width()/2, 0);
+            // g.lineTo(200, 200);
+            // g.stroke();
+
+            //各種互動反映
+            $('.lv1-1, .lv2-1, .lv3-1').hover(function () {
+                // $(this).css('background', 'cornsilk')
+                // $(this).css('cursor','pointer')
+                // 精簡寫法
+                $(this).css('background', 'cornsilk').css('cursor', 'pointer')
+            }, function () {
+                // $(this).css('background', 'coral')
+                // $(this).css('cursor','default')
+                // 精簡寫法
+                $(this).css({ 'background': 'coral', 'cursor': 'default' })
+            });
+
+            $('.lv1-1').click(function () {
+                // 不用show hide，改玩slideDown slideUp
+                if (lv2 == 'N') {
+                    $('.lv2').slideDown(1500)
+                    // $('#canvas1').slideDown(1500)
+                    lv2 = 'Y'
+                }
+                else if (lv2 == 'Y') {
+                    $('.lv2').slideUp("slow")
+                    // $('#canvas1').slideUp("slow")
+                    lv2 = 'N'
+                }
+
+                if (lv3 == 'Y') {
+                    $('.lv3').slideUp("slow")
+                    // $('#canvas2').slideUp("slow")
+                    lv3 = 'N'
+                }
+            });
+
+            $('.lv2-1').click(function () {
+                // 不用show hide，改玩fadeIn fadeOut
+                if (lv3 == 'N') {
+                    $('.lv3').fadeIn(1500)
+                    // $('#canvas2').fadeIn(1500)
+                    lv3 = 'Y'
+                }
+                else if (lv3 == 'Y') {
+                    $('.lv3').fadeOut("slow");
+                    // $('#canvas2').fadeOut("slow");
+                    lv3 = 'N'
+                }
+            });
+
+
+
+            // console.log($("#d1 a").text())
+            // console.log($("#d1>a").text())
+            // console.log($("#d1+a").text())
+            // console.log($("#d1~a").text())
+            // console.log($("#d1 a:last-child").text())
+            // console.log($("div:has(a)").text())
+            // console.log($("div:parent").text())
+        })
+    </script>
+</body>
+
+</html>

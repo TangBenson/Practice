@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3>點選圖片後，置換成另外一張圖片</h3>
+
+    <img onclick="changeImage()" id="imgTest" src="../../img/favorites.png">
+
+    <script>
+        function changeImage(){
+            // 1. 取得網頁中 imgTest 元素
+            var elm=document.getElementById('imgTest')
+            // 2. 將圖片改為放大鏡
+            elm.src="../../img/find.png"
+            // 3. 步驟一和二可以合併寫成
+            document.getElementById('imgTest').src="../../img/find.png"
+        }
+    </script>
+</body>
+
+</html>

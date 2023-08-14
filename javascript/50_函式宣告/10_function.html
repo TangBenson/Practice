@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3>將功能獨立出來，提高程式的可用性</h3>
+    <h3><a href="https://www.w3schools.com/js/js_functions.asp" target="_blank">JavaScript Functions</a></h3>
+
+    <script>
+        // 10. 函式宣告（Function Declaration）
+        fun1(); //程式會去找func1函式，函式不需要寫在前面才能呼叫
+        console.log('QQ---------')
+        function fun1() {
+            console.log('fun1--');
+        }
+        fun1();
+
+        // 20. 需要資訊的函式 / 傳入參數的函數
+        //     呼叫需要資訊的函式時，要把資訊帶入
+        function fun2(a, b) {
+            console.log(a);
+            console.log(b);
+        }
+        fun2('apple', 'bee');
+
+        // 30. 從函式取得一個回傳值
+        function fun3(num_X, num_Y) {
+            console.log(num_X);
+            console.log(num_Y);
+            return num_X + num_Y;
+        }
+        var result = fun3(1, 2);
+        console.log(result);
+
+
+        // 40. 函式運算式（Function Expressions）
+        //     變數 存放 計畫的內容，但呼叫時要小心
+        var fun4 = function () {
+            console.log('fun4');
+        }
+        fun4();
+
+        // 50. 建立物件模板
+        //      a. 建議第一個字母為大寫
+        //      b. this ==> 這一個物件模板
+        function Person(lname, fName) {
+            this.lastName = lname;
+            this.firstName = fName;
+
+            this.getName = function () {
+                return this.lastName + '-' + this.firstName;
+            }
+        }
+
+        var p1 = new Person('apple','bee');
+
+        console.log(p1.lastName);
+        console.log(p1.firstName);
+        console.log(p1.getName());
+
+        // 我測試區
+        var a=new fun4();
+        console.log('我測試'+a);
+        console.log('我測試'+typeof p1);  //object
+        console.log('我測試'+typeof fun3); //function
+        console.log('我測試'+typeof fun4); //function
+        console.log('我測試'+typeof Person); //function
+
+        // 小練習：設計一個function，傳入數量和單價
+        //        數量10杯以上總金額打95折，20杯以上打9折
+        function getMoney(inputCnt, inputQty) {
+            var result = inputCnt * inputQty;
+
+            if (inputCnt >= 10 && inputCnt < 20) {
+                result = inputCnt * inputQty * 0.95
+            } else if (inputCnt >= 20) {
+                result = inputCnt * inputQty * 0.8
+            }
+
+            return result;
+        }
+
+        console.log(getMoney(15, 10));
+        //js的原型(class)是用function關鍵字建立的
+    </script>
+
+    <script src="10.js"></script>
+</body>
+
+</html>

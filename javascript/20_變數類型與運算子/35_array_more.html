@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <p>請透過 chrome > 檢查 > console 觀察執行結果</p>
+
+    <script>
+        
+        // 10. 宣告一個陣列 lsA，存放 1,2,3,4,5,6
+        var lsA = [1,2,3,4,5,6];
+        console.log(lsA.toString());
+
+        // 20. 宣告另外一個陣列 lsB，讓 lsB = lsA
+        var lsB = lsA;
+        console.log(lsB.toString());
+
+        // 30. 取得 lsB 第一個位置的值
+        // 40. 修改 lsB 第一個位置的值
+        lsB[0] = 999;
+        console.log(lsB.toString());
+
+        // 50. 將 lsA 列印出來查看
+        console.log(lsA.toString());
+
+        var x = 5;
+        console.log(x);
+
+        var y = x; //copy
+        console.log(y);
+
+        y = 888;
+        console.log(y);
+        console.log(x);
+
+        //數值是傳值by value。若y=x，會把x的值複製給y，改y不影響x
+        //陣列是傳址by reference。若y=x，會把x的記憶體位址複製給y，改y也會影響x
+
+    </script>
+</body>
+
+</html>

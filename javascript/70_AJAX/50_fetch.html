@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3><a href="https://developers.google.com/web/updates/2015/03/introduction-to-fetch?hl=en">Google - Introduction to fetch()</a></h3>
+    <h3><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API/Using_Fetch">Mozilla - Using Fetch</a></h3>
+    <h3><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Request">Mozilla - Request</a></h3>
+    
+    <button type="button" onclick="loadDoc()">Change Content</button>
+    <p id="demo">Let AJAX change this text.</p>
+
+    <script>
+
+        // 10. 透過 fetch() 取得資料
+        //      .then () 下一步要執行什麼任務，詳見es6 promise
+        //      .catch() 錯誤處理
+        function loadDoc() {
+            window.fetch('https://jsonplaceholder.typicode.com/users')
+                .then(function (response) {
+                    // 第一個 then：資料已經確認可以提供，但還沒有完全載入完畢
+                    return response.json();
+                })
+                // 下面寫法同上, nodejs老師愛這樣寫
+                // .then(res => {
+                //     console.log(9947)
+                //     return res.json();
+                // })
+                .then(function (myJson) {
+                    // 第二個 then：資料已經準備完畢了，可以正式取用
+                    console.log(myJson);
+                })
+                .catch(function(err) { //類似try catch
+                    console.log(`發生錯誤: ${err}`);
+                });
+        }
+        // 自從 Fetch API 問世以來，我們就能使用漂亮的語法發送 HTTP Request 或取得網路資料，
+        // 這篇文章將會分享我自己常用的 Fetch 方法 ( GET、POST、搭配 await 或 promise.all...等 )，
+        // 隨著瀏覽器的普遍支援，也就不太需要使用 XMLHttpRequest 或 jQuery AJAX，
+        // 程式碼也就更加簡潔乾淨囉
+    </script>
+</body>
+
+</html>

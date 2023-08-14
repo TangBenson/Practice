@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <title>02eventBubble.html</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css//bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <table id="idtable" class="table table-bordered table-sm">
+            <tr>
+                <td>A0</td>
+                <td>B1</td>
+                <td>C2</td>
+                <td class="btn btn-danger">刪除</td>
+            </tr>
+            <tr>
+                <td>D3</td>
+                <td>E4</td>
+                <td>F5</td>
+                <td class="btn btn-danger">刪除</td>
+            </tr>
+            <tr>
+                <td>G6</td>
+                <td>H7</td>
+                <td>I8</td>
+                <td class="btn btn-danger">刪除</td>
+            </tr>
+        </table>
+    </div>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            // $('.btn-danger').click(function (event) {
+            //     console.log("btn-danger");
+            //     console.log(event.target);  //trigger object
+            // });   
+
+            $('.btn-danger').on("click", function (event) {
+                console.log("btn-danger");
+                console.log(event.target);  //trigger object
+            });
+
+
+            $('#idtable').click(function (event) {
+                console.log("idtable");
+                console.log(event.target);  //trigger object
+                console.log(event.eventPhase);
+            });
+
+        });
+    </script>
+</body>
+
+</html>

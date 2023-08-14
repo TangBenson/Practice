@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>01formevent.html</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css//bootstrap.min.css">
+    <style>
+        .btn{
+            top:0;
+            transition: .5s;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="02cart.html"  >
+            <div class="py-2">
+                <input type="text" id="idInp" name="txtName" class="form-control">
+                <span id="idsp"></span>
+            </div>
+            <div class="py-2">
+                <select class="form-control" name="" id="idSel">
+                    <option value="1">台北市</option>
+                    <option value="2">新竹市</option>
+                    <option value="3">台中市</option>
+                </select>
+            </div>
+            <div class="">
+                <a class="btn btn-info position-relative">click</a>
+                <input type="submit" class="btn btn-info position-relative" value="submit">
+            </div>
+            <div id="demo"></div>
+        </form>
+    </div>
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#idInp").focus(function(){
+                console.log("focus");
+                $(this).css("background","yellow");
+                
+            }).blur(function(){
+                console.log("blur");
+                $(this).css("background","lightgray");
+                
+            })
+
+            $("#idSel").change(function(){
+                console.log("change");
+                //讀取option的值
+                console.log($(this).val());
+                // console.log($(this).text());
+                var text=$(":selected").text();
+                console.log(text);
+                // $("#demo").text("The city of choice is : "+text)
+                $("#demo").text(`The city of choice is : ${text}`);  //ES6
+                            
+            });
+            
+            $(".btn").click(function(){
+                console.log("submit");
+                // $("form").submit();
+                var value=$("#idInp").val();
+                console.log(value);
+                if($.trim(value)==""){  //去除前後空白
+                    $("#idsp").text("you must enter");
+                }else{
+                    $("#idsp").text("");                   
+                    $("form").submit();
+                }
+                              
+            });
+
+            $("#myform").submit(function(event){
+                console.log("submit!"); 
+                // console.log(event.type);
+                          
+            })
+          
+
+        })
+    </script>
+</body>
+</html>

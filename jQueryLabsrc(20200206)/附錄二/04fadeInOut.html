@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04fadeInOut.html</title>
+    <style>
+        #img1{width:300px;height:200px}
+    </style>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){
+                $("#cardiv").fadeIn(3000);               
+            });
+
+            $("#btn2").click(function(){                
+                $("#cardiv").fadeOut("slow",function(){
+                    alert("透明度淡出");
+                });
+            });
+
+            $("#btn3").click(function(){               
+                $("#cardiv").fadeToggle(2000,function(){$(this).hide(2000)});
+            }); 
+            
+            $("#btn4").click(function(){               
+                $("#cardiv").fadeTo(2000,0.5,function(){
+                    $("#img1").css("border","2px dotted red");
+                    });
+            });          
+        });
+    </script>
+
+</head>
+<body>
+    <input type="button" id="btn1" value="透明度淡入">
+    <input type="button" id="btn2" value="透明度淡出">
+    <input type="button" id="btn3" value="切換透明度"> 
+    <input type="button" id="btn4" value="調整透明度">
+    <hr>
+    <div id="cardiv">
+        <img id="img1" src="images/car.png">
+    </div>
+</body>  
+</html>

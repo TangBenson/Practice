@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>01elementContent.html</title>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){
+                alert($("#div1").text());                
+            });
+
+            $("#btn2").click(function(){                
+                $("#div1").text("<b>replace</b>");
+            });
+
+            $("#btn3").click(function(){               
+                alert($("#div1").html());
+            });
+
+            $("#btn4").click(function(){               
+                $("#div1").html("<b>replace</b>");
+            });
+
+            $("#btn5").click(function(){               
+                // alert($("input[type='text']").val());
+                // alert($("input:text").val());
+                // console.log($('input'));
+                $("input").each(function(){
+                    alert($(this).val());
+                });
+            });
+
+            $("#btn6").click(function(){               
+                $("input").val("jQuery");  //所有input元素                             
+            });
+
+            //設定txtName中的值為guest
+            $('#txtName').val("guest");
+
+            $("#buttonClick").click(function(){                            
+                //將使用者輸入在txtName中的內容讀出顯示在span1中
+                // $('#span1').text('hello '+$('#txtName').val());
+                let txt=$('#txtName').val();
+                // $('#span1').text('Hello '+txt);
+                //將使用者輸入在txtName中的內容讀出加上<h2>的標籤顯示在span1中
+                // $('#span1').text("<h2>Hello " + txt + "</h2>")
+                $('#span1').html('<h2>Hello '+txt+'</h2>');
+                console.log($('#span1').text());
+                console.log($('#span1').html());                              
+            });
+
+            $('#select1').change(function () {
+                //練習
+                //當使用者選取不同的select1項目時
+                //讀出此項目的索引值(index),文字(text),值(value)
+                //將這些資料顯示在span2的span中
+                // alert($(this).val());                
+                
+                let opt=$('#select1>:selected');
+                let v=opt.val();
+                let t=opt.text();
+                let i=opt.index();
+                $('#span2').text(i+","+v+","+t);
+            });
+            
+        });
+    </script>
+
+</head>
+<body>
+    <div id="div1">this is first div
+        <div id="div2">this is second div</div>
+    </div>
+    <input type="text" value="hello"><br>
+    
+    <input type="button" id="btn1" value="text()">
+    <input type="button" id="btn2" value="text(value)">
+    <input type="button" id="btn3" value="html()">
+    <input type="button" id="btn4" value="html(value)">
+    <input type="button" id="btn5" value="val()">
+    <input type="button" id="btn6" value="val(value)">
+    <hr>
+    <label>Name:</label>
+    <input type="text" id="txtName" />
+    <input type="button" value="Click" id="buttonClick" />
+    <span id="span1"></span><br>
+    <select id="select1">
+        <option value="a">Item1</option>
+        <option value="b" selected>Item2</option>
+        <option value="c">Item3</option>
+        <option value="d">Item4</option>
+    </select>
+    <span id="span2"></span>
+</body>
+</html>

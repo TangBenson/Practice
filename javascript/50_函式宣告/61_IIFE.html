@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h3>IIFE = Immediately Invoked Function Expression</h3>
+    <h3>在函式宣告的當下立即呼叫</h3>
+    <h3><a href="https://www.w3schools.com/js/js_function_definition.asp">請往下找到 Self-Invoking Functions</a></h3>
+    <script>
+        // 10. 宣告函式 showMsg() 並且呼叫
+        function showMsg() {
+            console.log('apple');
+        }
+        showMsg();
+
+
+        //會錯
+        // 20. 宣告函式後直接呼叫 - 使用函式宣告的方法
+        // function showMsg_2() {
+        //     console.log('bee');
+        // }();
+
+
+        // 30. 宣告函式後直接呼叫 - 使用函式運算式的方法
+        var showMsg_3 = function(){
+            console.log('cat');
+        }();
+        console.log('showMsg_3:',typeof showMsg_3) //undefined，我猜是因為直接呼叫的寫法，變數用完直接刪除
+
+
+        // 40. 測試傳入參數，且立即執行後，呼叫這個變數的話，會得到什麼？
+        var showMsg_4 = function(test){
+            console.log(test);
+            console.log('dog');
+        }('egg');
+        console.log(showMsg_4); //undefined
+        // console.log(showMsg_4()); //錯誤
+
+
+        // 50. 改寫 40 回傳參數
+        var showMsg_5 = function(test){
+            console.log(test);
+            console.log('dog-4');
+            return 'flower';
+        }('egg-4');
+        console.log(showMsg_5);
+
+
+        // 60. 用 () 包起來一個匿名的函式，匿名函式可當作其它「Function的參數」或「變數」，主要的生命週期會隨著他被指派的「Function」或「變數」結束而消失。
+        (function(test){
+            console.log(test);
+            console.log('apple-5');
+        })('egg-5');
+    
+        
+        // jquery是函式庫
+        // 把常用方法打包起來更精簡
+        // jquery就用很多IIFE，因為需要使用者使用前立刻馬上執行一些事項
+    </script>
+</body>
+</html>

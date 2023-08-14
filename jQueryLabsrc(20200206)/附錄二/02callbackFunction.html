@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02callbackFunction.html</title>
+    <style>
+        div{width:300px;height: 200px;background-color: aqua}
+    </style>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){
+                $("#mydiv").hide("slow");
+                alert("The div is now hide");
+            });
+
+            //callback寫法，保證先慢慢隱藏再跳alert
+            $("#btn2").click(function(){
+                $("#mydiv").hide("slow",function(){
+                     alert("The div is now hide");
+                });               
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="button" id="btn1" value="FCall">
+    <input type="button" id="btn2" value="callback">
+    <hr>
+    <div id="mydiv">this is div</div>
+    <hr>
+</body>
+</html>

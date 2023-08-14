@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3>JSON = JavaScript Object Notation</h3>
+    <h3><a href="https://www.w3schools.com/js/js_json_intro.asp">JSON</a></h3>
+
+    <script>
+        // 10. 陣列 [] + 物件 {} 組成的格式
+        var drinkList = [{
+            "drink": "紅茶",
+            "price": "20",
+            "type": ["ice", "hot"]
+        }, {
+            "drink": "奶茶",
+            "price": "25",
+            "type": ["ice"]
+        }];
+
+
+        // 20. JSON.stringify() 將 JSON 格式的資料 轉成純文字 
+        //     => 傳送端將資料組好以後，透過這個方法轉換成字串
+        var str = JSON.stringify(drinkList);
+        console.log(str);
+
+        // 30. JSON.parse() 將 JSON格式的資料 轉換成物件使用 
+        //     => 接收者還原結構後使用
+        var obj = JSON.parse(str);
+        console.log(obj);
+
+        // 40. 延續步驟 30 ，如何將資料讀出?
+        // for (const item of obj) {
+        //     for (const item2 in item) {
+        //         console.log(item2);
+        //     }
+        // }
+        for (let i = 0; i < obj.length; i++) {
+            console.log("======");
+            for (const objKey in obj[i]) {
+                console.log(`${objKey}:${obj[i][objKey]}`);
+            }
+        }
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <!-- 10. 輸出畫面請參考圖片 -->
+
+    <!-- 20. 會需要的關鍵字：event.keyCode、event.charCode -->
+
+    <!-- http://keycode.info/ -->
+
+    <h3>測試綁定 onkeypress 事件</h3>
+    <h3>適合用在偵測 文字方框 輸入的時候 (請測試 ctrl、alt 等特殊鍵)</h3>
+    <input type="text" onkeypress="kp(event)">
+    <h4>keyCode：<span id="demoKeypress1"></span> </h4>
+    <h4>charCode：<span id="demoKeypress2"></span></h4>
+
+
+
+    <h3>測試綁定 onkeydown 事件</h3>
+    <h3>適合用在偵測 鍵盤組合鍵 的時候 (請測試 ctrl、alt 等特殊鍵)</h3>
+    <input type="text" onkeydown="kd(event)">
+    <h4>keyCode：<span id="demoKeydown1"></span> </h4>
+    <h4>charCode：<span id="demoKeydown2"></span></h4>
+
+    <h3>charCode 代表著是一個 char（字元）的代碼</h3>
+    <h3>keyCode 就是代表一個 key（按鍵）的代碼 </h3>
+
+    <script>
+        function kp(eveObj) {
+            demoKeypress1.innerHTML = eveObj.keyCode;
+            demoKeypress2.innerHTML = eveObj.charCode;
+        }
+
+        function kd(eveObj) {
+            demoKeydown1.innerHTML = eveObj.keyCode;
+            demoKeydown2.innerHTML = eveObj.charCode;
+        }
+    </script>
+
+</body>
+
+</html>

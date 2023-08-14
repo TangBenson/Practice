@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        // 1. 在這裡宣告一個變數 x 設定初始值 為 999
+        var x = 999; //在最外層宣告，直接住到window家去了
+        // 2. 透過 console.log(x); 觀察 x 為?
+        console.log(x);
+    </script>
+</head>
+
+<body>
+
+    <!-- 3. 在這裡增加一顆按鈕<button>，
+            綁定onclick="getX()"事件 -->
+    <button onclick="getX()">getX</button>
+
+    <!-- 5. 在這裡增加兩顆按鈕，並各自綁定事件
+            對應處理的function為 
+            onclick="set()" 和 onclick="get()" -->
+    <button onclick="set()">set</button>
+    <button onclick="get()">get</button>
+
+    <script>
+        // 4. 宣告 function getX()，裡面宣告一個變數 x 設定初始值 為 1，並log下來
+        function getX() {
+            var x = 1
+            //      4-1. 至瀏覽器觀察，log(x) 的紀錄是什麼?
+            console.log(x);
+            //      4-2. 如果需要取用到 步驟 1 的 x，要怎麼取得?
+            console.log(window.x);//感覺類似global關鍵字，但有點不一樣，這邊的x已是window的屬性
+        }
+
+        // 6. 宣告 function set() 
+        function set() {
+            //      6-1. 不使用 var 關鍵字，宣告一個變數 y，給予初始值 2 並log出來查看
+            y = 2;
+            console.log(y);
+
+            //      6-2. 使用 var 宣告變數z，並給予初始值 3 且log出來查看
+            var z = 3;
+            console.log(z);
+            console.log(window.z);//undefined
+        }
+
+        // 7. function get() 將變數 y 和 變數 z log出來查看
+        function get(){
+            console.log(y); //找的到，因為set()中不用var(let、const)就等同全域概念，也就是在最外層用var(let、const)宣告，直接住到window家去了
+            console.log(z); //找不到，正常，因為同層或外層都沒有該變數
+        }
+    </script>
+
+</body>
+
+</html>

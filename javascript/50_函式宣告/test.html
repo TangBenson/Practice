@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3>將功能獨立出來，提高程式的可用性</h3>
+    <h3><a href="https://www.w3schools.com/js/js_functions.asp" target="_blank">JavaScript Functions</a></h3>
+
+    <script>
+        // 50. 建立物件模板
+        //      a. 建議第一個字母為大寫
+        //      b. this ==> 這一個物件模板
+        function Person() {
+            console.log('556-----');
+        }
+        console.log('1:',Person())
+        var p1 = new Person();
+        console.log('2:',p1);
+        console.log('3:',typeof p1);
+        console.log('3.1:',typeof Person);
+        var ss = new Person();
+        console.log('3.2',typeof ss); // 什麼!! func可以宣告物件
+
+
+        // 宣告物件
+        const a = { name: 'AA' }
+        console.log('4:',a);
+        console.log('5:',typeof a);
+
+
+        // 構造函數 function 
+        function createCard(initName) {
+            this.name = initName
+        }
+        console.log('6:',createCard(5))
+        var c1 = new createCard(10);
+        console.log('7:',c1);
+        console.log('8:',typeof c1);
+        console.log('8.1:',typeof createCard);
+
+
+        // class的基本操作
+        class Card {
+            constructor(initName) {
+                this.name = initName
+            }
+        }
+        console.log('9:',typeof Card) // 這竟然是個function !! 我暈
+        let c2 = new Card(500);
+        console.log('10:',c2);
+        console.log('11:',typeof c2);
+
+    </script>
+
+</body>
+
+</html>

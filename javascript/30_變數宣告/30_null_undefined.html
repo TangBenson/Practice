@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <script>
+        var a;
+        // 10. undefined 是一個關鍵字
+        console.group('10.'); 
+        console.log(a); // undefined
+        a = "apple"
+        console.log(a == "apple"); // true
+        console.log(a === "apple"); // true
+        console.log(typeof a); // string
+
+        console.log('------');
+        a = true;
+        console.log(a == true);  // true
+        console.log(a === true); // true
+        console.log(a == 1);     // true
+        console.log(a === 1);    // false
+        console.log(typeof a);   // boolean
+
+        console.log('--- null ---');
+        a = null;
+        console.log(a == null);  // true
+        console.log(a === null); // true
+        console.log(typeof a);   // object ()
+
+        console.log('--- undefined ---');
+        a = undefined; // 
+        console.log(a == undefined);  // true
+        console.log(a === undefined); // true
+        console.log(typeof a);        // undefined，有自己的型態
+
+        console.groupEnd();
+
+
+
+        // 20. not defined 是一項錯誤訊息描述 (XXX is not defined)
+        console.group('20.');
+        try {
+            console.log(bb);
+        } catch (error) {
+            console.log(error);
+        }
+        console.groupEnd();
+
+        // 30. undefined 和 null 的比較
+        console.group('30.');
+        console.log(null == undefined);  // true?
+        console.log(null === undefined); // flase
+        console.groupEnd();
+
+    </script>
+</body>
+
+</html>

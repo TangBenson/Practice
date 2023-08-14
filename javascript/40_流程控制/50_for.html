@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3><a href="https://www.w3schools.com/js/js_loop_for.asp" target="_blank">JavaScript For Loop</a></h3>
+
+    <pre>
+        for ( 變數 ; 條件 ; 步進值) {
+            // code block to be executed
+        }
+    </pre>
+
+    <!-- 顯示效果的地方 -->
+    <p id="pSquare"></p>
+    <p id="pTriangle"></p>
+    <pre id="pTimes"></pre>
+
+    <script>
+        // 10. 使用for迴圈，列印出這個月份從1號到目前系統日
+        var d=new Date();
+        var today=d.getDate();
+        for (var i=1;i<=today;i++){
+            console.log(`${d.getMonth()+1}/${i}`)
+        }
+
+        // 20. 使用 for 迴圈，逐一取得陣列裡面的元素
+        var weekList = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+        for (var i=0;i<weekList.length;i++){
+            console.log(weekList[i]);
+        }
+
+        // 30. 從1加到10，配合for迴圈，應該要怎麼撰寫
+        var sum=0;
+        for (var i=1;i<11;i++){
+            sum+=i
+        }
+        console.log(sum);
+
+        // 40. 雙層迴圈 - 長方型星星
+        // **** 
+        // **** 
+        // **** 
+        // **** 
+        // **** 
+        // ****
+        // var s='';
+        // for (var i=0;i<6;i++){
+        //     for (var j=0;j<4;j++){
+        //         s+='*';
+        //     }
+        //     s+='<br>'
+        //     // console.log(s);
+        //     document.getElementById('pSquare').innerHTML=s;
+        //     s='';
+        // }
+        var stars = "";
+        for (var i = 1; i <= 6; i++) {
+            for (var j = 1; j <= 4; j++) {
+                stars += "＊";     
+            }
+            stars += "<br>"
+        }
+        document.getElementById('pSquare').innerHTML = stars;
+
+        // 50. 雙層迴圈 - 三角形
+        // * 
+        // ** 
+        // *** 
+        // **** 
+        // var stars = "";
+        // var s="";
+        // for (var i = 1; i <= 4; i++) {
+        //     for (var j = 1; j <= 4; j++) {
+        //         stars += "＊";     
+        //     }
+        //     s+=stars
+        //     s += "<br>"
+        // }
+        // document.getElementById('pSquare').innerHTML = s;
+        var stars = "";
+        for (var i = 1; i <= 6; i++) {
+            for (var j = 1; j <= i; j++) {
+                stars += "＊";
+            }
+            stars += "<br>"
+        }
+        document.getElementById('pTriangle').innerHTML = stars;
+        
+        // 60. 列印九九乘法表 (tab為 "&#9;") + <pre> 標籤
+
+    </script>
+</body>
+
+</html>

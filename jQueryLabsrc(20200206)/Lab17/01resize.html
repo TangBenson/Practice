@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>01resize.html</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" href="../css/themes/flora/flora.resizable.css">
+    <link rel="stylesheet" href="../css/themes/flora/functional_demos.css">
+    <style>
+        .resizable {
+            width: 100px; 
+            height: 100px;
+            border: 1px solid #000;
+            padding: 10px;
+            font-size: 12px;
+        }
+        .hide,.hide1{
+            display:none;
+            background-color:red;
+            width:400px;
+            padding:10px;
+            color:white
+        }
+        .hide1{
+            background-color:green;
+            width:100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="primarycontent" id=0>
+        <h1>$(&quot;#rs&quot;).resizable();</h1>
+        <b>handles: &quot;all&quot; / start / resize / stop  </b><br>
+        <div class=hide></div><br>
+        <div class=hide1>縮放中............</div><br>
+    <!-- <div id="rs" class="resizable">縮放我!</div><br> -->
+    <img src=images/sport.jpg id=img width="200px" height="133px">
+    
+    </div>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            
+                $("#img").resizable({ 
+                    handles: "all", 
+                        start: function(e, ui) { 
+                            $('.hide').slideDown().html("開始縮放"); 
+                        }, 
+                        resize: function(e, ui) { 
+                            $('.hide1').slideDown(); 
+                        },
+                        stop: function(e, ui) { 
+                            $('.hide').html("結束縮放").slideUp('slow'); 
+                            $('.hide1').slideUp('slow'); 
+                        }
+                });
+                
+        });
+    </script>
+</body>
+</html>

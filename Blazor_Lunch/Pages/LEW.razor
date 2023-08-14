@@ -1,0 +1,63 @@
+﻿@page "/"
+@inject IJSRuntime js
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @*<link href="css/LEW.css" rel="stylesheet" />*@
+    <!-- 这里是css部分 -->
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            width: 400px;
+            height: 400px;
+            padding: 0px;
+            margin: 50px auto;
+            position: relative;
+            border-radius: 50%;
+            border: 1px solid green;
+        }
+
+            ul > li {
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                list-style: none;
+                border-radius: 50%;
+                background-color: green;
+            }
+
+                ul > li.dot {
+                    background-color: #000;
+                }
+    </style>
+</head>
+
+<body>
+    <ul class="containerTang">
+        <li class="dot"></li>
+        <li class="box"></li>
+        <li class="box"></li>
+        <li class="box"></li>
+        <li class="box"></li>
+        <li class="box"></li>
+        <li class="box"></li>
+    </ul>
+    @*<div class="nei" @onclick="hello">
+        <div class="huan">
+            <span>今天<br />做点啥</span>
+        </div>
+    </div>*@
+</body>
+</html>
+
+@code {
+    async Task hello()
+    {
+        await js.InvokeVoidAsync("hello");
+    }
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>01click.html</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css//bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <a id="idlink" href="http://taipei.iiiedu.org.tw">IIIEDU</a>        
+    </div>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#idlink").click(function(event){
+                //取消預設的動作(preventDefault)
+                event.preventDefault();
+            });
+        })
+
+        // document.addEventListener("DOMContentLoaded",f())
+        // DOMContentLoaded會要求程式先跑完body再去看js內容
+        // 而jQuery(document).ready()功用就和DOMContentLoaded一樣
+
+    </script>
+</body>
+</html>

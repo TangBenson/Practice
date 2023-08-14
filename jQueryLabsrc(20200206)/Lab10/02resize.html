@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <title>02resize.html</title>
+    <style>
+        /* img {
+        }
+
+        #div1 {
+        } */
+    </style>
+
+</head>
+
+<body>
+    <div id="div1">
+        <img id="image1" src="images/tesla1.jpg">
+    </div>
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            move_div();
+
+            //當視窗放大或縮小時呼叫move_div的函式
+            //讓div1置中
+            $(window).resize(move_div);
+
+            function move_div() {
+                var winHeight = $(window).height();
+                var winWidth = $(window).width();
+
+                var objWidth = winWidth / 2;
+                var objHeight = objWidth * 3 / 4;
+
+                $("#div1").css('margin','50px auto')
+                $("#div1").css("width", objWidth).css("height", objHeight);
+                $('#image1').css("width", '100%');
+
+            }
+        });
+    </script>
+</body>
+
+</html>

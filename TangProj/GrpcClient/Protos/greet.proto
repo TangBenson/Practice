@@ -1,0 +1,24 @@
+syntax = "proto3"; // 目前是第3版
+
+option csharp_namespace = "GrpcTest";
+
+package greet; // namespace的概念
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+// message想像成是 class
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1; // 數字表示參數順序
+  string age = 2;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+  string a = 2;
+}

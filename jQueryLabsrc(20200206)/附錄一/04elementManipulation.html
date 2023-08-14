@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04elementManipulation.html</title>
+    <style>
+            div.wrap{
+              border: 2px solid blue;
+            }
+            p {
+              background: yellow;
+              margin: 4px;
+            }
+            </style>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){  //用F12查看
+                // $(".inner").append("<b>append</b>"); 
+                $(".inner").append("append");              
+            });
+
+            $("#btn2").click(function(){                
+                $(".inner").prepend("<b>prepend</b>");
+            });
+
+            $("#btn3").click(function(){               
+                $("<b>appendTo</b>").appendTo(".inner");
+                // $("appendTo").appendTo(".inner"); //錯誤的寫法,因為無法變成jQuery物件
+            });
+
+            $("#btn4").click(function(){               
+                $("<b>prependTo</b>").prependTo(".inner");
+            });
+
+            $("#btn5").click(function(){               
+                $(".inner").after("<b>after</b>");
+            });
+
+            $("#btn6").click(function(){               
+                $(".inner").before("<b>before</b>");
+            });
+
+            $("#btn7").click(function(){
+                $("<b>insertAfter</b>").insertAfter(".inner");               
+            });
+
+            $("#btn8").click(function(){                
+                $("<b>insertBefore</b>").insertBefore(".inner");
+            });
+
+            $("#btn9").click(function(){               
+                $("p").wrap("<div class='wrap'></div>");
+            });
+
+            $("#btn10").click(function(){               
+                $("p").wrapAll("<div class='wrap'></div>");
+            });
+
+            $("#btn11").click(function(){               
+                $("p").wrapInner("<div class='wrap'></div>");
+            });
+
+            $("#btn12").click(function(){               
+                $(".inner").remove();  //用F12查看                
+            });
+            
+            $("#btn13").click(function(){               
+                $(".inner").empty();
+                // $(".container").empty();
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <h2>Greetings</h2>
+    <div class="container">
+        <div class="inner">Hello</div>
+        <div class="inner">Goodbye</div>
+    </div>
+    <p>Hello</p>
+    <p>cruel</p>
+    <p>World</p>
+    
+    <hr>
+    <input type="button" id="btn1" value="append()">
+    <input type="button" id="btn2" value="prepend()">
+    <input type="button" id="btn3" value="appendTo()">
+    <input type="button" id="btn4" value="prependTo()"><br>
+    <input type="button" id="btn5" value="after()">
+    <input type="button" id="btn6" value="before()">
+    <input type="button" id="btn7" value="insertAfter()">
+    <input type="button" id="btn8" value="insertBefore()"><br>
+    <input type="button" id="btn9" value="wrap()">
+    <input type="button" id="btn10" value="wrapAll()">
+    <input type="button" id="btn11" value="wrapInner()">
+    <input type="button" id="btn12" value="remove()">
+    <input type="button" id="btn13" value="empty()">
+</body>
+</html>

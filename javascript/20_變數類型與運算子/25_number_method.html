@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3><a href="https://www.w3schools.com/js/js_number_methods.asp">JavaScript Number Methods</a></h3>
+
+    <script>
+ 
+        // 10. toPrecision() and toFixed()
+        // (測試 1.005 和 1.006)
+        var x = 1;
+        console.group('x');
+        console.log(x.toPrecision(3));
+        console.log(x.toFixed(3));
+        console.log(x.toPrecision(10));
+        console.groupEnd();
+        
+        var y = 1.005;
+        console.group('y');
+        console.log(y.toPrecision(3));
+        console.log(y.toFixed(2));
+        console.log(y.toPrecision(21));
+        console.groupEnd();
+
+        var z = 1.006;
+        console.group('z');
+        console.log(z.toPrecision(3));
+        console.log(z.toFixed(2));
+        console.log(z.toPrecision(21));
+        console.groupEnd();
+
+        // 20. 數值運算常見的錯誤
+        // NaN、Infinity、-Infinity
+        console.log( 7 / 'apple');
+        console.log(1 / 0);
+        console.log(-1 / 0);
+
+        // 30. 數值轉字串的方法 toString()
+        var a = 5;
+        console.log(typeof a);
+
+        a = a.toString();
+        console.log(typeof a);
+        
+    </script>
+
+</body>
+
+</html>

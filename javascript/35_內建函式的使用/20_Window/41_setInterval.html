@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <h3><a href="https://www.w3schools.com/jsref/met_win_setinterval.asp">setInterval()</a></h3>
+    <p>指定的秒數，做指定的事情</p>
+
+    <script>
+        var cnt = 0;
+
+        function add() {
+            cnt += 1;
+            console.log(`add() ==> ${cnt}`);
+        }
+
+        //一個網頁同一時間只能啟動一個碼表
+        // 10. 放入  add
+        // window.setInterval(add, 1000);
+        //用這個就對了，囉哩八縮
+
+        // 20. 放入 'add()'
+        // window.setInterval('add()',1000);
+        //技術上可行但不建議用，不用糾結為何字串可以，這狀況類似onclick事件後面也是接""
+        //js相比其它語言相當寬鬆，所以常會看到奇怪的用法卻可以，不要太糾結，跟著規則走就對了
+
+        // 30. 放入  add()
+        // window.setInterval(add(), 1000);
+        //有背包是現在立刻馬上去做一次，沒有等設定的時間喔，而且只做一次
+        
+        // 40. 呼叫 setInterval 時改為直接放入 function 
+        window.setInterval(function(){
+            cnt += 1;
+            console.log(`add() ==> ${cnt}`);
+        },1000)
+
+    </script>
+</body>
+
+</html>

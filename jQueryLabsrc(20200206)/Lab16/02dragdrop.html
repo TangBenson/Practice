@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <title>02dragdrop.html</title>
+    <style>
+        .block {
+            top: 5px;
+            left: 5px;
+            border: 1px solid gray;
+            background-color: #68BFEF;
+            width: 130px;
+            height: 130px;
+            margin: 10px;
+            z-index: 100;
+        }
+
+        .block1 {
+            top: 5px;
+            left: 5px;
+            border: 2px solid green;
+            background-color: #68BFEF;
+            width: 130px;
+            height: 130px;
+            margin: 10px;
+            z-index: 100;
+        }
+
+        .drop {
+            border: 2px #ccc dotted;
+            width: 160px;
+            height: 600px;
+            overflow: auto;
+            margin: 10px 10px 10px 10px;
+            position: absolute;
+            top: 5px;
+            right: 200px;
+            opacity: 0.7;
+        }
+
+        .myactive {
+            opacity: 0.2;
+            border: 5px solid rgb(255, 0, 106);
+        }
+
+        .myhover {
+            border: 5px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="iddiv">
+        <img src="images/01a.jpg" class="block" data-num="1">
+        <img src="images/01b.jpg" class="block" data-num="1"><br>
+        <img src="images/01c.jpg" class="block1" data-num="1">
+    </div>
+    <div class="drop">
+
+    </div>
+
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function () {
+            //設定拖曳
+            //helper顯示拖曳物件，預設original、clone、function
+            $(".block").draggable({ helper: 'clone' });
+            $(".block1").draggable({ helper: 'clone', opacity: 0.40 });
+            var mycart = []; //完全沒用到阿
+            var tempcart = ""; //完全沒用到阿
+
+            //設定放入
+            $(".drop").droppable({
+                //接受拖曳物件的選取器
+                accept: "*",
+                //物件被拖曳時的css樣式，此時被拖曳物件尚未進.drop
+                activeClass: 'myactive',
+                //物件被拖曳到放置區的css樣式，此時被拖曳物件已進.drop
+                hoverClass: 'myhover',
+                //偵測滑鼠是否超過放置區
+                tolerance: 'pointer',
+                //物件從放置區拖出時觸發，不是已放入的拖出喔，而是....自己試就知道啦
+                out: function (ev, ui) {
+                    //ui.draggable指被拖曳的物件
+                    //attr取得屬性值，改用prop會得到不同值
+                    var src = ui.draggable.attr('src');
+                    alert(src + ' 未置入已返回');
+
+                    console.log(ev);
+                    console.log(ui);
+                    console.log(ui.draggable);
+                    console.log(ui.draggable[0]);
+                    console.log($(this));
+                    console.log('==============');
+                },
+                //物件拖曳到放置區時觸發
+                drop: function (ev, ui) {
+                    console.log(ev);
+                    console.log(ui);
+                    console.log(ui.draggable);
+                    console.log(ui.draggable[0]);
+                    console.log($(this));
+                    console.log('==============');
+
+                    //ui.draggable指被拖曳的物件
+                    //callback寫法，指fadeOut效果實現後再call func
+                    ui.draggable.clone().fadeOut("fast",
+                        function () {
+                            // console.log($(this)[0]);
+                            $(this).fadeIn("fast");//<img>                                                  
+                        }).appendTo($(this));//<div></div>
+
+                    console.log($(this));
+                }
+            });
+        });
+
+
+
+    </script>
+</body>
+
+</html>

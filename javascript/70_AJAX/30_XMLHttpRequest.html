@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3>底下範例來自 w3schools；資料改由線上取得 </h3>
+    <h3><a href="https://www.w3schools.com/js/js_ajax_http.asp" target="_blank">XMLHttpRequest Object Properties</a>
+    </h3>
+
+    <button type="button" onclick="loadDoc()">Change Content</button>
+    <p id="demo">Let AJAX change this text.</p>
+
+    <script>
+        let url = 'https://jsonplaceholder.typicode.com/users';
+
+        function loadDoc() {
+            // 10. 創建一個 XMLHttpRequest ()
+            //      不同的瀏覽器提供不同的物件名稱
+            var xhttp;
+            
+            if (window.XMLHttpRequest) {
+                xhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            // 20. 撰寫事件，說明資料取得後的處理
+            //     readyState 0==>初始化 1=>載入 2=>載入完成 3=>解析 4=>完成
+            //         status 200==>server 說OK、404==>Not Found
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = this.responseText; 
+                    //this指的是xhttp
+                }
+            };
+
+            // 30. 使用 XMLHttpRequest.open() 初始化一個請求
+            xhttp.open('GET', url, true);
+
+            // 40. XMLHttpRequest.send() 送出請求
+            xhttp.send();
+        }
+    </script>
+
+</body>
+
+</html>

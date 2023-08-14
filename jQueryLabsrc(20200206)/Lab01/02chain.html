@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>02chain.html</title>
+</head>
+
+<body>
+    <h1>write less, do more1</h1>
+    <h1>write less, do more2</h1>
+    <h1>write less, do more3</h1>
+    <h1>write less, do more4</h1>
+    <h1>write less, do more5</h1>
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //    $("h1").css("color","green");
+            //    $("h1").mouseover(function(){
+            //        $(this).css("color","red");
+            //    });
+            //    $("h1").mouseout(function(){
+            //        $(this).css("color","green");
+            //    });
+
+            $("h1").css("color", "green").mousemove(over).mouseout(out);
+            function over() {
+                $(this).css("color", "red");
+                console.log('$(this):' + $(this))     //selector
+                console.log('this:' + this)        //element
+                console.log('$(this)[0]:' + $(this)[0])  //element
+            };
+            function out() {
+                $(this).css("color", "green");
+            };
+        });
+    </script>
+
+</body>
+
+</html>

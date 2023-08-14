@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        div {
+            height: 2000px;
+            width: 500px;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body onmousemove="getXY(event)">
+    <div>
+        <h3><a href="https://www.wix.com/code/reference/$w.MouseEvent.html" target="_blank">補充資料-1</a></h3>
+        <h3><a href="https://stackoverflow.com/questions/21064101/understanding-offsetwidth-clientwidth-scrollwidth-and-height-respectively?rq=1"  target="_blank">補充資料-2</a></h3>
+        
+        <img src="../img/favorites.png" alt="">
+        
+        <h3 id="showScreen">(x,y)</h3> 
+        <h3 id="showPage">(x,y)</h3>
+        <h3 id="showClient">(x,y)</h3>
+        <h3 id="showOffset">(x,y)</h3>
+    </div>
+    <script>
+        // 螢幕解析度 和 螢幕可用工作區寬度
+        console.log(" 螢幕解析度的高height：" + window.screen.height);
+        console.log(" 螢幕解析度的寬width：" + window.screen.width);
+        console.log(" 螢幕可用工作區高度availHeight：" + window.screen.availHeight);
+        console.log(" 螢幕可用工作區寬度availWidth：" + window.screen.availWidth);
+
+        function getXY(eve) {
+            document.getElementById("showScreen").innerHTML = "Screen（起始點在「螢幕」左上角） => " + eve.screenX + "," + eve.screenY;
+            document.getElementById("showPage").innerHTML = "Page（起始點在「網頁內容」左上角） => " + eve.pageX + "," + eve.pageY;
+            document.getElementById("showClient").innerHTML = "Client（起始點在「瀏覽器」左上角） => " + eve.clientX + "," + eve.clientY;
+            document.getElementById("showOffset").innerHTML = "Offset（起始點在「元素」左上角） => " + eve.offsetX + "," + eve.offsetY;
+        }
+    </script>
+</body>
+
+</html>

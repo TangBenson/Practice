@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3>Hoisting is JavaScript's default behavior of moving declarations to the top.</h3>
+    <h3><a href="https://www.w3schools.com/js/js_hoisting.asp">JavaScript Hoisting</a></h3>
+
+    <script>
+        
+        // (A). ReferenceError: 變數名稱 is not undefined
+        // (B). ReferenceError: Cannot access 變數名稱 before initialization 
+        // (C). 印出 undefined 
+        // (D). 印出 20 
+        console.log('---鹿紫雲一好強---');
+        // // 10. 執行前思考：底下這一行應該會出現什麼訊息?
+        try {
+            console.log('---這A---');
+            console.log(x);
+        } catch (error) {
+            console.log('---這B---');
+            console.log(error); // ReferenceError: x is not defined
+        }
+
+        // // 20. 執行前思考：底下這一行應該會出現什麼訊息?
+        var x2    // (C)
+        console.log("1.",x2); // undefined
+        x2 = 10;
+        console.log("11.",x2); // 10
+
+        // // 30. 執行前思考：底下這一行應該會出現什麼訊息?
+        x3 = 20;    // (D)
+        console.log("2.",x3); // 20
+        var x3;
+        console.log("22.",x3); // 20
+
+        // 40. 執行前思考：底下這一行應該會出現什麼訊息?
+        console.log("3.",x4);   // (C) 
+        var x4 = 25; // 程式默默把var x4提到最上面
+
+
+        // 50. 用 上述用 var 宣告的變數改為用 let 宣告，會出現什麼訊息?
+        console.group('50. ')
+        let y2
+        console.log("4.",y2); // (C) undefined
+        y2 = 10;
+
+        try {
+            y3 = 20;
+            console.log("5.",y3);  // (B). ReferenceError: Cannot access 變數名稱 before initialization
+            let y3;
+        } catch (error) {
+            console.log(error);
+        }
+
+        try {
+            console.log("6.",y4); // (B). ReferenceError: Cannot access 變數名稱 before initialization
+            let y4 = 25;
+        } catch (error) {
+            console.log(error);
+        }
+
+    </script>
+</body>
+
+</html>

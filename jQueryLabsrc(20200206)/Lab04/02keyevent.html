@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css//bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+       <input  class="form-control" id="idText" type="text">
+       <h1 >hello, <span id="showName"></span></h1>
+
+    </div>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+            $(function(){
+                //事件優先順序 keydown->keypress->keyup
+
+                //鍵盤按下時，可偵測控制鍵
+                 $("#idText").keydown(function(){
+                    console.log("keydown");
+
+                    // console.log($(this).val()); //空白
+                })
+                //鍵盤離開時，可取得最新value
+                $("#idText").keyup(function(){
+                    console.log("keyup"); 
+
+                    //輸入值在#showName顯示
+                    console.log($(this).val());
+                    var val=$(this).val();
+                    $("#showName").text(val);   
+                })                
+                //鍵盤按下放開時，不可偵測控制鍵
+                $("#idText").keypress(function(){
+                    console.log("keypress");
+
+                    // console.log(event.keyCode);
+                    // console.log($(this).val()); //空白
+                })
+               
+            })
+    </script>
+</body>
+</html>

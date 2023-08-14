@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06animateColor.html</title>
+    <style>
+        #imgdiv{position: absolute;
+            left: 500px;top:300px;border:10px dotted green;}        
+    </style>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/jquery.color.js"></script>
+    <script>
+        $(function(){
+            $("#imgdiv").mouseover(function(){ 
+                    // $("#imgdiv").mouseover(function(){   
+                    //animate()
+                    //使用者點選imgbird的圖片後,使用3秒鐘的時間完成下列動作
+                    //向左移動到100px的位置(left:100)
+                    //向上移動到0px的位置(top:0)
+                    //寬度調整成30px(width:30)
+                    //高度調整成30px(height:30)
+                    //不透明度調整成0.3(opacity:0.3)
+                    //背景顏色設為黃色(yellow)
+                    //邊框顏色設為紅色(red)
+                    //瀏覽網頁看看效果                     
+                    $("#imgdiv,#imgbird").animate({"left":"100px",
+                                    "top":"0px",
+                                    "width":"30px",
+                                    "height":"30px",
+                                    "opacity":"0.3",
+                                    "backgroundColor":"yellow",
+                                    "borderColor":"red",                                                              
+                                    "borderWidth": "1px"
+                                    },3000,function(){$(this).hide()}
+                                );                                          
+            });                      
+        });
+    </script>
+
+</head>
+<body> 
+    <div  id="imgdiv">
+            <img id="imgbird"  src="images/birdfly.gif" alt="bird flying">
+    </div>
+</body>   
+</html>

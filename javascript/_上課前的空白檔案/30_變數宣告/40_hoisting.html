@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3>Hoisting is JavaScript's default behavior of moving declarations to the top.</h3>
+    <h3><a href="https://www.w3schools.com/js/js_hoisting.asp">JavaScript Hoisting</a></h3>
+
+    <script>
+        // (A). ReferenceError: 變數名稱 is not undefined
+        // (B). ReferenceError: Cannot access 變數名稱 before initialization 
+        // (C). 印出 undefined 
+        // (D). 印出 20 
+
+        // 10. 執行前思考：底下這一行應該會出現什麼訊息?
+        try {
+            console.log(x);
+        } catch (error) {
+            console.log(error);
+        }
+
+        // 20. 執行前思考：底下這一行應該會出現什麼訊息?
+        var x2
+        console.log(x2); 
+        x2 = 10;
+
+        // 30. 執行前思考：底下這一行應該會出現什麼訊息?
+        x3 = 20;
+        console.log(x3);
+        var x3;
+
+        // 40. 執行前思考：底下這一行應該會出現什麼訊息?
+        console.log(x4); 
+        var x4 = 25;
+
+
+        // 50. 用 上述用 var 宣告的變數改為用 let 宣告，會出現什麼訊息?
+ 
+    </script>
+</body>
+
+</html>

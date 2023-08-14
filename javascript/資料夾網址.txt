@@ -1,0 +1,24 @@
+﻿
+計算機上傳位置
+https://forms.gle/96Wkp1aQpEtVUKcD9
+
+
+線上點評 ==> 5410
+https://w3.iiiedu.org.tw/score/1100/stu
+
+
+A301_JavaScript資料夾連結 將於 4/15 刪除
+https://reurl.cc/exmLQK
+
+
+延伸閱讀:
+    event.stopPropagation()
+    event.preventDefault()
+    我找的:https://dotblogs.com.tw/harry/2016/09/10/131956
+
+    method chaining
+    ES6 promise
+    ES6 class
+    ES5 Array 操作
+
+

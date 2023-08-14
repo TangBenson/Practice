@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW</title>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <style>
+        #hw1 td {
+            border: 1px;
+            border: black;
+            border-style: solid;
+        }
+        #hw5 {
+            width: 50%;
+            height: 300px;
+            border: 1px;
+            border: black;
+            border-style: solid;
+        }
+        .left {
+            float: left;
+            width: 49%;
+            margin-left: 0;
+        }
+        .right {
+            float: right;
+            width: 49%;
+            margin-left: 2%;
+        }
+        table {
+            width: 100%;
+        }
+        tr td {          
+            border: 1px;
+            border: black;
+            border-style: solid;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="hw1">
+        <table>
+            <tr>
+                <td id="td2">s</td>
+                <td id="td3">s</td>
+                <td id="td4">s</td>
+                <td id="td5">s</td>
+                <td id="td6">s</td>
+                <td id="td7">s</td>
+                <td id="td8">s</td>
+                <td id="td9">s</td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div>
+        <form action="https://www.gamer.com.tw/" method="GET" style="width: 300px;">
+            <fieldset>
+                <legend>Form Check</legend>
+                <div>
+                    <label for="name">姓名:</label>
+                    <input type="text" name="name" id="na">
+                    <h5 id="h5" style="display: inline;"></h5>
+                    <p style="margin: 0;">1.不可空白 2.!@#$%^&*</p>
+                </div>
+                <hr>
+                <div>
+                    <label for="pwd">密碼:</label>
+                    <input type="text" name="pwd" value="請輸入密碼" id="pw">
+                    <h5 id="h5_1" style="display: inline;"></h5>
+                    <p style="margin: 0;">1.不可空白 2.!@#$%^&*</p>
+                </div>
+                <hr>
+                <div>
+                    <label for="date">日期:</label>
+                    <input type="text" name="date" value="ex:2020/4/11">
+                    <p style="margin: 0;">格式:西元年/月/日 yyyy/mm/dd</p>
+                </div>
+                <hr>
+                <div style="margin: 0 auto; width: 100px;">
+                    <button>送出</button>
+                    <input type="button" value="清除" id="clear">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <hr>
+    <div id="hw3">
+        <img src="/dark.png" alt="" id="star1">
+        <img src="/dark.png" alt="" id="star2">
+        <img src="/dark.png" alt="" id="star3">
+        <img src="/dark.png" alt="" id="star4">
+        <img src="/dark.png" alt="" id="star5">
+        <p></p>
+    </div>
+    <button>重評</button>
+    <hr>
+    <div id="hw5">
+        <div class="left">
+            <h3><b>Welcome</b></h3>
+            <div>
+                <select name="" id="sle1">
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                </select>年
+                <select name="" id="sle2" disabled="false">
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>月
+                <select name="" id="sle3" disabled="true">
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                </select>日
+            </div>
+            
+        </div>
+        <div class="right">
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            Information
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="date">
+                            您選擇的日期是
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            All Rights xxxxx
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+
+    <script>
+        for (var i = 2; i < 10; i++) {
+            var s = '';
+            for (var j = 1; j < 10; j++) {
+                s += `${i}*${j}=${i * j}`;
+                s += '\n'
+            }
+            var ss = 'td' + i
+            document.getElementById(ss).innerText = s;
+        }
+
+
+        $(function () {
+            $('#na').blur(function () {
+                $('#h5').append('正確')
+            });
+            $('#pw').blur(function () {
+                console.log($(this).val())
+                if ($(this).val() == '') {
+                    $('#h5_1').append('密碼不可空白，北七')
+                }
+            });
+            $('#clear').click(function () {
+                $('input').val('');
+            });
+        });
+
+
+        $('#star1').mouseenter(function () {
+            $(this).attr("src", "/yellow.png")
+            $('#hw3 p').text('打分中...1')
+        });
+        $('#star1').mouseleave(function () {
+            $(this).attr('src', "/dark.png")
+            $('#hw3 p').empty()
+        });
+        $('#star1').click(function () {
+            $(this).attr("src", "/yellow.png")
+            $('#hw3 p').text('你給1分，太低了吧，得罪你喔?')
+            // $('#star1').on("mouseenter mouseleave",function(event){
+            //     event.preventDefault;
+            // })
+            $('*').off("mouseenter");
+            $('*').off("mouseleave")
+        });
+        $('#star2').mouseenter(function () {
+            $('#star1').attr("src", "/yellow.png")
+            $(this).attr("src", "/yellow.png")
+            $('#hw3 p').text('打分中...2')
+        });
+        $('#star2').mouseleave(function () {
+            $('#star1').attr('src', "/dark.png")
+            $(this).attr('src', "/dark.png")
+            $('#hw3 p').empty()
+        });
+        $('#star2').click(function () {
+            $('#star1').attr("src", "/yellow.png")
+            $(this).attr("src", "/yellow.png")
+            $('#hw3 p').text('你給2分，有點低，多給點?')
+            $('*').off("mouseenter");
+            $('*').off("mouseleave")
+        });
+        $('#star3').mouseenter(function () {
+            $('#star1').attr("src", "/yellow.png")
+            $('#star2').attr("src", "/yellow.png")
+            $(this).attr("src", "/yellow.png")
+            $('#hw3 p').text('打分中...3')
+        });
+        $('#star3').mouseleave(function () {
+            $('#star1').attr('src', "/dark.png")
+            $('#star2').attr('src', "/dark.png")
+            $(this).attr('src', "/dark.png")
+            $('#hw3 p').empty()
+        });
+        $('#star3').click(function () {
+            $('#star1').attr("src", "/yellow.png")
+            $('#star2').attr("src", "/yellow.png")
+            $(this).attr("src", "/yellow.png")
+            $('#hw3 p').text('你給3分，普通，免強吃飽')
+            $('*').off("mouseenter");
+            $('*').off("mouseleave")
+        });
+
+
+        $('#sle1').change(function(){
+            $('#sle2').removeAttr('disabled');
+            y=$(this).val()
+            // console.log($(this).val())
+        })
+        $('#sle2').change(function(){
+            $('#sle3').removeAttr('disabled');
+            m=$(this).val()
+            // console.log($(this).val())
+        })
+        $('#sle3').change(function(){
+            d=$(this).val()
+            $('#date').text(`您選擇的日期是${y}年${m}月${d}日`)
+        })
+    </script>
+</body>
+
+</html>

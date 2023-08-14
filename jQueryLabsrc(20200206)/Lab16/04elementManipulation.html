@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>04elementManipulation.html</title>
+    <style>
+            div.wrap{
+              border: 2px solid blue;
+            }
+            p {
+              background: yellow;
+              margin: 4px;
+            }
+    </style>
+</head>
+<body>
+    <h2>Greetings</h2>
+    <div class="container">
+        <div class="inner">Hello</div>
+        <div class="inner">Goodbye</div>
+    </div>
+    <p>Hello</p>
+    <p>cruel</p>
+    <p>World</p>
+    <u>Hello</u>
+    
+    <hr>
+    <input type="button" id="btn1" value="append()">
+    <input type="button" id="btn2" value="prepend()">
+    <input type="button" id="btn3" value="appendTo()">
+    <input type="button" id="btn4" value="prependTo()"> 
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){  //用F12查看
+                $(".inner").append("<b>append</b>"); 
+                // $(".inner").append("append");              
+            });
+
+            $("#btn2").click(function(){                
+                $(".inner").prepend("<b>prepebd</b>");
+            });
+
+            $("#btn3").click(function(){               
+                $("<b>appendTo</b>").appendTo(".inner");
+                // $("appendTo").appendTo(".inner"); //錯誤的寫法,因為無法變成jQuery物件
+            });
+
+            $("#btn4").click(function(){               
+                $("<b>prependTo</b>").prependTo(".inner");
+            });
+
+            
+        });
+    </script>
+</body>
+</html>

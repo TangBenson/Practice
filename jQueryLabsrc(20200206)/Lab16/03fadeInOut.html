@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>03fadeInOut.html</title>
+    <style>
+        #img1{width:300px;height:200px}
+    </style>
+</head>
+<body>
+    <input type="button" id="btn1" value="透明度淡入">
+    <input type="button" id="btn2" value="透明度淡出">
+
+    <hr>
+    <div id="cardiv">
+        <img id="img1" src="images/car.png">
+    </div>
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){
+                $("#cardiv").fadeIn(3000);               
+            });
+
+            $("#btn2").click(function(){                
+                $("#cardiv").fadeOut("slow",function(){
+                    alert("透明度淡出");
+                });
+            });       
+        });
+    </script>
+</body>  
+</html>

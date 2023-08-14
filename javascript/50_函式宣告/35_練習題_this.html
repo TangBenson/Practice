@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+   
+    <script>
+
+        // 10. 如何動態生成變數?
+        
+        // for (i=0;i<5;i++){
+        //     'x'+String(i)=i;
+        // }
+
+        for (var i = 0; i < 5; i++) {
+            //this不在object或事件裡面就等同window
+            //這邊this相當於window物件
+            this['str' + i] = 100 + i;
+            // console.log(this['str' + i]);
+            x=5;
+            var y=6;
+        }
+
+        console.log(str0);
+        console.log(str1);
+        console.log(str2);
+        console.log(str3);
+        console.log(str4);
+        console.log(x);
+        console.log(y);
+        console.log(i);
+    </script>
+   
+</body>
+</html>

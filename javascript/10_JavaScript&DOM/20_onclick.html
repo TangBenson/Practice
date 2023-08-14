@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <!-- 10. 於網頁放置一顆按鈕 -->
+    <button>按鈕一</button>
+    <!-- 20. 點擊按鈕，在 console 紀錄一段文字 -->
+    <button onclick="console.log(123);">按鈕二</button>
+    <!-- 30. 將要執行的事件打包成 function -->
+    <button onclick="btnClick()">按鈕三</button>
+
+    <script>
+        function btnClick() {
+            console.log(456)
+        }
+    </script>
+    <!-- onclick是button的屬性，更清楚說明是"事件的屬性" -->
+    <!-- 若onclick要做很多東西，則會寫成function -->
+</body>
+
+</html>

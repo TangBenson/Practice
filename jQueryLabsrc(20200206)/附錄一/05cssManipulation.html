@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05cssManipulation.html</title>
+    <style>
+        .myClass{
+            background-color:aquamarine;
+            border:2px dotted fuchsia;
+        }
+        p{background-color: yellow}    
+    </style>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){
+                alert($("p").css("background-color"));               
+            });
+
+            $("#btn2").click(function(){                
+                $("p").css("color","red");
+            });
+
+            $("#btn3").click(function(){               
+                $("p").css({"text-decoration":"line-through",
+                            "border":"2px solid green",
+                            "text-decoration-color":"deeppink"
+                        });
+            });
+
+            $("#btn4").click(function(){
+                $("div").addClass("myClass");               
+            });
+
+            $("#btn5").click(function(){                
+                $("div").removeClass("myClass");
+            });
+
+            $("#btn6").click(function(){               
+                $("div").toggleClass("myClass");
+            });
+
+            $("#btn7").click(function(){               
+                alert($("div").hasClass("myClass"));
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <P >this is pragraph</P>
+    <div id="div1">this is first div</div>
+    <div id="div2">this is second div</div>
+    <hr>
+
+    <input type="button" id="btn1" value="css('name')">
+    <input type="button" id="btn2" value="css('name','value')">
+    <input type="button" id="btn3" value="css({})">
+    <input type="button" id="btn4" value="addClass()">
+    <input type="button" id="btn5" value="removeClass()">
+    <input type="button" id="btn6" value="toggleClass()">
+    <input type="button" id="btn7" value="hasClass()">
+    
+</body>
+</html>

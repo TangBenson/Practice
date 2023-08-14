@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>05slider.html</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .wrapper {
+            position: relative;
+            width: 800px;
+            height: 300px;
+            /* 讓照片不要一次全顯現 */
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+        }
+
+        li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        ul.slides {
+            /* 4張圖片並排共3200 */
+            width: 3200px;
+            left: 0px;
+            transition: all .5s;
+        }
+
+        ul.slides li {
+            width: 800px;
+            height: 300px;
+            /* overflow: hidden; */
+            float: left;
+        }
+
+        ul.slides li img {
+            width: 100%;
+            height: 100%;
+            /* 應該是不讓照片因外框比例變形 */
+            object-fit: cover;
+        }
+
+        .dot {
+            bottom: 10px;
+            width: 100%;
+            /* 水平排列 */
+            display: flex;
+            /* 水平置中 */
+            justify-content: center;
+        }
+
+        .dot li {
+            border: 1px solid #fff;
+            /* border-radius: 50%; */
+            margin: 0 5px;
+            width: 24px;
+            height: 10px;
+        }
+
+        .dot li:hover {
+            background: #fff;
+        }
+
+        .slide_btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* top和bottom設0垂直置中 */
+            top: 0;
+            bottom: 0;
+            width: 30px;
+            color: #fff;
+            position: absolute;
+            font-size: 24px;
+        }
+
+        #prevSlide {
+            left: 0;
+        }
+
+        #nextSlide {
+            right: 0;
+        }
+
+        .slide_btn i {
+            color: rgba(255, 255, 255, .6);
+            transition: .5s;
+        }
+
+        .slide_btn:hover i {
+            color: rgba(255, 255, 255, 1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <ul class="slides">
+            <li><img src="images/slide1.jpg" alt=""></li>
+            <li><img src="images/slide2.jpg" alt=""></li>
+            <li><img src="images/slide3.jpg" alt=""></li>
+            <li><img src="images/slide4.jpg" alt=""></li>
+        </ul>
+        <ul class="dot">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div id="prevSlide" class="slide_btn">
+            <i class="fa fa-caret-left"></i>
+            <!-- 套用特殊class名稱產生箭頭符號 -->
+        </div>
+        <div id="nextSlide" class="slide_btn">
+            <i class="fa fa-caret-right"></i>
+        </div>
+    </div>
+
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            let slideNum = 0;
+            let slideCount = $(".slides li").length;
+            let lastIndex = slideCount - 1;
+            // console.log(slideCount);
+
+            $(".dot li").eq(0).css("background", "white");
+            $(".dot li").mouseenter(function () {
+                slideNum = $(this).index();
+                console.log(slideNum);
+                //    $(this).css("background","white")
+                //    .siblings().css("background","transparent");
+
+                //    $(".dot li").eq(slideNum).css("background","white")
+                //    .siblings().css("background","transparent");
+
+                //    var slidemove=0-800*slideNum;
+                //    $("ul.slides").css("left",slidemove);
+                show();
+            });
+
+            $("#prevSlide").click(function () {
+                slideNum--;
+                if (slideNum < 0) slideNum = lastIndex;
+                show();
+
+            });
+            $("#nextSlide").click(function () {
+                slideNum++;
+                if (slideNum > lastIndex) slideNum = 0;
+                show();
+            })
+
+            function show() {
+                $(".dot li").eq(slideNum).css("background", "white")
+                    .siblings().css("background", "transparent"); //背景透明
+
+                var slidemove = 0 - 800 * slideNum;
+                $("ul.slides").css("left", slidemove);
+            }
+
+        });
+    </script>
+</body>
+
+</html>

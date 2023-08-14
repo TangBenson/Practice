@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3><a href="https://www.w3schools.com/jsref/jsref_obj_global.asp">JavaScript Global Reference</a></h3>
+
+    <script>
+
+        // 10. 實作前，先思考一下，這兩者出來的結果是什麼？
+        //     a. "11" + 1
+        //     b. "11" - 1 
+        console.log("11" + 1); //111
+        console.log("11" - 1); //10
+
+
+        // 20. parseInt() 把文字轉換為數值 (預設為10進位的轉換方式)
+        var num;
+        num = "10000";
+        console.log(parseInt(num, 2));
+        num = "16";
+        console.log(parseInt(num, 10));
+        num = "0X10";
+        console.log(parseInt(num, 16));
+        num = "10";
+        console.log(parseInt(num, 16));
+
+
+        // 資料型別之一的物件，又稱雜湊或關聯陣列，類似PYTHON的dict，主體為各個元素
+
+        // 物件導向概念的物件，主體為物件整體
+
+        // 物件實體化：var 變數名稱 = new 物件名稱([參數])，這裡的物件名稱就是python的class，但在js稱為原型
+
+        // 如何新增原型就不探討了，我沒有要精通js
+
+        // js物件有分內建物件、瀏覽器物件
+        // 內建物件：Array、Date、String、RegExp、Number、Error、Math...，這些物件實體化不需要加new
+        // 瀏覽器物件：Window(BOM的核心)、Navigator、Location、History、Document(DOM的核心)...
+
+        // Object物件是所有物件的樣板，所有物件都具備Object的屬性方法，但也有特別方法不繼承
+
+        // Global物件也是特別的，但我不研究了
+
+        //在Javcascript中，所有的全域變數、函式、物件，其實都是屬於window物件。舉例來說：
+        //x=5;
+        //alert (window.x); //輸出 5
+        //很明顯，全域變數x是window物件的一個屬性。事實上，上面使用到的 alert() 函式，也是window的一個方法。
+
+        // BOM: JavaScript 與瀏覽器溝通的窗口，不涉及網頁內容。
+        // DOM: JavaScript 用來控制網頁的節點與內容的標準。
+
+        // https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/283220/
+        // https://icodding.blogspot.com/2015/12/javascript-bom-dom.html
+        // https://www.happycoding.today/posts/43
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01showhide.html</title>
+    <style>
+       #img1{width:300px;height:200px}
+    </style>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){
+                $("#cardiv").show(3000);               
+            });
+
+            $("#btn2").click(function(){                
+                $("#cardiv").hide("slow",function(){
+                    alert("隱藏起來了");
+                });
+            });
+
+            $("#btn3").click(function(){               
+                // $("#cardiv").toggle(2000,function(){$(this).hide(2000)});
+                $("#cardiv").toggle();
+            });           
+        });
+    </script>
+
+</head>
+<body>
+    <input type="button" id="btn1" value="顯示元素">
+    <input type="button" id="btn2" value="隱藏元素">
+    <input type="button" id="btn3" value="切換顯示隱藏元素"> 
+    <hr>
+    <div id="cardiv">
+        <img id="img1" src="images/car.png">
+    </div>   
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>01resize.html</title>
+    <style>
+        img{
+            /* position: absolute; */
+            width:400px;
+            height:300px;
+            /* float: left; */
+            } 
+
+        #div1 {
+            position: absolute;
+            width: 400px;
+            height: 300px;                                
+        }       
+    </style>
+    
+</head>
+<body>
+    <div id="div1">
+            <img id="image1" src="images/tesla1.jpg">
+    </div>
+    
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            move_div();
+
+            //當視窗放大或縮小時呼叫move_div的函式
+            //讓div1置中
+            $(window).resize(move_div);
+
+            function move_div() {
+               var winHeight=$(window).height();  
+            //    console.log(winHeight); 
+            //    var winHeight2=$(window).css("height");//x，會錯，我想是window不是元素，是物件吧
+            //    console.log(winHeight2);           
+               var winWidth=$(window).width();
+               var objHeight=$("#div1").height();
+            //    var objHeight2=$("#div1").css("height");//ok
+            //    console.log(objHeight2);
+               var objWidth=$("#div1").width();
+
+               var top=(winHeight-objWidth)/2;
+               var left=(winWidth-objWidth)/2;
+               
+
+               $("#div1").css("top",top).css("left",left);
+            }   
+        });
+    </script>
+</body>
+</html>

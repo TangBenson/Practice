@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3>ES6 新增的箭頭函式，精簡寫法，但要小心 this 關鍵字的使用</h3>
+    <h3><a href="https://www.w3schools.com/js/js_arrow_function.asp">Arrow Function</a></h3>
+
+    <script>
+        //#region 
+        console.group();
+        // 10. 透過 函式運算式 宣告一個 function
+        var a = function () {
+            return 'apple';
+        }
+        console.log(a());//apple
+
+        // 20. 精簡後的樣子 () => 
+        // function字樣直接拿掉，大括號及return變=>
+        var b = () => 'bee';
+        console.log(b());//bee
+
+        // 30. 可以有參數的傳入 (para) => 
+        var c = (x, y) => x * y;
+        console.log(c(2, 3)); //6
+
+        // 35. 改寫 30 加上 {} 程式碼會報錯，為什麼?
+        var d = (x, y) => {
+            x * y
+        };
+        console.log(d(2, 3)); //undefined，因為沒return
+
+        // 40. 如果說需要多個陳述句子，還是需要加上 () => {}
+        var e = (x, y) => {
+            x = x + 1;
+            y = y + 1;
+            return x * y
+        };
+        console.log(e(2, 3)); //12
+        console.groupEnd();
+        //#endregion
+
+        // 50. object + this 關鍵字 + 箭頭函式
+        var qty = 100;
+        var price = 1;
+        
+        var product = {
+            qty: 101,
+            price: 500,
+
+            getPrice: function () {
+                var price = 501;
+                console.log(price);  // 501 
+                console.log(this.price); // 500 =>我:正規func的this會抓物件的屬性值，若沒有this擇一層層往外找變數名稱
+                console.log(this); // { qty:101 }
+            },
+            getQty: () => {
+                var qty = 102;
+                console.log(qty);      // 102
+                console.log(this.qty); // 100 (window的qty) =>我:精簡func的this會抓window的qty，若沒有this擇一層層往外找變數名稱
+                console.log(this);     // window
+            },
+            getTotal: function () {
+                // var qty = 103;
+                setTimeout(() => {
+                    console.log(qty);//100
+                    console.log(this.qty);//101
+                    console.log(this);//product物件
+                }, 1000);
+            }
+            // this不在object或事件裡面就等同window
+        };
+        console.log('難的開始:',typeof product)
+        console.log('qty:',qty)
+        console.log('price:',price)
+
+        product.getPrice();
+        product.getQty();
+        product.getTotal();
+
+        // 物件裡的function的this會指向物件
+        // 全域裡的function的this會指向全域
+        // 正規func和精簡func使用this其指向不一樣喔
+        var e=2;
+        function test(){
+            var e=1;
+            console.log('test:',e); // 1
+            console.log('test:',this.e); // 2，此時this指向window
+            console.log('test:',window.e); // 2
+            console.log(this);
+        }
+        test();
+
+    </script>
+
+</body>
+
+</html>

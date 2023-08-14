@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3><a href="https://www.w3schools.com/js/js_object_definition.asp" target="_blank">JavaScript Objects</a></h3>
+
+    <script>
+        // 10. 使用{} create object；object 可以包含屬性和方法
+        //     { key1:value1, key2:value2.. }
+
+        var myCSS = 1;
+        var myJS = 2;
+
+        var s1 = {
+            name:'apple',
+            phone:'0911222333',
+            myCSS: 90,
+            myJS: 90,
+            score: function(){
+                return myCSS + myJS;
+            },
+            score2: function(){
+                return this.myCSS + this.myJS;
+            }
+        }
+          
+        // 20. 取得 object 屬性的值或者呼叫方法
+        console.log('1:'+s1);
+        console.log('2:'+s1.name);
+        console.log('3:'+s1.myCSS);
+        console.log('4:'+s1.score());
+
+        // 30. 透過 . 新增 object 的屬性
+        s1.html = 100;
+        console.log('5:'+s1);
+
+        var s2 = s1;
+        s2.name = 'bee';
+        console.log('6:'+s1);
+
+        var a=5
+        console.log('7:'+a)
+        console.log('8:'+typeof(a))
+        var b=[1,2,3]
+        console.log('9:'+b)
+        console.log('10:'+typeof(b))
+        console.log('10_2:'+b.valueOf());
+
+        // 40. 透過 [] 存取值
+        // console.clear();
+        console.log(s1['myJS']);
+        console.log(s1[3]);
+
+        s1['myHTML'] = 100;
+        console.log(s1['myHTML']);
+
+        // var s2 = s1;
+        // s2.name = 'bee';
+        // console.log(s1);
+
+        var weekList = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+        console.log('11:'+weekList)
+        console.log('12:'+typeof(weekList))
+        console.log('13:'+weekList.valueOf());
+        console.log(weekList.valueOf());
+    </script>
+
+</body>
+
+</html>

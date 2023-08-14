@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <title>02selectable.html</title>
+    <link rel="stylesheet" href="../css/themes/base/jquery-ui.css">
+    <style>
+        #feedback { font-size: 1.4em; }
+        #divselectable{width:500px}
+        #selectable .ui-selecting { background: cyan; }
+        #selectable .ui-selected { background: blue; color: white; }
+        #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+        #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+    </style>
+</head>
+<body>
+    <div id="divselectable">
+        <ol id="selectable">
+            <li class="ui-widget-content">Item 1</li>
+            <li class="ui-widget-content">Item 2</li>
+            <li class="ui-widget-content">Item 3</li>
+            <li class="ui-widget-content">Item 4</li>
+            <li class="ui-widget-content">Item 5</li>
+            <li class="ui-widget-content">Item 6</li>
+            <li class="ui-widget-content">Item 7</li>
+        </ol>
+    </div>
+    <div ><ul id="feedback"></ul></div>
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <script>
+        $( function() {
+        $( "#selectable" ).selectable({
+            selected: function(ev, ui) {                    
+                $(ui.selected).each(function(){
+                    console.log($(this));
+                    alert($(this).html()); //html會解譯標籤，text不會
+                    $("#feedback").append("<li>"+$(this).html()+"</li>");
+                });
+            }
+        });
+        });
+    </script>
+</body>
+</html>

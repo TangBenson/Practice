@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <button onclick="a()">1</button>
+    <button id="btn2">2</button>
+    <button id="btn3">3</button>
+
+    <script>
+        // 10. 在開始標籤綁定事件
+        function a() {
+            console.log('10-1');
+        }
+
+        // 20. 透過元素綁定事件
+        document.getElementById('btn2').onclick = function () {
+            console.log('20-1');
+        }
+        // btn2.onclick = function () {
+        //     console.log('20-1');
+        // }
+        document.getElementById('btn2').onclick = function () {
+            console.log('20-2');
+        }
+
+        // 30. 透過addEventListener (事件名稱, function(){}) 加入事件
+        document.getElementById('btn3').addEventListener('click', function () {
+            console.log('30-1');
+        })
+
+        document.getElementById('btn3').addEventListener('click', function () {
+            console.log('30-2');
+        })
+
+        // 40. 請測試看看，哪一種綁定方式可以指定多項處理function?
+        //30才行
+    </script>
+
+</body>
+
+</html>

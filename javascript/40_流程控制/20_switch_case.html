@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <h3><a href="https://www.w3schools.com/js/js_switch.asp" target="_blank">JavaScript Switch Statement</a></h3>
+  <pre>
+        switch(expression) {
+          case x:
+            // code block
+            break;
+          case y:
+            // code block
+            break;
+          default:
+            // code block
+        }
+  </pre>
+  <!-- 10. 請設計一個介面，讓使用者輸入頻道代碼後，網頁可以顯示對應的頻道名稱 -->
+  <!-- label和input通常會成對出現，會出現一些方便的效果 -->
+  <label for="tv">input TV:</label>
+  <input type="text" name="" id="tv">
+  <button onclick="showTV()">query</button>
+  <p id="demo">頻道資訊即將公開於此</p>
+
+
+  <script>
+      // 20. 透過 switch case 設定底下對應項目
+      //     20 ==> TLC 旅遊生活頻道
+      //     65 ==> HBO
+      //     66 ==> 東森洋片台
+      //     非上述 ==> 頻道尚未建立
+
+    function showTV(){
+      var tvnum = document.getElementById('tv').value;
+      // console.log(typeof(tvnum));
+      var tvnum2 = parseInt(tvnum);
+
+      switch (tvnum2) {
+        case 20:
+          // console.log('TLC 旅遊生活頻道');
+          document.getElementById('demo').innerText='TLC 旅遊生活頻道'
+          break;
+        case 65:
+          // console.log('HBO');
+          document.getElementById('demo').innerText='HBO'
+          break;
+        case 66:
+          // console.log('東森洋片台');
+          document.getElementById('demo').innerText='東森洋片台'
+          break;  
+        default:
+          // console.log('頻道尚未建立');
+          document.getElementById('demo').innerText='頻道尚未建立'
+          break;
+      }
+    }
+
+
+    // function showTV() {
+      
+    //   var tvnum = document.getElementById('tv').value;
+    //   var temp = 20;
+
+    //   console.log( tvnum == temp);
+    //   console.log( tvnum === temp);
+    //   console.log( typeof tvnum );
+      
+    //   console.log(tvnum);
+
+    //   switch (tvnum) {
+    //     case 20:
+    //       console.log('TLC 旅遊生活頻道');
+    //       break;
+    //     default:
+    //       console.log('頻道尚未建立');
+    //       break;
+    //   }
+    // }
+      // var x=10;
+      // switch (x) {
+      //   case 5:
+      //     console.log('5');
+      //     break;
+      //   case 10:
+      //     console.log('10');
+      //     break;
+      //   default:
+      //     console.log('?');
+      //     break;
+      // }
+
+  </script>
+</body>
+
+</html>

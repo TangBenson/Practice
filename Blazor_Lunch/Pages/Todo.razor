@@ -1,0 +1,38 @@
+﻿@page "/todo"
+
+<h1>Todo (@todos.Count(todo => !todo.IsDone))</h1>
+
+<ul>
+    @foreach (var todo in todos)
+    {
+        @*<li>@todo.Title</li>*@
+        <li>
+            <input type="checkbox" @bind="todo.IsDone" />
+            <input @bind="todo.Title" />
+        </li>
+    }
+</ul>
+
+<input placeholder="Something todo" @bind="newTodo" /> @*宣告一個newTodo的變數來做為雙向綁定*@
+
+<button @onclick="AddTodo">Add todo</button>
+
+@code {
+    private List<TodoItem> todos = new();
+    private string? newTodo; //宣告一個newTodo的變數來做為雙向綁定
+    private void AddTodo()
+    {
+        if (!string.IsNullOrWhiteSpace(newTodo))
+        {
+            todos.Add(new TodoItem { Title = newTodo });
+            newTodo = string.Empty;
+        }
+    }
+
+    //這class應該抽出去在Models資料夾，但我懶
+    public class TodoItem
+    {
+        public string? Title { get; set; }
+        public bool IsDone { get; set; }
+    }
+}

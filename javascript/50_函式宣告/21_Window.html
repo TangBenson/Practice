@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h3><a href="https://www.w3schools.com/jsref/obj_window.asp" target="_blank">The Window Object</a></h3>
+
+    <script>
+        // 10. 大寫 Window 和小寫 window 的差異
+        console.log(Window); // function
+        console.log(window); // object 
+
+        // 20. alert() & window.alert()
+        //     若宣告一個變數為 alert 結果會變成？
+        console.group("20. alert() & window.alert()")
+        console.log(window.alert); // function
+        window.alert('apple');
+        alert('bee');
+
+        var alert = 'cat';
+        console.log(alert); //cat
+        
+        // alert('dog');
+        // window.alert('egg');
+
+        console.log(window.alert); //cat
+
+        console.groupEnd();
+        // 已知關鍵字例如alert，變數名稱就不要用這名字，會出錯
+
+        // 30. console.log() & window.console.log()
+        //     再 function內 宣告一個變數為 console 結果會變成？ 
+        console.group("30. console.log() & window.console.log()")       
+        function func1(){
+            var console = 42;
+            window.console.log(console);
+            console.log(console); //console.log不是function
+        }
+        func1();
+        console.groupEnd();
+    </script>
+</body>
+</html>

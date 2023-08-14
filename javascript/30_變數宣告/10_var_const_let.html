@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3><a href="https://www.w3schools.com/js/js_let.asp">JavaScript Let</a></h3>
+    <h3><a href="https://www.w3schools.com/js/js_const.asp">JavaScript Const</a></h3>
+
+    
+    <!-- 0330 補充 -->
+    <h3><a href="https://www.w3schools.com/js/js_versions.asp">JavaScript Versions</a></h3>
+    <!-- 0330 補充 -->
+    <h3><a href="https://www.w3schools.com/js/js_es5.asp">ECMAScript 5 - JavaScript 5 (2009)</a></h3>
+    <h3><a href="https://www.w3schools.com/js/js_es6.asp">ECMAScript 6 - ECMAScript 2015</a></h3>
+
+    <script>
+        // 10. var、let、const 宣告變數的方法
+        var a = 'apple';
+        let b = 'bee';
+        const c = 'cat';
+
+        console.log("1.",a);
+        console.log("2.",b);
+        console.log("3.",c);
+
+        // 20. const 變數宣告並給值後是否還能修改?
+        // c = 'dog';
+        // console.log(c); //==> 會錯，因為const宣告的變數不能再改值
+
+        // 30. 在 if 判斷句中，透過 var、let 宣告兩個變數，並觀察他們的作用域
+        if (true) {
+            var d = 'dog';
+            let e = 'egg';
+            
+            console.log("4.",d);
+            console.log("5.",e);
+        }
+        console.log("6.",d);
+        // console.log(e); //==> 這邊會有錯誤訊息，因為let宣告的變數在作用域外就認不得了。測試const也是
+
+        // 40. 測試 var 宣告相同的變數名稱
+        var test1 = '兒童節';
+        var test1 = '清明節';
+        console.log("7.",test1)
+
+        // 50. 測試 let 宣告相同的變數名稱 
+        let tese2 = '萬聖節';
+        // let tese2 = '聖誕節'; //==> 會錯，因為let宣告的變數不能二次宣告
+        //console.log(tese2) 
+
+    </script>
+</body>
+
+</html>

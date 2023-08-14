@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <script>
+        // 10.  底下會在控制台顯示出什麼資訊？為什麼？ 
+        var name = 'apple';
+        (function () {
+            if (typeof name == 'undefined') {
+                var name = 'bee';
+                console.log('A. Hello~ ' + name);
+            } else {
+                console.log('B. Hello~' + name);
+            }
+        })();
+
+
+        // 20.  底下會在控制台顯示出什麼資訊？為什麼？
+        var name = 'cat';
+        (function () {
+            var name;
+            if (typeof name == 'undefined') {
+                var name = 'dog';
+                console.log('C. Hello~ ' + name);
+            } else {
+                console.log('D. Hello~ ' + name);
+            }
+        })();
+    </script>
+</body>
+
+</html>

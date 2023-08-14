@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03AttrProp.html</title>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){                                
+            $("#btn1").click(function(){
+                $(":checkbox[name='ch']").each(function(index){
+                    console.log("attr "+index+":"+$(this).attr("checked"));
+                });
+
+                $(":checkbox[name='ch']").each(function(index){
+                    console.log("prop "+index+":"+$(this).prop("checked"));
+                });          
+            });
+
+            $("#Toggle").change(function () {
+                //切換所有checkbox的勾選狀態與#Toggle相同
+
+                console.log($(this).attr('checked'));
+                console.log($(this).prop('checked'));
+                var b=$(this).prop("checked");
+                $(":checkbox[name='ch']").prop("checked",b);
+
+            });
+
+            $("#buttonToggle").click(function () {
+                //切換各自checkbox的勾選狀態
+
+                $(":checkbox[name='ch']").each(function(){
+                    let b=!$(this).prop("checked");
+                    // console.log(b);
+                    $(this).prop("checked",b);
+                });  
+
+            });
+
+            $("#buttonGet").click(function () {
+                //讀出所有被勾選checkbox的值
+
+                var vs=[];
+                $(':checked[name="ch"]').each(function(){
+                    // alert($(this).val());
+                    vs.push($(this).val());
+                })
+                alert(vs);  
+            });            
+            
+        });
+    </script>
+
+</head>
+<body>    
+    <input type="checkbox" name="ch" value="a1" checked><label>A1</label>
+    <input type="checkbox" name="ch" value="a2" checked="checked"><label>A2</label>
+    <input type="checkbox" name="ch" value="a3" checked="true"><label>A3</label>
+    <input type="checkbox" name="ch" value="a4" checked="on"><label>A4</label>
+    <input type="checkbox" name="ch" value="a5" checked="yes"><label>A5</label>
+    <input type="checkbox" name="ch" value="a6" checked="xyz"><label>A6</label>
+    <input type="checkbox" name="ch" value="a7" ><label>A7</label>
+    <hr>
+    <input type="button" id="btn1" value="attr&prop">
+    <input type="checkbox" id="Toggle" />Toggle All
+    <input type="button" value="checkToggle" id="buttonToggle" />
+    <input type="button" value="get checked" id="buttonGet" />
+
+</body>
+</html>

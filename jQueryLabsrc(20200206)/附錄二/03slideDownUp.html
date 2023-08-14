@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03slideDownUp.html</title>
+    <style>
+        #img1{width:300px;height:200px}
+    </style>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){
+                $("#cardiv").slideDown(3000);               
+            });
+
+            $("#btn2").click(function(){                
+                $("#cardiv").slideUp("slow",function(){
+                    alert("藏起來了!!");
+                });
+            });
+
+            $("#btn3").click(function(){               
+                $("#cardiv").slideToggle(2000,function(){$(this).hide(2000)});
+            });           
+        });
+    </script>
+
+</head>
+<body>
+    <input type="button" id="btn1" value="滑動加大顯示">
+    <input type="button" id="btn2" value="滑動向上縮小">
+    <input type="button" id="btn3" value="切換顯示隱藏元素"> 
+    <hr>
+    <div id="cardiv">
+        <img id="img1" src="images/car.png">
+    </div>   
+</html>

@@ -1,0 +1,39 @@
+{
+  "Name": "總經理",
+  "Children": [
+    {
+      "Name": "行政部",
+      "Children": [
+        { "Name": "人資組" },
+        { "Name": "總務組" }
+      ]
+    },
+    {
+      "Name": "資訊部",
+      "Children": [
+        { "Name": "網路組" },
+        { "Name": "研發組" }
+      ]
+ 
+    },
+    {
+      "Name": "業務部",
+      "Children": [
+        {
+          "Name": "海外組",
+          "Children": [
+            { "Name": "海外一科" },
+            { "Name": "海外二科" }
+          ]
+        },
+        {
+          "Name": "通路組",
+          "Children": [
+            { "Name": "行銷科" },
+            { "Name": "電銷科" }
+          ] 
+        }
+      ] 
+    }
+  ] 
+}

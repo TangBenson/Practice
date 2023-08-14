@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <canvas id="canvas" width="200" height="200"></canvas>
+    <script>
+        var g = canvas.getContext("2d");
+        //普通的直線   
+        g.beginPath();
+        g.strokeStyle = "#CCC";
+        g.moveTo(0, 0);
+        g.lineTo(200, 0);
+        g.lineTo(0, 200);
+        g.lineTo(200, 200);
+        g.stroke();
+        //貝茲曲線   
+        g.beginPath();
+        g.strokeStyle = "#F00";
+        g.moveTo(0, 0);
+        g.bezierCurveTo(200, 0, 0, 200, 200, 200);
+        g.stroke();   
+    </script>
+</body>
+
+</html>

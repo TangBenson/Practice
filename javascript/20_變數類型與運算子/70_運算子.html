@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <h3><a href="https://www.w3schools.com/js/js_operators.asp" target="_blank">JavaScript Operators</a></h3>
+    
+    <script>
+        
+        // 算術運算子，四則運算、取餘數 (%) 等
+        var a = 10;
+        var b = 3;
+
+        //      10. 取餘數 %
+        console.log('取餘數 %:'+a % b);
+
+        // 比較運算子，評估條件，回傳 true 或者 false 值
+        var x = 10;
+        var y = "10";
+        var z = 4;
+
+        //      20. == 和 === 的差異在?
+        console.log(x == y);  // true
+        console.log(x === y); // false
+
+        // 邏輯運算子
+        //      30. 不等於的寫法 (!=)
+        console.log(x != y);   // false
+        console.log(x !== y);  // true
+        console.clear();
+
+        //      40. and (&&) 條件需要同時成立的時候
+        console.log(a == x && b < z);
+
+        //      50. or (||) 條件擇一成立
+        console.log(a == z || b < z);
+
+        //      60. 比較 && 和 & 的差異
+        var test1 = 0;
+        if(x<z && (test1=x+z)<20){
+            console.log(cat);
+        }
+        console.log(test1); //0
+
+        //------------------------------
+        var test2=0
+        if(x<z & (test2=x+z)<20){
+            console.log(cat);
+        }
+        console.log(test2); //14
+
+        //      70. 三元運算子 (condition) ? value1:value2
+        var temp = x == 11 ? 'apple' : 'bee';
+        console.log(temp);
+        
+        // 80. 測試 2 > 1
+        var flag = 2>1;
+        console.log(flag);
+
+        // 81. 測試 1 < 2 < 3 和 3 > 2 > 1
+        flag=1<2<3<2;
+        console.log(flag);
+
+        flag=3>2>1; //3>2為true，true=1，而1>1為false
+        console.log(flag);
+
+        // 82. 測試 true == 1 還有 false == 0 答案是什麼
+        //      並試著說明為什麼上面兩個測試呈現這樣的結果
+        console.clear();
+        console.log(true == 1);
+        console.log(false == 0);
+
+    </script>
+
+</body>
+
+</html>

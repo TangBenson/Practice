@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <p id="memo">點選圖片後，放大圖片和文字</p>
+    <img onclick="changeImg()" id="imgTest" src="../../img/find.png">
+    <img onclick="QQ()" id="imgTest2" src="../../img/find.png">
+
+    <script>
+        function changeImg(){
+            var elm=document.getElementById('imgTest');
+            // 1. 網頁的 圖片的 樣式的 寬度 改變
+            elm.style.width="200px";
+
+            // 2. 網頁的 圖片的 樣式的 高度 改變
+            elm.style.height="150px"
+
+            // 3. 網頁的 memo的 樣式的 字型 改變
+            // var elm2=document.getElementsByTagName('p');
+            var elm2=document.getElementById('memo');
+            elm2.style.fontSize='50px'
+        }
+        // console.log(89);
+        var tag='Y';
+        var elm=document.getElementById('imgTest2');
+        function QQ(){
+            // console.log(48);
+            if (tag=='Y'){
+                elm.style.width="200px";
+                tag='N';
+                console.log(66);
+            }
+            else if(tag=='N'){
+                elm.style.width="100px";
+                tag='Y';
+                console.log(77);
+            }
+        }
+    </script>
+</body>
+
+</html>

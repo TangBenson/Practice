@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <h3><a href="http://www.w3schools.com/js/js_dates.asp">JavaScript Date Objects</a></h3>
+    <h3><a href="http://www.w3schools.com/js/js_date_formats.asp">JavaScript Date Formats</a></h3>
+    <h3><a href="http://www.w3schools.com/js/js_date_methods.asp">JavaScript Get Date Methods</a></h3>
+
+    <h3>生成一個日期物件的方法：</h3>
+    <h3>new Date() </h3>
+    <h3>new Date(milliseconds) </h3>
+    <h3>new Date(dateString) </h3>
+    <h3>new Date(year, month, day, hours, minutes, seconds, milliseconds) </h3>
+
+    <script>
+        // 宣告一個時間物件
+        var d = new Date();
+        console.log(d);
+        // 取得年份
+        console.log(d.getFullYear());
+        // 取得月份 (請注意這裡)
+        console.log(d.getMonth()); //月的顯示方式為0-11
+        // 取得日期
+        console.log(d.getDate());
+        // 取得星期 (請注意這裡)
+        console.log(d.getDay()); //0表示週日
+        // 取得時間
+        console.log(d.getHours()+':'+d.getMinutes()+':'+d.getSeconds());
+        // 取得分鐘
+        console.log('取得分鐘:'+d.getMinutes());
+        // 若日期物件生成後，我們需要加一天
+        d.setDate( d.getDate() + 1 );
+        console.log(d);
+        // 若日期物件生成後，我們需要加一個月
+        d.setMonth( d.getMonth() + 1 );
+        console.log(d);
+
+
+        console.log('小練習：如何透過日期的加減，取得這個月的最後一天');
+        // 小練習：如何透過日期的加減，取得這個月的最後一天?
+        var d2 = new Date();
+        console.log(d2);
+        d2.setMonth( d2.getMonth() + 1 );
+        console.log(d2);
+        d2.setDate(1);
+        console.log(d2);
+        d2.setDate( d2.getDate() - 1 );
+        console.log(d2);
+
+
+        // 小練習：宣告兩個日期物件，並指定日期後，進行日期相減
+        // millisecond = 86400000 = 1000*60*60*24
+        var first = new Date();
+        var secondDate = new Date('2020/7/31');
+        console.log(first);
+        console.log(secondDate);
+
+        var diff = secondDate - first;
+        console.log(diff);
+        console.log(diff / 86400000);
+
+    </script>
+
+</body>
+
+</html>

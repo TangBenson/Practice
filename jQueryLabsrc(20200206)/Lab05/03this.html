@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03this.html</title>   
+</head>
+<body>
+    <h2>Drinks</h2>
+    <ul>
+        <li>Coffee</li>
+        <li>Juice</li>
+        <li>Tea</li>
+    </ul>
+    <p id="demo"></p>
+    <hr>
+    <input type="button" id="btn1" value="selector.each()">
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").click(function(){                             
+                $("li").each(function(index,element){ //each就像個迴圈
+                    // console.log(index);
+                    // console.log(element);
+                    // console.log(this);  //javascript object
+                    console.log($(this)); //jquery object
+                    console.log(index+':'+element);  //string [datatype class] [object HTMLLIElement]
+                    
+                    // console.log($(this).text());
+                    var text=$(this).text();
+                    $("#demo").append("<li>"+text+"</li>");
+                });                  
+            });
+
+        });
+
+        // selector是物件集合的陣列
+    </script>
+</body>
+</html>

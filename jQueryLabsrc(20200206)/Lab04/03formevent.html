@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>03formevent.html</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css//bootstrap.min.css">
+    <style>
+        .btn{
+            top:0;
+            transition: .5s;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="02keyevent.html" id="myform">
+            <div class="py-2">
+                <input type="text" id="idInp" class="form-control">
+            </div>
+            <div class="py-2">
+                <select class="form-control" name="" id="idSel">
+                    <option value="1">台北市</option>
+                    <option value="2">新竹市</option>
+                    <option value="3">台中市</option>
+                </select>
+            </div>
+            <div class="">
+                <!-- <a class="btn btn-info position-relative">click</a> -->
+                <!-- submit送到哪寫在form的action -->
+                <input type="submit" class="btn btn-info position-relative" value="submit">
+            </div>
+        </form>
+    </div>
+
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            //偵測點擊輸入欄位
+            $("#idInp").focus(function(){
+                console.log("focus");                              
+            });
+            //偵測離開輸入欄位
+            $("#idInp").blur(function(){
+                console.log("blur");                               
+            });
+            //偵測輸入欄位是否有輸入值的變化
+            $("#idInp").change(function(){
+                console.log("change");                               
+            });
+            //偵測下拉選項是否改變
+            $("#idSel").change(function(){
+                console.log("change2");                               
+            });
+            //偵測form表單是否送出(是否點擊type="submit"的欄位)
+            $("#myform").submit(function(event){
+                console.log("submit!"); 
+                alert("submit");                            
+            })
+        })
+    </script>
+</body>
+</html>

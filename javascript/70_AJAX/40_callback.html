@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+    <!-- 補充資料：範例中包含 jQuery的程式碼 ($開頭的相關) -->
+    <h3>A callback function is executed after the current effect is 100% finished.</h3>
+    <h3>A function 執行完畢後才呼叫 B function </h3>
+    <h3><a href="https://www.w3schools.com/jquery/jquery_callback.asp"></a></h3>
+
+    <!-- 底下的程式碼請分段執行 -->
+
+    <script>
+        // 10. 執行前思考：底下這應該會出現什麼訊息?
+        // Ans: 先出現工作中 > 才出現購物金
+        function work(userName) {
+            console.log(`${userName} 工作中 `);
+            shopping(100);
+        }
+        function shopping(m) {
+            console.log(`購物金: ${m}`);
+        }
+        // work('apple');
+        //apple工作中
+        //購物金100
+
+
+
+        // 20. 執行前思考：底下這應該會出現什麼訊息?
+        // Ans: 先出現購物金 > 才出現工作中
+        //      JS 是單執行緒，也就是一次只能做一件事情
+        //      JS 碰到特定的執行對象 (例如 event、setTimeout)，就會先放到事件的序列中
+        //      等到其他的事情都做完了，才回頭過來執行事件序列中被擱置的項目
+        function work_v2(userName) {
+            setTimeout(function () {
+                console.log(`${userName} 工作中 - 1 `);
+            },5000);
+            shopping(100);
+        }
+        // work_v2('bee');
+        //購物金: 100
+        //隔5秒再印出：
+        //bee 工作中 - 1 
+
+
+
+        // 30. callbock: 如果想要確認 A 函式先做完在執行 B 函式
+        //     在呼叫 A 函式時，傳入 B 函式當作參數
+        function work_v3(userName, myfunc) {
+            setTimeout(function () {
+                console.log(`${userName} 工作中 `);
+
+                myfunc(100);
+            }, 5000);
+        }
+        work_v3('cat', shopping);
+        // 隔5秒印出下兩行：
+        // cat 工作中 
+        // 購物金: 100
+
+
+
+        // 40. 改為匿名函式傳入
+        //     A 函式呼叫時會傳入參數給 B 函式
+        //     補充：若這一段看懂了，會比較容易理解 featch() 中的 response 是怎麼來的
+        function work_v4(userName, myfunc) {
+            setTimeout(function () {
+                console.log(`${userName} 工作中 `);
+
+                myfunc(100);
+            }, 5000);
+        }
+        work_v3('dog', function (m) {
+            console.log(`購物金 v2: ${m}`)
+        });
+        // 隔5秒印出下兩行：
+        // dog 工作中 
+        // 購物金 v2: 100
+
+    </script>
+
+
+</body>
+
+</html>

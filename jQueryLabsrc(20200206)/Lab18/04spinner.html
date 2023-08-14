@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <title>04spinner.html</title>
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css"> -->
+    <link rel="stylesheet" href="../css/themes/base/jquery-ui.css">
+</head>
+<body> 
+    <p>
+      <label for="spinner">Select a value:</label>
+      <input id="spinner" name="value">
+    </p>    
+    <p>
+      <button id="disable">Toggle disable/enable</button>
+      <button id="destroy">Toggle widget</button>
+    </p>    
+    <p>
+      <button id="getvalue">Get value</button>
+      <button id="setvalue">Set value to 5</button>
+    </p>
+ 
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <!-- <script src="/resources/demos/external/jquery-mousewheel/jquery.mousewheel.js"></script> -->
+    <script>
+        $( function() {
+            var spinner = $( "#spinner" ).spinner();
+
+            $( "#disable" ).on( "click", function() {
+              if ( spinner.spinner( "option", "disabled" ) ) {//options
+                spinner.spinner( "enable" );//method
+              } else {
+                spinner.spinner( "disable" );//method
+              }
+            });
+            $( "#destroy" ).on( "click", function() {
+              if ( spinner.spinner( "instance" ) ) {//method
+                spinner.spinner( "destroy" );//method
+              } else {
+                spinner.spinner();
+              }
+            });
+            $( "#getvalue" ).on( "click", function() {
+              alert( spinner.spinner( "value" ) );//method
+            });
+            $( "#setvalue" ).on( "click", function() {
+              spinner.spinner( "value", 5 );//method
+            });
+
+            
+        } );
+    </script>
+</body>
+</html>

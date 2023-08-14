@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <p id="demo">JavaScript can change HTML content.</p>
+
+    <button onclick="changeMsg()">Click Me!</button>
+
+    <script>
+        function changeMsg() {
+            // 1. 透過console.log先確認事件是否有綁定成功
+            console.log('123');
+
+            // 2. 用ID取得網頁上面的元素
+            var elm = document.getElementById('demo');
+
+            // 3. 修改元素的網頁內容
+            // elm.innerText = 'apple';
+            // elm.innerHTML = 'apple';
+            
+            elm.innerHTML = '<h1> apple </h1>';
+            // elm.innerText = '<h1> apple </h1>';
+            //innerHTML和innerTEXT差別是前者會認識標籤符號，後者全視為字串
+        }
+    </script>
+</body>
+
+</html>

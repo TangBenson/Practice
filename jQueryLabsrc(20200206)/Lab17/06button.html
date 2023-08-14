@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>06button.html</title>
+    <link rel="stylesheet" href="../css/themes/base/jquery-ui.css">
+</head>
+<body>
+    <div class="widget">
+        <h1>Widget</h1>
+        <button>Button with only text</button>
+        <button>Button with icon only</button>
+        <button>Button with icon on the left</button>
+        <button>Button with icon on the right</button>
+        <button>Button with icon on the top</button>
+        <button>Button with icon on the bottom</button>
+      </div>
+      <div class="css">
+        <h1>CSS</h1>
+        <button class="ui-button ui-widget ui-corner-all">
+          Button with only text
+        </button>
+        <button class="ui-button ui-widget ui-corner-all ui-button-icon-only" title="Button with icon only">
+          <span class="ui-icon ui-icon-gear"></span> Button with icon only
+        </button>
+        <button class="ui-button ui-widget ui-corner-all">
+          <span class="ui-icon ui-icon-gear"></span> Button with icon on the left
+        </button>
+        <button class="ui-button ui-widget ui-corner-all">
+          Button with icon on the right <span class="ui-icon ui-icon-gear"></span>
+        </button>
+        <button class="ui-button ui-widget ui-corner-all">
+          <span class="ui-icon ui-icon-gear ui-widget-icon-block"></span> Button with icon on the top
+        </button>
+        <button class="ui-button ui-widget ui-corner-all">
+          Button with icon on the bottom <span class="ui-icon ui-icon-gear ui-widget-icon-block"></span>
+        </button>
+        </div>
+        <script src="../js/jquery-3.4.1.min.js"></script>
+        <script src="../js/jquery-ui.js"></script>
+        <script>
+            $(function(){
+                $( ".widget button" )
+                    .eq( 0 ).button()
+                    .end().eq( 1 ).button( {
+                        icon: "ui-icon-gear",
+                        showLabel: false
+                    } ).end().eq( 2 ).button( {
+                        icon: "ui-icon-gear"
+                    } ).end().eq( 3 ).button( {
+                        icon: "ui-icon-gear",
+                        iconPosition: "end"
+                    } ).end().eq( 4 ).button( {
+                        icon: "ui-icon-gear",
+                        iconPosition: "top"
+                    } ).end().eq( 5 ).button( {
+                        icon: "ui-icon-gear",
+                        iconPosition: "bottom"
+                    } );
+            })
+        </script>
+      
+</body>
+</html>
