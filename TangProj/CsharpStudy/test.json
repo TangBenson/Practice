@@ -1,0 +1,1061 @@
+{
+    "schema": {
+        "type": "struct",
+        "fields": [
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "CarNo"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "CID"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "Token"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": false,
+                        "field": "deviceType"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "ACCStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "GPSStatus"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "name": "io.debezium.time.Timestamp",
+                        "version": 1,
+                        "field": "GPSTime"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "OBDStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "GPRSStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "PowerOnStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "CentralLockStatus"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "DoorStatus"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "LockStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "IndoorLightStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "SecurityStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "Speed"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "Volt"
+                    },
+                    {
+                        "type": "bytes",
+                        "optional": true,
+                        "name": "org.apache.kafka.connect.data.Decimal",
+                        "version": 1,
+                        "parameters": {
+                            "scale": "7",
+                            "connect.decimal.precision": "12"
+                        },
+                        "field": "Latitude"
+                    },
+                    {
+                        "type": "bytes",
+                        "optional": true,
+                        "name": "org.apache.kafka.connect.data.Decimal",
+                        "version": 1,
+                        "parameters": {
+                            "scale": "7",
+                            "connect.decimal.precision": "12"
+                        },
+                        "field": "Longitude"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "Millage"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceCourse"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceRPM"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "device2TBA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "device3TBA"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "deviceRSOC"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "deviceRDistance"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceMBA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceMBAA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceMBAT_Hi"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceMBAT_Lo"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceRBA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceRBAA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceRBAT_Hi"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceRBAT_Lo"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceLBA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceLBAA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceLBAT_Hi"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceLBAT_Lo"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceTMP"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceCur"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceTPS"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceVOL"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceErr"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceALT"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceGx"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceGy"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceGz"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceBLE_Login"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceBLE_BroadCast"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "devicePwr_Mode"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceReversing"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "devicePut_Down"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "devicePwr_Relay"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceStart_OK"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceHard_ACC"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceEMG_Break"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceSharp_Turn"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceBat_Cover"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceLowVoltage"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "extDeviceStatus1"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "extDeviceStatus2"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData1"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData2"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData3"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData4"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData5"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData6"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData7"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "deviceName"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "name": "io.debezium.time.Timestamp",
+                        "version": 1,
+                        "field": "WriteTime"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "name": "io.debezium.time.Timestamp",
+                        "version": 1,
+                        "field": "MKTime"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "name": "io.debezium.time.Timestamp",
+                        "version": 1,
+                        "field": "UPDTime"
+                    }
+                ],
+                "optional": true,
+                "name": "mssql.IRENT_V2T.dbo.TB_CarStatus.Value",
+                "field": "before"
+            },
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "CarNo"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "CID"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "Token"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": false,
+                        "field": "deviceType"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "ACCStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "GPSStatus"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "name": "io.debezium.time.Timestamp",
+                        "version": 1,
+                        "field": "GPSTime"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "OBDStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "GPRSStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "PowerOnStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "CentralLockStatus"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "DoorStatus"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "LockStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "IndoorLightStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "SecurityStatus"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "Speed"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "Volt"
+                    },
+                    {
+                        "type": "bytes",
+                        "optional": true,
+                        "name": "org.apache.kafka.connect.data.Decimal",
+                        "version": 1,
+                        "parameters": {
+                            "scale": "7",
+                            "connect.decimal.precision": "12"
+                        },
+                        "field": "Latitude"
+                    },
+                    {
+                        "type": "bytes",
+                        "optional": true,
+                        "name": "org.apache.kafka.connect.data.Decimal",
+                        "version": 1,
+                        "parameters": {
+                            "scale": "7",
+                            "connect.decimal.precision": "12"
+                        },
+                        "field": "Longitude"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "Millage"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceCourse"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceRPM"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "device2TBA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "device3TBA"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "deviceRSOC"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "deviceRDistance"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceMBA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceMBAA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceMBAT_Hi"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceMBAT_Lo"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceRBA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceRBAA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceRBAT_Hi"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceRBAT_Lo"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceLBA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceLBAA"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceLBAT_Hi"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceLBAT_Lo"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceTMP"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceCur"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceTPS"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceVOL"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceErr"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceALT"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceGx"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceGy"
+                    },
+                    {
+                        "type": "double",
+                        "optional": true,
+                        "field": "deviceGz"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceBLE_Login"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceBLE_BroadCast"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "devicePwr_Mode"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceReversing"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "devicePut_Down"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "devicePwr_Relay"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceStart_OK"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceHard_ACC"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceEMG_Break"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceSharp_Turn"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceBat_Cover"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "deviceLowVoltage"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "extDeviceStatus1"
+                    },
+                    {
+                        "type": "int32",
+                        "optional": true,
+                        "field": "extDeviceStatus2"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData1"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData2"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData3"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData4"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData5"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData6"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "extDeviceData7"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "deviceName"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "name": "io.debezium.time.Timestamp",
+                        "version": 1,
+                        "field": "WriteTime"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "name": "io.debezium.time.Timestamp",
+                        "version": 1,
+                        "field": "MKTime"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "name": "io.debezium.time.Timestamp",
+                        "version": 1,
+                        "field": "UPDTime"
+                    }
+                ],
+                "optional": true,
+                "name": "mssql.IRENT_V2T.dbo.TB_CarStatus.Value",
+                "field": "after"
+            },
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "version"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "connector"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "name"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "ts_ms"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "name": "io.debezium.data.Enum",
+                        "version": 1,
+                        "parameters": {
+                            "allowed": "true,last,false,incremental"
+                        },
+                        "default": "false",
+                        "field": "snapshot"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "db"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "sequence"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "schema"
+                    },
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "table"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "change_lsn"
+                    },
+                    {
+                        "type": "string",
+                        "optional": true,
+                        "field": "commit_lsn"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": true,
+                        "field": "event_serial_no"
+                    }
+                ],
+                "optional": false,
+                "name": "io.debezium.connector.sqlserver.Source",
+                "field": "source"
+            },
+            {
+                "type": "string",
+                "optional": false,
+                "field": "op"
+            },
+            {
+                "type": "int64",
+                "optional": true,
+                "field": "ts_ms"
+            },
+            {
+                "type": "struct",
+                "fields": [
+                    {
+                        "type": "string",
+                        "optional": false,
+                        "field": "id"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "total_order"
+                    },
+                    {
+                        "type": "int64",
+                        "optional": false,
+                        "field": "data_collection_order"
+                    }
+                ],
+                "optional": true,
+                "name": "event.block",
+                "version": 1,
+                "field": "transaction"
+            }
+        ],
+        "optional": false,
+        "name": "mssql.IRENT_V2T.dbo.TB_CarStatus.Envelope",
+        "version": 1
+    },
+    "payload": {
+        "before": {
+            "CarNo": "EWA-0116",
+            "CID": "B1B5",
+            "Token": "",
+            "deviceType": 1,
+            "ACCStatus": 0,
+            "GPSStatus": 1,
+            "GPSTime": 1692022804943,
+            "OBDStatus": null,
+            "GPRSStatus": 1,
+            "PowerOnStatus": null,
+            "CentralLockStatus": null,
+            "DoorStatus": null,
+            "LockStatus": null,
+            "IndoorLightStatus": null,
+            "SecurityStatus": null,
+            "Speed": 0,
+            "Volt": 12.286,
+            "Latitude": "DvHAeA==",
+            "Longitude": "SHLNVg==",
+            "Millage": 4792.1,
+            "deviceCourse": 18.6,
+            "deviceRPM": 0.0,
+            "device2TBA": 23.5,
+            "device3TBA": 41.93,
+            "deviceRSOC": "NA",
+            "deviceRDistance": "18.9",
+            "deviceMBA": 79.0,
+            "deviceMBAA": 0.0,
+            "deviceMBAT_Hi": 0.0,
+            "deviceMBAT_Lo": 0.0,
+            "deviceRBA": 43.0,
+            "deviceRBAA": 0.0,
+            "deviceRBAT_Hi": 0.0,
+            "deviceRBAT_Lo": 0.0,
+            "deviceLBA": 4.0,
+            "deviceLBAA": 0.0,
+            "deviceLBAT_Hi": 0.0,
+            "deviceLBAT_Lo": 0.0,
+            "deviceTMP": 0.0,
+            "deviceCur": 0.0,
+            "deviceTPS": 0.0,
+            "deviceVOL": 0.0,
+            "deviceErr": 0.0,
+            "deviceALT": 0.0,
+            "deviceGx": 1.017,
+            "deviceGy": 0.184,
+            "deviceGz": 0.005,
+            "deviceBLE_Login": 0,
+            "deviceBLE_BroadCast": 1,
+            "devicePwr_Mode": 0,
+            "deviceReversing": 0,
+            "devicePut_Down": 0,
+            "devicePwr_Relay": 0,
+            "deviceStart_OK": 0,
+            "deviceHard_ACC": 0,
+            "deviceEMG_Break": 0,
+            "deviceSharp_Turn": 0,
+            "deviceBat_Cover": 0,
+            "deviceLowVoltage": 0,
+            "extDeviceStatus1": 0,
+            "extDeviceStatus2": null,
+            "extDeviceData1": null,
+            "extDeviceData2": null,
+            "extDeviceData3": "",
+            "extDeviceData4": null,
+            "extDeviceData5": "iMoto_b1b5",
+            "extDeviceData6": "RjEyNTY3MDUx",
+            "extDeviceData7": null,
+            "deviceName": "EWA-0116",
+            "WriteTime": null,
+            "MKTime": 1607998062313,
+            "UPDTime": 1692022804943
+        },
+        "after": {
+            "CarNo": "EWA-0116",
+            "CID": "B1B5",
+            "Token": "",
+            "deviceType": 1,
+            "ACCStatus": 0,
+            "GPSStatus": 1,
+            "GPSTime": 1692022804943,
+            "OBDStatus": null,
+            "GPRSStatus": 1,
+            "PowerOnStatus": null,
+            "CentralLockStatus": null,
+            "DoorStatus": null,
+            "LockStatus": null,
+            "IndoorLightStatus": null,
+            "SecurityStatus": null,
+            "Speed": 0,
+            "Volt": 12.286,
+            "Latitude": "DvHAeA==",
+            "Longitude": "SHLNVg==",
+            "Millage": 4792.1,
+            "deviceCourse": 18.6,
+            "deviceRPM": 0.0,
+            "device2TBA": 23.5,
+            "device3TBA": 41.93,
+            "deviceRSOC": "NA",
+            "deviceRDistance": "18.9",
+            "deviceMBA": 80.0,
+            "deviceMBAA": 0.0,
+            "deviceMBAT_Hi": 0.0,
+            "deviceMBAT_Lo": 0.0,
+            "deviceRBA": 43.0,
+            "deviceRBAA": 0.0,
+            "deviceRBAT_Hi": 0.0,
+            "deviceRBAT_Lo": 0.0,
+            "deviceLBA": 4.0,
+            "deviceLBAA": 0.0,
+            "deviceLBAT_Hi": 0.0,
+            "deviceLBAT_Lo": 0.0,
+            "deviceTMP": 0.0,
+            "deviceCur": 0.0,
+            "deviceTPS": 0.0,
+            "deviceVOL": 0.0,
+            "deviceErr": 0.0,
+            "deviceALT": 0.0,
+            "deviceGx": 1.017,
+            "deviceGy": 0.184,
+            "deviceGz": 0.005,
+            "deviceBLE_Login": 0,
+            "deviceBLE_BroadCast": 1,
+            "devicePwr_Mode": 0,
+            "deviceReversing": 0,
+            "devicePut_Down": 0,
+            "devicePwr_Relay": 0,
+            "deviceStart_OK": 0,
+            "deviceHard_ACC": 0,
+            "deviceEMG_Break": 0,
+            "deviceSharp_Turn": 0,
+            "deviceBat_Cover": 0,
+            "deviceLowVoltage": 0,
+            "extDeviceStatus1": 0,
+            "extDeviceStatus2": null,
+            "extDeviceData1": null,
+            "extDeviceData2": null,
+            "extDeviceData3": "",
+            "extDeviceData4": null,
+            "extDeviceData5": "iMoto_b1b5",
+            "extDeviceData6": "RjEyNTY3MDUx",
+            "extDeviceData7": null,
+            "deviceName": "EWA-0116",
+            "WriteTime": null,
+            "MKTime": 1607998062313,
+            "UPDTime": 1692022804943
+        },
+        "source": {
+            "version": "2.3.0.Final",
+            "connector": "sqlserver",
+            "name": "mssql",
+            "ts_ms": 1691994178133,
+            "snapshot": "false",
+            "db": "IRENT_V2T",
+            "sequence": null,
+            "schema": "dbo",
+            "table": "TB_CarStatus",
+            "change_lsn": "00019f53:00007db8:0001",
+            "commit_lsn": "00019f53:00007db8:0006",
+            "event_serial_no": 2
+        },
+        "op": "u",
+        "ts_ms": 1691994189215,
+        "transaction": null
+    }
+}
