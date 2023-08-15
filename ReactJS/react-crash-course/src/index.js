@@ -2,7 +2,10 @@ import React from "react"; //類似jquery的包，一些API
 // import ReactDOM from 'react-dom'; //將元件渲染到畫面上
 import ReactDOM from "react-dom/client"; // react系統訊息建議的新版的寫法
 import "./index.css";
-import Home from "./pages/Home";
+import Home from "./pages/Home"; //首頁
+// import Page1 from "./pages/Page1";
+
+// 舊式寫法
 // ReactDOM.render(
 //   <React.StrictMode>
 //     <Home />
@@ -14,6 +17,7 @@ import Home from "./pages/Home";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    {/* <Page1 /> */}
     <Home />
   </React.StrictMode>
 );

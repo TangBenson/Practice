@@ -104,8 +104,9 @@ export default Home;
 
 
 // useEffect表示狀態變動後要去做啥事
-//    Home
-//   /    \
+// state都存在父親Home，要共享給孩子Edit/List，用props傳入命令
+//    Home (State)
+//   /    \ (props)
 //  Edit  List
 //          \
 //           Item

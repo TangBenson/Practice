@@ -1,0 +1,26 @@
+安裝react開發包
+npx create-react-app react-crash-course
+初始會有：node_modules、public、src、package-lock.json、package.json、README.md
+
+開啟站台
+npm run start
+
+webpack包你打包前端工具，打包成html、css、js，讓瀏覽器看懂你寫的react或vue或angular
+
+src/index.js是入口
+
+pages表示很多的頁面，每個頁面有根元件index.json
+
+src/components 共用元件
+src/Home/components Home的元件
+src/global 共用的小工具的js
+想要在jsx寫js都要加個大括號{}
+
+// useEffect表示狀態變動後要去做啥事
+// state都存在父親Home，要共享給孩子Edit/List，用props傳入命令
+//    Home (State)
+//   /    \ (props)
+//  Edit  List
+//          \
+//           Item
+
