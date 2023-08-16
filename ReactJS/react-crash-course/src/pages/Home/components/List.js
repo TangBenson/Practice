@@ -5,7 +5,7 @@ const List = ({ listData, deleteD }) => {
     <div className="list">
       {
         listData.map(item => {
-          const { note = 'undefinded下的預設值', date, time, id } = item;
+          const { note = 'undefinded下的預設值', date, time, id } = item; //用解構賦值
           return (
             <Item
               key={id} //react建議要給key值，為了效能優化，不加這行也可以run，但Console會噴錯誤，噴屁噴

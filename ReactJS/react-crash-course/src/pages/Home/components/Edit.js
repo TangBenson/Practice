@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { v4 } from "uuid";
-// import $ from 'jquery';
 
 const Edit = ({ add }) => {
   //Edit自己的狀態是為了控制元件，然後把元件value取出去set Home的狀態
@@ -23,7 +22,7 @@ const Edit = ({ add }) => {
     // add([1,2,3])
     add(function (prevDataQQ) {
       return [
-        // ...prevDataQQ,
+        // ...prevDataQQ, //解構的陣列放這，每次新增的項目就會在最下面
         {
           id: v4(), //引入uuid包即可自動針對每筆資料產生 unique 的 ID
           note,
