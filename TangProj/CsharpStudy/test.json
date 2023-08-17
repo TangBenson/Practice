@@ -93,25 +93,13 @@
                         "field": "Volt"
                     },
                     {
-                        "type": "bytes",
+                        "type": "string",
                         "optional": true,
-                        "name": "org.apache.kafka.connect.data.Decimal",
-                        "version": 1,
-                        "parameters": {
-                            "scale": "7",
-                            "connect.decimal.precision": "12"
-                        },
                         "field": "Latitude"
                     },
                     {
-                        "type": "bytes",
+                        "type": "string",
                         "optional": true,
-                        "name": "org.apache.kafka.connect.data.Decimal",
-                        "version": 1,
-                        "parameters": {
-                            "scale": "7",
-                            "connect.decimal.precision": "12"
-                        },
                         "field": "Longitude"
                     },
                     {
@@ -481,25 +469,13 @@
                         "field": "Volt"
                     },
                     {
-                        "type": "bytes",
+                        "type": "string",
                         "optional": true,
-                        "name": "org.apache.kafka.connect.data.Decimal",
-                        "version": 1,
-                        "parameters": {
-                            "scale": "7",
-                            "connect.decimal.precision": "12"
-                        },
                         "field": "Latitude"
                     },
                     {
-                        "type": "bytes",
+                        "type": "string",
                         "optional": true,
-                        "name": "org.apache.kafka.connect.data.Decimal",
-                        "version": 1,
-                        "parameters": {
-                            "scale": "7",
-                            "connect.decimal.precision": "12"
-                        },
                         "field": "Longitude"
                     },
                     {
@@ -899,7 +875,7 @@
             "deviceType": 1,
             "ACCStatus": 0,
             "GPSStatus": 1,
-            "GPSTime": 1692116403617,
+            "GPSTime": 1692266404223,
             "OBDStatus": null,
             "GPRSStatus": 1,
             "PowerOnStatus": null,
@@ -910,8 +886,8 @@
             "SecurityStatus": null,
             "Speed": 0,
             "Volt": 12.286,
-            "Latitude": "DvHAeA==",
-            "Longitude": "SHLNVg==",
+            "Latitude": "25.0724472",
+            "Longitude": "121.5483222",
             "Millage": 4792.1,
             "deviceCourse": 18.6,
             "deviceRPM": 0.0,
@@ -919,7 +895,7 @@
             "device3TBA": 41.93,
             "deviceRSOC": "NA",
             "deviceRDistance": "18.9",
-            "deviceMBA": 75.0,
+            "deviceMBA": 89.0,
             "deviceMBAA": 0.0,
             "deviceMBAT_Hi": 0.0,
             "deviceMBAT_Lo": 0.0,
@@ -964,7 +940,7 @@
             "deviceName": "EWA-0116",
             "WriteTime": null,
             "MKTime": 1607998062313,
-            "UPDTime": 1692116403617
+            "UPDTime": 1692266404223
         },
         "after": {
             "CarNo": "EWA-0116",
@@ -973,7 +949,7 @@
             "deviceType": 1,
             "ACCStatus": 0,
             "GPSStatus": 1,
-            "GPSTime": 1692116403617,
+            "GPSTime": 1692266404223,
             "OBDStatus": null,
             "GPRSStatus": 1,
             "PowerOnStatus": null,
@@ -984,8 +960,8 @@
             "SecurityStatus": null,
             "Speed": 0,
             "Volt": 12.286,
-            "Latitude": "DvHAeA==",
-            "Longitude": "SHLNVg==",
+            "Latitude": "25.0724472",
+            "Longitude": "121.5483222",
             "Millage": 4792.1,
             "deviceCourse": 18.6,
             "deviceRPM": 0.0,
@@ -993,7 +969,7 @@
             "device3TBA": 41.93,
             "deviceRSOC": "NA",
             "deviceRDistance": "18.9",
-            "deviceMBA": 76.0,
+            "deviceMBA": 80.0,
             "deviceMBAA": 0.0,
             "deviceMBAT_Hi": 0.0,
             "deviceMBAT_Lo": 0.0,
@@ -1038,24 +1014,24 @@
             "deviceName": "EWA-0116",
             "WriteTime": null,
             "MKTime": 1607998062313,
-            "UPDTime": 1692116403617
+            "UPDTime": 1692266404223
         },
         "source": {
             "version": "2.3.0.Final",
             "connector": "sqlserver",
             "name": "mssql",
-            "ts_ms": 1692087827893,
+            "ts_ms": 1692238313197,
             "snapshot": "false",
             "db": "IRENT_V2T",
             "sequence": null,
             "schema": "dbo",
             "table": "TB_CarStatus",
-            "change_lsn": "0001a0d0:000183b0:0005",
-            "commit_lsn": "0001a0d0:000183b0:0009",
+            "change_lsn": "0001a36e:0001f300:0009",
+            "commit_lsn": "0001a36e:0001f300:000d",
             "event_serial_no": 2
         },
         "op": "u",
-        "ts_ms": 1692087839449,
+        "ts_ms": 1692238329812,
         "transaction": null
     }
 }
