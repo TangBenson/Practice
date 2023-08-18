@@ -26,6 +26,12 @@ while (1 != 2)
     Thread.Sleep(2000);
 }
 
+//USE YOUR DATA MODEL WITH YOUR SYNCED REALM
+// realm.Write(() =>
+// {
+//     realm.Add(new Dog { Name = "Clifford", Age = 1 });
+// });
+// var dogs = realm.All<Dog>();
 
 
 //官網的教學

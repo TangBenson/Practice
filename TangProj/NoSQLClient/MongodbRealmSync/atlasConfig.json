@@ -1,0 +1,9 @@
+{
+    "appId": "realmpoc-recnv",
+    "appUrl": "https://realm.mongodb.com/groups/646d8535bdadfa157bd2e786/apps/64ded1690318f8eaeeacacc2",
+    "baseUrl": "https://realm.mongodb.com",
+    "clientApiBaseUrl": "https://eastus2.azure.realm.mongodb.com",
+    "dataApiBaseUrl": "https://eastus2.azure.data.mongodb-api.com",
+    "dataExplorerLink": "https://cloud.mongodb.com/links/646d8535bdadfa157bd2e786/explorer/Cluster0/database/collection/find",
+    "dataSourceName": "mongodb-atlas"
+}
