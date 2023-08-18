@@ -1,8 +1,16 @@
 ﻿using MongodbRealm;
 using Realms;
 
+var config = new RealmConfiguration();
+Realm.DeleteRealm(config);
+
 // 開啟 client端 realm
 var realm = Realm.GetInstance();
+
+// 查詢資料
+var allFriends = realm.All<Friend>();
+Console.WriteLine(allFriends.Count());
+Console.WriteLine(allFriends);
 
 // 寫入資料
 // realm.Write(() =>
@@ -16,34 +24,24 @@ var realm = Realm.GetInstance();
 //     });
 // });
 // 寫入資料
-var testItem = new Item
+var testItem = new Friend
 {
-    Name = "Do this thing",
-    Status = "A",
-    Partition = "Aimee"
+    Name = "Bensss",
+    Age = "987"
 };
 await realm.WriteAsync(() =>
 {
     realm.Add(testItem);
 });
-// 寫入資料
-var testItem2 =
-    await realm.WriteAsync(() =>
-    {
-        return realm.Add<Item>(new Item
-        {
-            Name = "Do this thing, too",
-            Status = "A",
-            Partition = "Satya"
-        });
-    }
-);
 
 // 查詢資料
-var allFriends = realm.All<Friend>();
 Console.WriteLine(allFriends.Count());
-Console.WriteLine(allFriends);
 // Console.WriteLine(allFriends.Where(x => x.Name == "Adam"));
+foreach(var i in allFriends){
+    Console.WriteLine(i.Age);
+    Console.WriteLine(i.Name);
+}
+
 
 // 刪除資料
 // var mostExpensiveGuitar = realm.All<Friend>().OrderByDescending(g => g.Age).FirstOrDefault();
@@ -51,3 +49,6 @@ Console.WriteLine(allFriends);
 // {
 //     realm.Remove(mostExpensiveGuitar);
 // });
+
+
+realm.Dispose();
