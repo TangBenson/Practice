@@ -13,7 +13,7 @@ namespace MongodbRealmSync.Models
     public partial class Item : IRealmObject
     {
         [PrimaryKey]
-        [MapTo("_id")] //映射到數據庫中的 _id 欄位
+        [MapTo("_id")]
         public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
 
         [MapTo("owner_id")]
@@ -27,10 +27,9 @@ namespace MongodbRealmSync.Models
         [MapTo("isComplete")]
         public bool IsComplete { get; set; }
 
-        //根據 OwnerId 是否等於當前登入用戶的 ID，來判斷該物件是否屬於當前用戶
-        // public bool IsMine => OwnerId == RealmService.CurrentUser.Id;
+        public bool IsMine => OwnerId == RealmService.CurrentUser.Id;
 
-        
+
 
         //以下內容從官方下載時沒有，但 IRealmObject要求實作這些，我就讓 ide自動帶入
         //但我發現把專案檔的<Nullable>enable</Nullable>註解掉就不用了耶，真奇怪

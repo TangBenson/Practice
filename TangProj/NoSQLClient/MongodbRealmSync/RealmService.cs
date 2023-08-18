@@ -29,13 +29,15 @@ public static class RealmService
         }
         //使用 StreamReader 讀取文件內容
         // using Stream fileStream = await FileSystem.Current.OpenAppPackageFileAsync("atlasConfig.json");
-        string filePath = @"C:\Users\benson922\Documents\Github_Mine\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
+        string filePath = @"C:\Users\benso\OneDrive\文件\dotnetProject\Practice\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
         using FileStream fileStream = new(filePath, FileMode.Open, FileAccess.Read);
         using StreamReader reader = new(fileStream);
         var fileContent = await reader.ReadToEndAsync();
         //將文件內容反序列化為 RealmAppConfig 對象
         var config = JsonSerializer.Deserialize<RealmAppConfig>(fileContent,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        Console.WriteLine(config.AppId);
 
         //設置了 Realm 應用程序的配置
         var appConfiguration = new AppConfiguration(config.AppId)
@@ -87,16 +89,27 @@ public static class RealmService
     {
         await app.LogInAsync(Credentials.EmailPassword(email, password));
         //This will populate the initial set of subscriptions the first time the realm is opened
+
+        // 打印当前线程的 ID
+        Console.WriteLine($"1-Current thread ID: {Thread.CurrentThread.ManagedThreadId}");
+        
         using var realm = GetRealm();
         //用戶登錄後，等待數據同步完成
-        await realm.Subscriptions.WaitForSynchronizationAsync();
+        // await realm.Subscriptions.WaitForSynchronizationAsync();
+        realm.Subscriptions.WaitForSynchronizationAsync();
 
-        var items = realm.All<Item>(); // 查詢所有的 Item 物件
-        foreach (var item in items)
+        Console.WriteLine($"2-Current thread ID: {Thread.CurrentThread.ManagedThreadId}");
+
+        while (true)
         {
-            Console.WriteLine($"Item ID: {item.Id}, Summary: {item.Summary}, IsComplete: {item.IsComplete}");
+            Thread.Sleep(3000);
+            Console.WriteLine($"-----------------------------------");
+            var completedItems = realm.All<Item>();//.Where(item => item.Avalible);
+            foreach (var item in completedItems)
+            {
+                Console.WriteLine($"Completed item: {item.Summary}");
+            }
         }
-        Console.WriteLine("Dddddone");
     }
     public static async Task LogoutAsync()
     {
