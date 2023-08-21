@@ -8,7 +8,7 @@ namespace MongodbRealmSync;
 public static class RealmService
 {
     private static bool serviceInitialised;
-    private static Realms.Sync.App app;
+    private static App app;
     private static Realm mainThreadRealm;
     /*
     C# 8 中的一種簡寫語法，允許在一個類中聲明一個只讀屬性。這個屬性的值是透過表達式計算得出
@@ -16,10 +16,10 @@ public static class RealmService
     就像訪問一個常規屬性一樣，但它實際上是通過表達式計算得出的。這種語法可以讓你更方便地訪問計算屬性值，同時保持只讀的性質
     */
     public static User CurrentUser => app.CurrentUser;
+    public static int count = 0;
 
 
-
-    //初始化 Realm 服務
+    #region 初始化 Realm 服務
     public static async Task Init()
     {
         //如果服務已初始化，則直接返回
@@ -29,14 +29,14 @@ public static class RealmService
         }
         //使用 StreamReader 讀取文件內容
         // using Stream fileStream = await FileSystem.Current.OpenAppPackageFileAsync("atlasConfig.json");
-        string filePath = @"C:\Users\benso\OneDrive\文件\dotnetProject\Practice\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
+        // string filePath = @"C:\Users\benso\OneDrive\文件\dotnetProject\Practice\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
+        string filePath = @"C:\Users\benson922\Documents\Github_Mine\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
         using FileStream fileStream = new(filePath, FileMode.Open, FileAccess.Read);
         using StreamReader reader = new(fileStream);
         var fileContent = await reader.ReadToEndAsync();
         //將文件內容反序列化為 RealmAppConfig 對象
         var config = JsonSerializer.Deserialize<RealmAppConfig>(fileContent,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
         Console.WriteLine(config.AppId);
 
         //設置了 Realm 應用程序的配置
@@ -45,66 +45,63 @@ public static class RealmService
             BaseUri = new Uri(config.BaseUrl)
         };
         //創建了一個 Realm 應用程序實例
-        app = Realms.Sync.App.Create(appConfiguration);
+        app = App.Create(appConfiguration);
 
         serviceInitialised = true;
     }
+    #endregion
 
 
-
-
-
-
+    #region 建立Realm實例
     //返回主線程的 Realm 實例，如果不存在則創建一個
-    public static Realm GetMainThreadRealm()
-    {
-        //...??= 運算子。這個運算子的作用是在變數為 null 時，將右邊的值賦值給左邊的變數
-        return mainThreadRealm ??= GetRealm();
-    }
+    // public static Realm GetMainThreadRealm()
+    // {
+    //     //...??= 運算子。這個運算子的作用是在變數為 null 時，將右邊的值賦值給左邊的變數
+    //     return mainThreadRealm ??= GetRealm();
+    // }
     //返回一個 Realm 實例，同時配置了數據同步設置
     public static Realm GetRealm()
     {
+        // var config = new FlexibleSyncConfiguration(app.CurrentUser);
         var config = new FlexibleSyncConfiguration(app.CurrentUser)
         {
             PopulateInitialSubscriptions = (realm) =>
             {
-                var (query, queryName) = GetQueryForSubscriptionType(realm, SubscriptionType.Mine);
+                var (query, queryName) = GetQueryForSubscriptionType(realm, SubscriptionType.All);
                 realm.Subscriptions.Add(query, new SubscriptionOptions { Name = queryName });
             }
         };
         return Realm.GetInstance(config);
     }
+    #endregion
 
 
-
-
-
-
-    //公共的靜態異步方法，用於註冊新用戶
+    #region 註冊/登入/登出
     public static async Task RegisterAsync(string email, string password)
     {
         await app.EmailPasswordAuth.RegisterUserAsync(email, password);
     }
     public static async Task LoginAsync(string email, string password)
     {
+        // await app.LogInAsync(Credentials.Anonymous());
         await app.LogInAsync(Credentials.EmailPassword(email, password));
         //This will populate the initial set of subscriptions the first time the realm is opened
-
-        // 打印当前线程的 ID
         Console.WriteLine($"1-Current thread ID: {Thread.CurrentThread.ManagedThreadId}");
-        
-        using var realm = GetRealm();
-        //用戶登錄後，等待數據同步完成
-        // await realm.Subscriptions.WaitForSynchronizationAsync();
-        realm.Subscriptions.WaitForSynchronizationAsync();
 
+        using var realm = GetRealm();
+        SetSubscription(realm,SubscriptionType.All);
+
+        //用戶登錄後，等待數據同步完成。我改成同步，因為發生不同線程(執行緒/thread)導致錯誤問題........
+        realm.Subscriptions.WaitForSynchronizationAsync(); // await realm.Subscriptions.WaitForSynchronizationAsync();
         Console.WriteLine($"2-Current thread ID: {Thread.CurrentThread.ManagedThreadId}");
 
-        while (true)
+        while (count < 25)
         {
+            count++;
             Thread.Sleep(3000);
             Console.WriteLine($"-----------------------------------");
             var completedItems = realm.All<Item>();//.Where(item => item.Avalible);
+            Console.WriteLine($"***{completedItems.Count()}****");
             foreach (var item in completedItems)
             {
                 Console.WriteLine($"Completed item: {item.Summary}");
@@ -117,7 +114,7 @@ public static class RealmService
         mainThreadRealm?.Dispose();
         mainThreadRealm = null;
     }
-
+    #endregion
 
 
 
@@ -129,6 +126,7 @@ public static class RealmService
     {
         if (GetCurrentSubscriptionType(realm) == subType)
         {
+            Console.WriteLine("123");
             return;
         }
 
@@ -144,13 +142,15 @@ public static class RealmService
         //There is no need to wait for synchronization if we are disconnected
         if (realm.SyncSession.ConnectionState != ConnectionState.Disconnected)
         {
+            Console.WriteLine("456");
             await realm.Subscriptions.WaitForSynchronizationAsync();
         }
     }
     //根據訂閱類型返回相應的查詢和查詢名稱
     public static SubscriptionType GetCurrentSubscriptionType(Realm realm)
     {
-        var activeSubscription = realm.Subscriptions.FirstOrDefault();
+        // var activeSubscription = realm.Subscriptions.FirstOrDefault();
+        var activeSubscription = realm.Subscriptions.ToList().FirstOrDefault();
 
         return activeSubscription.Name switch
         {
