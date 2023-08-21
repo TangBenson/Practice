@@ -29,8 +29,8 @@ public static class RealmService
         }
         //使用 StreamReader 讀取文件內容
         // using Stream fileStream = await FileSystem.Current.OpenAppPackageFileAsync("atlasConfig.json");
-        // string filePath = @"C:\Users\benso\OneDrive\文件\dotnetProject\Practice\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
-        string filePath = @"C:\Users\benson922\Documents\Github_Mine\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
+        string filePath = @"C:\Users\benso\OneDrive\文件\dotnetProject\Practice\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
+        // string filePath = @"C:\Users\benson922\Documents\Github_Mine\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
         using FileStream fileStream = new(filePath, FileMode.Open, FileAccess.Read);
         using StreamReader reader = new(fileStream);
         var fileContent = await reader.ReadToEndAsync();
@@ -89,13 +89,13 @@ public static class RealmService
         Console.WriteLine($"1-Current thread ID: {Thread.CurrentThread.ManagedThreadId}");
 
         using var realm = GetRealm();
-        SetSubscription(realm,SubscriptionType.All);
+        // SetSubscription(realm,SubscriptionType.All);
 
         //用戶登錄後，等待數據同步完成。我改成同步，因為發生不同線程(執行緒/thread)導致錯誤問題........
         realm.Subscriptions.WaitForSynchronizationAsync(); // await realm.Subscriptions.WaitForSynchronizationAsync();
         Console.WriteLine($"2-Current thread ID: {Thread.CurrentThread.ManagedThreadId}");
 
-        while (count < 25)
+        while (count < 5)
         {
             count++;
             Thread.Sleep(3000);

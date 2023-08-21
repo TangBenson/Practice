@@ -8,8 +8,8 @@ Console.WriteLine("---START---");
 
 // Init會產生 app實例，並設定 serviceInitialised = true
 await RealmService.Init();
-Console.WriteLine($"洽巴巴 2---{RealmService.CurrentUser}");
-Console.WriteLine($"洽巴巴 2---{RealmService.CurrentUser.Id}");
+// Console.WriteLine($"洽巴巴 2---{RealmService.CurrentUser}");
+// Console.WriteLine($"洽巴巴 2---{RealmService.CurrentUser.Id}");
 
 
 try

@@ -4911,26 +4911,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\benson922\\.nuget\\packages\\": {}
+    "C:\\Users\\benso\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj",
+      "projectUniqueName": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj",
       "projectName": "MongodbRealmSync",
-      "projectPath": "c:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj",
-      "packagesPath": "C:\\Users\\benson922\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\obj\\",
+      "projectPath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj",
+      "packagesPath": "C:\\Users\\benso\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TangProj\\NoSQLClient\\MongodbRealmSync\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\benson922\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\benso\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
