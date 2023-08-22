@@ -41,11 +41,10 @@ try
     // }
 
 
-    // await RealmService.RegisterAsync("mongo229@zzz.com", "hims99878");
-
-    // Login會執行 GetRealm
     var config = new RealmConfiguration();
     Realm.DeleteRealm(config);
+    // await RealmService.RegisterAsync("mongo229@zzz.com", "hims99878");
+    // Login會執行 GetRealm
     await RealmService.LoginAsync("mongo229@zzz.com", "hims99878");
     await RealmService.LogoutAsync();
     // 將 mainThreadRealm賦值，但程式只有登出用到 mainThreadRealm，感覺沒啥用? 而且還會在執行一次 GetRealm，感覺就很奇怪

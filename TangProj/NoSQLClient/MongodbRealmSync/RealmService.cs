@@ -29,8 +29,8 @@ public static class RealmService
         }
         //使用 StreamReader 讀取文件內容
         // using Stream fileStream = await FileSystem.Current.OpenAppPackageFileAsync("atlasConfig.json");
-        string filePath = @"C:\Users\benso\OneDrive\文件\dotnetProject\Practice\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
-        // string filePath = @"C:\Users\benson922\Documents\Github_Mine\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
+        // string filePath = @"C:\Users\benso\OneDrive\文件\dotnetProject\Practice\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
+        string filePath = @"C:\Users\benson922\Documents\Github_Mine\TangProj\NoSQLClient\MongodbRealmSync\atlasConfig.json";
         using FileStream fileStream = new(filePath, FileMode.Open, FileAccess.Read);
         using StreamReader reader = new(fileStream);
         var fileContent = await reader.ReadToEndAsync();
@@ -104,7 +104,7 @@ public static class RealmService
             Console.WriteLine($"***{completedItems.Count()}****");
             foreach (var item in completedItems)
             {
-                Console.WriteLine($"Completed item: {item.Summary}");
+                Console.WriteLine($"Completed item: {item.CarNo}");
             }
         }
     }
@@ -166,7 +166,7 @@ public static class RealmService
 
         if (subType == SubscriptionType.Mine)
         {
-            query = realm.All<Item>().Where(i => i.OwnerId == CurrentUser.Id);
+            query = realm.All<Item>();//.Where(i => i.OwnerId == CurrentUser.Id);
             queryName = "mine";
         }
         else if (subType == SubscriptionType.All)

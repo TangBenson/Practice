@@ -12,18 +12,12 @@ namespace MongodbRealmSync.Models
     //實現了 IRealmObject 介面，代表是可以存儲在 Realm 數據庫中的物件
     public partial class Item : IRealmObject
     {
-        [PrimaryKey]
         [MapTo("_id")]
-        public ObjectId Id { get; set; } //= ObjectId.GenerateNewId();
-
-        [MapTo("owner_id")]
-        public string OwnerId { get; set; }
-
-        [MapTo("summary")]
-        public string Summary { get; set; }
-
-        // [MapTo("isComplete")]
-        // public bool IsComplete { get; set; }
+        [PrimaryKey]
+        public ObjectId Id { get; set; }//= ObjectId.GenerateNewId();
+        public string CarNo { get; set; }
+        [MapTo("available")]
+        public int Available { get; set; }
 
         // public bool IsMine => OwnerId == RealmService.CurrentUser.Id;
     }
