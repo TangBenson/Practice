@@ -81,26 +81,24 @@ public static class RealmService
     {
         await app.EmailPasswordAuth.RegisterUserAsync(email, password);
     }
-    public static async Task LoginAsync(string email, string password)
+    public static async Task LoginAsync()
     {
-        // await app.LogInAsync(Credentials.Anonymous());
-        await app.LogInAsync(Credentials.EmailPassword(email, password));
+        await app.LogInAsync(Credentials.Anonymous());
+        // await app.LogInAsync(Credentials.EmailPassword(email, password));
         //This will populate the initial set of subscriptions the first time the realm is opened
-        Console.WriteLine($"1-Current thread ID: {Thread.CurrentThread.ManagedThreadId}");
 
         using var realm = GetRealm();
         // SetSubscription(realm,SubscriptionType.All);
 
         //用戶登錄後，等待數據同步完成。我改成同步，因為發生不同線程(執行緒/thread)導致錯誤問題........
         realm.Subscriptions.WaitForSynchronizationAsync(); // await realm.Subscriptions.WaitForSynchronizationAsync();
-        Console.WriteLine($"2-Current thread ID: {Thread.CurrentThread.ManagedThreadId}");
 
         while (count < 5)
         {
             count++;
             Thread.Sleep(3000);
             Console.WriteLine($"-----------------------------------");
-            var completedItems = realm.All<Item>();//.Where(item => item.Avalible);
+            var completedItems = realm.All<Car>();//.Where(item => item.Avalible);
             Console.WriteLine($"***{completedItems.Count()}****");
             foreach (var item in completedItems)
             {
@@ -159,19 +157,19 @@ public static class RealmService
             _ => throw new InvalidOperationException("Unknown subscription type")
         };
     }
-    private static (IQueryable<Item> Query, string Name) GetQueryForSubscriptionType(Realm realm, SubscriptionType subType)
+    private static (IQueryable<Car> Query, string Name) GetQueryForSubscriptionType(Realm realm, SubscriptionType subType)
     {
-        IQueryable<Item> query = null;
+        IQueryable<Car> query = null;
         string queryName = null;
 
         if (subType == SubscriptionType.Mine)
         {
-            query = realm.All<Item>();//.Where(i => i.OwnerId == CurrentUser.Id);
+            query = realm.All<Car>();//.Where(i => i.OwnerId == CurrentUser.Id);
             queryName = "mine";
         }
         else if (subType == SubscriptionType.All)
         {
-            query = realm.All<Item>();
+            query = realm.All<Car>();
             queryName = "all";
         }
         else
