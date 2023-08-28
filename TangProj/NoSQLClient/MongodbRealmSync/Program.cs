@@ -52,25 +52,25 @@ realm.All<Car>()
         // 没有有效的更改通知
         if (changes == null)
         {
-            Console.WriteLine("~~~~~~~~~~~");
+            Console.WriteLine("changes is null");
             return; //中止当前函数的执行并立即退出
         }
         // Handle individual changes
         foreach (var i in changes.DeletedIndices)
         {
-            Console.WriteLine("----------");
+            Console.WriteLine("delete event");
         }
         foreach (var i in changes.InsertedIndices)
         {
-            Console.WriteLine("++++++++++");
+            Console.WriteLine("Insert event");
         }
         foreach (var i in changes.NewModifiedIndices)
         {
-            Console.WriteLine("uuuuuuuuuuuu");
+            Console.WriteLine("Modify event");
         }
         if (changes.IsCleared)
         {
-            Console.WriteLine("????????????");
+            Console.WriteLine("changes is cleared");
             return;
         }
     });
