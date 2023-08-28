@@ -1,0 +1,42 @@
+先用docker run一個空資料庫server，準備後續用
+
+建立Model (Customer.cs)
+
+建立DbContext (AppDbContext.cs)
+
+建立Migration file (Migration的檔案是依照Model的定義及AppDbContext中的內容，來產生相關的資料表Sql Script，執行完成之後，
+專案目錄應該會增加一個Migrations的目錄，裡面放著三個檔案)
+=> dotnet ef migrations add AddCustomerToDb
+
+承上，若想移除可用以下指令，但若已經create到db就不能移除了，因為已經綁訂了
+=> dotnet ef migrations remove
+
+執行Migration將Model映射到資料庫中 (依照前面所設定的資料庫連線參數，建立資料庫並且按照Migrations的內容建立資料表)，
+會在資料庫建立起db、table...
+=> dotnet ef database update
+
+建立Query.cs
+
+資料庫建立測試資料
+
+到此為止有了：資料庫資料、model、DbContext、Query，可以測試GraphQL了
+=> dotnet run ，然後去Voyager介面操作
+
+建立第二個Model (Order.cs)
+
+修改第一個Model (Customer.cs)
+
+修改AppDbContext
+
+建立Migration及建立相關資料庫物件
+dotnet ef migrations add AddOrderToDb
+dotnet ef database update
+
+建立Order的測試資料
+
+修改Query.cs 加入訂單查詢
+
+
+＊Voyager讓前端開發者直接看graphql關聯，不用去看資料庫
+https://localhost:7167/graphql-voyager
+https://localhost:7167/graphql
