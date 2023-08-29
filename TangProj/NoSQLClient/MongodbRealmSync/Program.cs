@@ -2,6 +2,7 @@
 using MongodbRealmSync.Models;
 using Realms;
 using Realms.Sync;
+using Realms.Logging;
 
 Console.WriteLine("---START---");
 
@@ -15,6 +16,11 @@ catch (Exception ex)
 {
     Console.WriteLine($"Login failed: {ex.Message}");
 }
+Logger.LogLevel = LogLevel.Trace; // 導入Realm log
+Logger.Default = Logger.Function((message) =>
+{
+    Console.WriteLine(message);
+});
 var config = new FlexibleSyncConfiguration(app.CurrentUser);
 //刪除本地 Realm 數據庫
 // Realm.DeleteRealm(config);
@@ -113,7 +119,7 @@ while (true)
     Thread.Sleep(2000);
     Console.WriteLine($"-----------------------------------");
     var myCars = realm.All<Car>();//.Where(car => car.Avalible);
-    Console.WriteLine($"count次數:{count}");
+    Console.WriteLine($"count:{count}");
     Console.WriteLine($"***{myCars.Count()}****");
     // Console.WriteLine($"---{myCars.FirstOrDefault().CarNo}---{myCars.FirstOrDefault().Available}");
     // foreach (var car in myCars)
