@@ -8,15 +8,15 @@ namespace MongodbRealmSync;
 public static class RealmService
 {
     private static bool serviceInitialised;
-    private static App app;
-    private static Realm mainThreadRealm;
+    private static App? app;
+    private static Realm? mainThreadRealm;
     /*
     C# 8 中的一種簡寫語法，允許在一個類中聲明一個只讀屬性。這個屬性的值是透過表達式計算得出
     當你訪問 CurrentUser 屬性時，它實際上會調用 app.CurrentUser 並將其值返回給你，
     就像訪問一個常規屬性一樣，但它實際上是通過表達式計算得出的。這種語法可以讓你更方便地訪問計算屬性值，同時保持只讀的性質
     */
-    public static User CurrentUser => app.CurrentUser;
-    public static int count = 0;
+    public static User? CurrentUser => app!.CurrentUser;
+    private static int count = 0;
 
 
     #region 初始化 Realm 服務
@@ -37,12 +37,12 @@ public static class RealmService
         //將文件內容反序列化為 RealmAppConfig 對象
         var config = JsonSerializer.Deserialize<RealmAppConfig>(fileContent,
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        Console.WriteLine(config.AppId);
+        Console.WriteLine(config!.AppId);
 
         //設置了 Realm 應用程序的配置
-        var appConfiguration = new AppConfiguration(config.AppId)
+        var appConfiguration = new AppConfiguration(config!.AppId!)
         {
-            BaseUri = new Uri(config.BaseUrl)
+            BaseUri = new Uri(config!.BaseUrl!)
         };
         //創建了一個 Realm 應用程序實例
         app = App.Create(appConfiguration);
@@ -63,7 +63,7 @@ public static class RealmService
     public static Realm GetRealm()
     {
         // var config = new FlexibleSyncConfiguration(app.CurrentUser);
-        var config = new FlexibleSyncConfiguration(app.CurrentUser)
+        var config = new FlexibleSyncConfiguration(app!.CurrentUser!)
         {
             PopulateInitialSubscriptions = (realm) =>
             {
@@ -79,36 +79,47 @@ public static class RealmService
     #region 註冊/登入/登出
     public static async Task RegisterAsync(string email, string password)
     {
-        await app.EmailPasswordAuth.RegisterUserAsync(email, password);
+        await app!.EmailPasswordAuth.RegisterUserAsync(email, password);
     }
     public static async Task LoginAsync()
     {
-        await app.LogInAsync(Credentials.Anonymous());
+        Console.WriteLine("執行緒id開始");
+        Console.WriteLine(Environment.CurrentManagedThreadId);
+        await app!.LogInAsync(Credentials.Anonymous());
         // await app.LogInAsync(Credentials.EmailPassword(email, password));
         //This will populate the initial set of subscriptions the first time the realm is opened
 
-        using var realm = GetRealm();
-        // SetSubscription(realm,SubscriptionType.All);
+        Console.WriteLine(Environment.CurrentManagedThreadId);
 
-        //用戶登錄後，等待數據同步完成。我改成同步，因為發生不同線程(執行緒/thread)導致錯誤問題........
-        realm.Subscriptions.WaitForSynchronizationAsync(); // await realm.Subscriptions.WaitForSynchronizationAsync();
-
-        while (count < 5)
+        using (var realm = GetRealm())
         {
-            count++;
-            Thread.Sleep(3000);
-            Console.WriteLine($"-----------------------------------");
-            var completedItems = realm.All<Car>();//.Where(item => item.Avalible);
-            Console.WriteLine($"***{completedItems.Count()}****");
-            foreach (var item in completedItems)
+            Console.WriteLine(Environment.CurrentManagedThreadId);
+            SetSubscription(realm,SubscriptionType.All);
+
+            //用戶登錄後，等待數據同步完成。我改成同步，因為發生不同線程(執行緒/thread)導致錯誤問題........
+            // realm.Subscriptions.WaitForSynchronizationAsync();
+            Console.WriteLine(Environment.CurrentManagedThreadId);
+            realm.Refresh();
+
+            realm.RealmChanged += (sender, e) =>
             {
-                Console.WriteLine($"Completed item: {item.CarNo}");
+                Console.WriteLine("AAAAAAA");
+            };
+
+            while (true)
+            {
+                count++;
+                Thread.Sleep(3000);
+                Console.WriteLine($"-----------------------------------");
+                var completedItems = realm.All<Car>().ToList();//.Where(item => item.Avalible);
+                Console.WriteLine($"***{completedItems.Count}****");
             }
-        }
+        };
+
     }
     public static async Task LogoutAsync()
     {
-        await app.CurrentUser.LogOutAsync();
+        await app!.CurrentUser!.LogOutAsync();
         mainThreadRealm?.Dispose();
         mainThreadRealm = null;
     }
@@ -159,8 +170,8 @@ public static class RealmService
     }
     private static (IQueryable<Car> Query, string Name) GetQueryForSubscriptionType(Realm realm, SubscriptionType subType)
     {
-        IQueryable<Car> query = null;
-        string queryName = null;
+        IQueryable<Car> query;
+        string queryName;
 
         if (subType == SubscriptionType.Mine)
         {
@@ -189,9 +200,9 @@ public enum SubscriptionType
 
 public class RealmAppConfig
 {
-    public string AppId { get; set; }
+    public string? AppId { get; set; }
 
-    public string BaseUrl { get; set; }
+    public string? BaseUrl { get; set; }
 }
 
 

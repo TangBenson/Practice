@@ -6,6 +6,8 @@ using Realms.Logging;
 
 Console.WriteLine("---START---");
 
+#region 測試一
+//step <1>
 App app = App.Create("application-0-gyubp");
 var credential = Credentials.Anonymous();
 try
@@ -16,32 +18,49 @@ catch (Exception ex)
 {
     Console.WriteLine($"Login failed: {ex.Message}");
 }
-Logger.LogLevel = LogLevel.Trace; // 導入Realm log
-Logger.Default = Logger.Function((message) =>
-{
-    Console.WriteLine(message);
-});
+// Logger.LogLevel = LogLevel.Trace; // 導入Realm log
+// Logger.Default = Logger.Function((message) =>
+// {
+//     Console.WriteLine(message);
+// });
+
+//step <2>
 var config = new FlexibleSyncConfiguration(app.CurrentUser);
-//刪除本地 Realm 數據庫
-// Realm.DeleteRealm(config);
+// {
+//     PopulateInitialSubscriptions = (realm) =>
+//     {
+//         var myItems = realm.All<Car>();
+//         realm.Subscriptions.Add(myItems);
+//     }
+// };
+
+//step <3>
+Realm.DeleteRealm(config);
+
+//step <4>
 //創建了一個新的 Realm 實例
 var realm = await Realm.GetInstanceAsync(config);
-//向 Realm 添加了一個訂閱
+//向 Realm 添加了一個訂閱，這和上面的PopulateInitialSubscriptions意思一樣
 realm.Subscriptions.Update(() =>
 {
     var myCars = realm.All<Car>();//.Where(t => t.Name == "Clifford" && t.Age > 5);
     realm.Subscriptions.Add(myCars);
 });
-Console.WriteLine("Peggy");
-await realm.Subscriptions.WaitForSynchronizationAsync(); //等待所有訂閱的同步操作完成
-realm.Refresh();
-Console.WriteLine("Cao");
 
-realm.RealmChanged += (sender, e) =>
+//step <5>
+await realm.Subscriptions.WaitForSynchronizationAsync(); //等待所有訂閱的同步操作完成
+// await myCars.SubscribeAsync();
+
+//step <6>
+realm.Refresh();
+
+//step <7> - Realm有資料異動會觸發此通知處理程序，但該處理程序不會收到有關變更的具體信息
+realm.RealmChanged += (sender, eventArgs) =>
 {
     Console.WriteLine("AAAAAAA");
 };
 
+//step <8> - 在 Realm 內的特定物件上註冊通知處理程序
 // var artist = realm.All<Car>().FirstOrDefault();
 // artist!.PropertyChanged += (sender, eventArgs) =>
 // {
@@ -51,7 +70,8 @@ realm.RealmChanged += (sender, e) =>
 //         '{changedProperty}' is now {artist.GetType().GetProperty(changedProperty)!.GetValue(artist)}");
 // };
 
-realm.All<Car>()
+//step <9> - 若要停止就呼叫token.Dispose()
+var token = realm.All<Car>()
     .SubscribeForNotifications((sender, changes) =>
     {
         Console.WriteLine("狂浪是一種態度");
@@ -80,9 +100,24 @@ realm.All<Car>()
             return;
         }
     });
-// Console.ReadLine();
 
-// Console.WriteLine($"香蕉妳個芭樂");
+int count = 0;
+while (true)
+{
+    realm.Refresh();
+    count++;
+    Thread.Sleep(2000);
+    Console.WriteLine($"----------------{realm.SyncSession.ConnectionState}-------------------");
+    var myCars = realm.All<Car>();//.Where(car => car.Avalible);
+    Console.WriteLine($"count:{count}");
+    Console.WriteLine($"***{myCars.Count()}****");
+    // Console.WriteLine($"---{myCars.FirstOrDefault().CarNo}---{myCars.FirstOrDefault().Available}");
+    // foreach (var car in myCars)
+    // {
+    //     Console.WriteLine($"Completed car: {car.CarNo}");
+    // }
+}
+
 // int count = 1;
 // while (true)
 // {
@@ -111,23 +146,8 @@ realm.All<Car>()
 //     var myCars = realm.All<Car>();
 //     Console.WriteLine($"***{myCars.Count()}****");
 // }
-
-int count = 0;
-while (true)
-{
-    count++;
-    Thread.Sleep(2000);
-    Console.WriteLine($"-----------------------------------");
-    var myCars = realm.All<Car>();//.Where(car => car.Avalible);
-    Console.WriteLine($"count:{count}");
-    Console.WriteLine($"***{myCars.Count()}****");
-    // Console.WriteLine($"---{myCars.FirstOrDefault().CarNo}---{myCars.FirstOrDefault().Available}");
-    // foreach (var car in myCars)
-    // {
-    //     Console.WriteLine($"Completed car: {car.CarNo}");
-    // }
-}
-
+// Console.ReadLine();
+#endregion
 
 
 
@@ -141,7 +161,7 @@ while (true)
 
 
 
-
+#region 測試二
 // try
 // {
 //     // Init會產生 app實例，並設定 serviceInitialised = true
@@ -149,9 +169,10 @@ while (true)
 //     var config = new RealmConfiguration();
 //     Realm.DeleteRealm(config);
 //     // await RealmService.RegisterAsync("mongo229@zzz.com", "hims99878");
+
 //     // Login會執行 GetRealm
 //     await RealmService.LoginAsync();
-//     await RealmService.LogoutAsync();
+//     // await RealmService.LogoutAsync();
 //     // 將 mainThreadRealm賦值，但程式只有登出用到 mainThreadRealm，感覺沒啥用? 而且還會在執行一次 GetRealm，感覺就很奇怪
 //     // 我修改Login會回傳物件，這步就可以省略
 //     // Realm realm = RealmService.GetMainThreadRealm();
@@ -176,3 +197,4 @@ while (true)
 //     Console.WriteLine(e);
 //     await RealmService.LogoutAsync();
 // }
+#endregion
