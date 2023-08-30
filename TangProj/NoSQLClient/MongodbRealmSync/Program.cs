@@ -39,7 +39,7 @@ Realm.DeleteRealm(config);
 
 //step <4>
 //創建了一個新的 Realm 實例
-var realm = await Realm.GetInstanceAsync(config);
+var realm = Realm.GetInstance(config);
 //向 Realm 添加了一個訂閱，這和上面的PopulateInitialSubscriptions意思一樣
 realm.Subscriptions.Update(() =>
 {
@@ -48,7 +48,7 @@ realm.Subscriptions.Update(() =>
 });
 
 //step <5>
-await realm.Subscriptions.WaitForSynchronizationAsync(); //等待所有訂閱的同步操作完成
+realm.Subscriptions.WaitForSynchronizationAsync(); //等待所有訂閱的同步操作完成
 // await myCars.SubscribeAsync();
 
 //step <6>
