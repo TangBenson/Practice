@@ -111,7 +111,7 @@ public static class RealmService
                 count++;
                 Thread.Sleep(3000);
                 Console.WriteLine($"-----------------------------------");
-                var completedItems = realm.All<Car>().ToList();//.Where(item => item.Avalible);
+                var completedItems = realm.All<MotorRent>().ToList();//.Where(item => item.Avalible);
                 Console.WriteLine($"***{completedItems.Count}****");
             }
         };
@@ -168,19 +168,19 @@ public static class RealmService
             _ => throw new InvalidOperationException("Unknown subscription type")
         };
     }
-    private static (IQueryable<Car> Query, string Name) GetQueryForSubscriptionType(Realm realm, SubscriptionType subType)
+    private static (IQueryable<MotorRent> Query, string Name) GetQueryForSubscriptionType(Realm realm, SubscriptionType subType)
     {
-        IQueryable<Car> query;
+        IQueryable<MotorRent> query;
         string queryName;
 
         if (subType == SubscriptionType.Mine)
         {
-            query = realm.All<Car>();//.Where(i => i.OwnerId == CurrentUser.Id);
+            query = realm.All<MotorRent>();//.Where(i => i.OwnerId == CurrentUser.Id);
             queryName = "mine";
         }
         else if (subType == SubscriptionType.All)
         {
-            query = realm.All<Car>();
+            query = realm.All<MotorRent>();
             queryName = "all";
         }
         else

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj": {}
+    "c:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj": {}
   },
   "projects": {
-    "C:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj": {
+    "c:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj",
+        "projectUniqueName": "c:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj",
         "projectName": "MongodbRealmSync",
-        "projectPath": "C:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj",
+        "projectPath": "c:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj",
         "packagesPath": "C:\\Users\\benson922\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\obj\\",
+        "outputPath": "c:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\benson922\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -3,8 +3,9 @@ using MongodbRealmSync.Models;
 using Realms;
 using Realms.Sync;
 using Realms.Logging;
+using MongoDB.Bson;
 
-Console.WriteLine("---START---");
+Console.WriteLine($"---START---{Environment.CurrentManagedThreadId}");
 
 #region 測試一
 //step <1>
@@ -43,16 +44,19 @@ var realm = Realm.GetInstance(config);
 //向 Realm 添加了一個訂閱，這和上面的PopulateInitialSubscriptions意思一樣
 realm.Subscriptions.Update(() =>
 {
-    var myCars = realm.All<Car>();//.Where(t => t.Name == "Clifford" && t.Age > 5);
+    var myCars = realm.All<MotorRent>();//.Where(t => t.Name == "Clifford" && t.Age > 5);
     realm.Subscriptions.Add(myCars);
 });
+Console.WriteLine($"---ID1---{Environment.CurrentManagedThreadId}");
 
 //step <5>
 realm.Subscriptions.WaitForSynchronizationAsync(); //等待所有訂閱的同步操作完成
-// await myCars.SubscribeAsync();
+// await myCars.SubscribeAsync(); //不知道三小
+Console.WriteLine($"---ID2---{Environment.CurrentManagedThreadId}");
 
 //step <6>
-realm.Refresh();
+// realm.Refresh();
+Console.WriteLine($"---ID3---{Environment.CurrentManagedThreadId}");
 
 //step <7> - Realm有資料異動會觸發此通知處理程序，但該處理程序不會收到有關變更的具體信息
 realm.RealmChanged += (sender, eventArgs) =>
@@ -71,7 +75,7 @@ realm.RealmChanged += (sender, eventArgs) =>
 // };
 
 //step <9> - 若要停止就呼叫token.Dispose()
-var token = realm.All<Car>()
+var token = realm.All<MotorRent>()
     .SubscribeForNotifications((sender, changes) =>
     {
         Console.WriteLine("狂浪是一種態度");
@@ -84,15 +88,15 @@ var token = realm.All<Car>()
         // Handle individual changes
         foreach (var i in changes.DeletedIndices)
         {
-            Console.WriteLine("delete event");
+            Console.WriteLine($"delete event");
         }
         foreach (var i in changes.InsertedIndices)
         {
-            Console.WriteLine("Insert event");
+            // Console.WriteLine($"Insert event");
         }
         foreach (var i in changes.NewModifiedIndices)
         {
-            Console.WriteLine("Modify event");
+            Console.WriteLine($"Modify event");
         }
         if (changes.IsCleared)
         {
@@ -108,7 +112,7 @@ while (true)
     count++;
     Thread.Sleep(2000);
     Console.WriteLine($"----------------{realm.SyncSession.ConnectionState}-------------------");
-    var myCars = realm.All<Car>();//.Where(car => car.Avalible);
+    var myCars = realm.All<MotorRent>();//.Where(car => car.Avalible);
     Console.WriteLine($"count:{count}");
     Console.WriteLine($"***{myCars.Count()}****");
     // Console.WriteLine($"---{myCars.FirstOrDefault().CarNo}---{myCars.FirstOrDefault().Available}");
