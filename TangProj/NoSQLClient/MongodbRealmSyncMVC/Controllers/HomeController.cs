@@ -10,8 +10,8 @@ namespace MongodbRealmSyncMVC.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private App _app;
-    private Realm _realm;
+    private readonly App _app;
+    private readonly Realm _realm;
 
     public HomeController(ILogger<HomeController> logger)
     {

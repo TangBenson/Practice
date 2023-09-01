@@ -1,6 +1,11 @@
 ﻿using MongodbRealm;
 using Realms;
 
+/*
+Realm.GetInstance()會在本機文件夾建立default.realm.management、default.realm、default.realm.lock
+Realm.DeleteRealm會刪除本機的default.realm.management、default.realm
+*/
+
 var config = new RealmConfiguration();
 Realm.DeleteRealm(config);
 
