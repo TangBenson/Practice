@@ -84,3 +84,5 @@ C:\Users\benson922\Documents\Github_Mine\TangProj\NoSQLClient\MongodbRealmSync\o
 C:\Users\benson922\Documents\Github_Mine\TangProj\NoSQLClient\MongodbRealmSync\obj\Debug\net7.0\ref\MongodbRealmSync.dll
 C:\Users\benson922\Documents\Github_Mine\TangProj\NoSQLClient\MongodbRealmSync\obj\Debug\net7.0\MongodbRealmSync.csproj.Fody.CopyLocal.cache
 C:\Users\benson922\Documents\Github_Mine\TangProj\NoSQLClient\MongodbRealmSync\obj\Debug\net7.0\MongodbRealmSync.csproj.Fody.RuntimeCopyLocal.cache
+C:\Users\benso\OneDrive\文件\dotnetProject\Practice\TangProj\NoSQLClient\MongodbRealmSync\obj\Debug\net7.0\MongodbRealmSync.csproj.Fody.CopyLocal.cache
+C:\Users\benso\OneDrive\文件\dotnetProject\Practice\TangProj\NoSQLClient\MongodbRealmSync\obj\Debug\net7.0\MongodbRealmSync.csproj.Fody.RuntimeCopyLocal.cache

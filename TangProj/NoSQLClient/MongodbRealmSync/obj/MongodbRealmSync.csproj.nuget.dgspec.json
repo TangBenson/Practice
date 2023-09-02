@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj": {}
+    "C:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj": {}
   },
   "projects": {
-    "C:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj": {
+    "C:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj",
+        "projectUniqueName": "C:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj",
         "projectName": "MongodbRealmSync",
-        "projectPath": "C:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj",
-        "packagesPath": "C:\\Users\\benson922\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\benson922\\Documents\\Github_Mine\\TangProj\\NoSQLClient\\MongodbRealmSync\\obj\\",
+        "projectPath": "C:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TangProj\\NoSQLClient\\MongodbRealmSync\\MongodbRealmSync.csproj",
+        "packagesPath": "C:\\Users\\benso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TangProj\\NoSQLClient\\MongodbRealmSync\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\benson922\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\benso\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

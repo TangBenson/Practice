@@ -11,37 +11,49 @@ Console.WriteLine("---START---");
 #region 測試一
 /*
 realm.Refresh()加了則第1次執行程式就會下載到資料，若不加則要啟動第2次才會下載到資料。
-LogInAsyn不用await一定噴錯，而GetInstanceAsync和WaitForSynchronizationAsync不用await會載不到資料
-結論就是一定要用非同步，全部加await
+LogInAsyn不用await一定噴錯，而GetInstanceAsync和WaitForSynchronizationAsync
+不用await會載不到資料，結論就是一定要用非同步，全部加await
+
+await Realm.GetInstanceAsync會下載資料，Realm.GetInstance不會下載資料，要使用
+WaitForSynchronizationAsync才會下載資料。
 */
-App app = App.Create("application-0-gyubp");
+App app = App.Create("application-0-gyubp");//在本機文件夾建立mongodb-realm/server-utility
 var credential = Credentials.Anonymous();
 try
 {
-    // Console.WriteLine($"Thread ID 2:  {Environment.CurrentManagedThreadId}");
     await app.LogInAsync(credential);
-    // Console.WriteLine($"Thread ID 3:  {Environment.CurrentManagedThreadId}");
 }
 catch (Exception ex)
 {
     Console.WriteLine($"Login failed: {ex.Message}");
 }
-var config = new FlexibleSyncConfiguration(app.CurrentUser);
-// Console.WriteLine($"Thread ID 4:  {Environment.CurrentManagedThreadId}");
-var realm = await Realm.GetInstanceAsync(config); //在本機文件夾建立mongodb-realm，其子資料夾有default.realm.management、default.realm、default.realm.lock
-// Console.WriteLine($"Thread ID 5:  {Environment.CurrentManagedThreadId}");
-realm.Subscriptions.Update(() =>
+var config = new FlexibleSyncConfiguration(app.CurrentUser)//在本機文件夾建立mongodb-realm/[user id]
 {
-    var myCars = realm.All<MotorRent>();
-    realm.Subscriptions.Add(myCars);
-});
-// Console.WriteLine($"Thread ID 6:  {Environment.CurrentManagedThreadId}");
-await realm.Subscriptions.WaitForSynchronizationAsync();
-// Console.WriteLine($"Thread ID 7:  {Environment.CurrentManagedThreadId}");
-// realm.Refresh(); //加此行則在第1次執行程式就會下載到資料，若不加則要啟動第2次才會下載到資料
+    PopulateInitialSubscriptions = (realm) =>
+    {
+        var myCars = realm.All<MotorRent>();
+        realm.Subscriptions.Add(myCars);
+    }
+};
+var realm = await Realm.GetInstanceAsync(config); //在本機文件夾建立default.realm.management、default.realm、default.realm.lock
+
+// realm.Subscriptions.Update(() =>
+// {
+//     var myCars = realm.All<MotorRent>();
+//     realm.Subscriptions.Add(myCars);
+// });
+// await realm.Subscriptions.WaitForSynchronizationAsync();
+// realm.Refresh(); //加此行則在第1次執行程式就會顯示Count數量，若不加則要啟動第2次才會正確顯示
+
 var myCars = realm.All<MotorRent>();
+// Console.WriteLine($"***{myCars.Result.Count()}****");
 Console.WriteLine($"***{myCars.Count()}****");
-// Console.WriteLine($"Thread ID 8:  {Environment.CurrentManagedThreadId}");
+// while (true)
+// {
+//     Thread.Sleep(1000);
+//     Console.WriteLine($"***{myCars.Result.Count()}****");
+//     Console.WriteLine($"***{myCars.Count()}****");
+// }
 #endregion
 
 
