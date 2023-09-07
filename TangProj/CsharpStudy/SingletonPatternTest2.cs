@@ -20,19 +20,20 @@ public sealed class Customer
         // 定義 Lazy<T> 的初始化委派，當訪問 Order 屬性時執行
         lazyInstance = new Lazy<Order>(() => LoadOrderFromDatabase(ID));
     }
-    public Order Order => lazyInstance.Value;
+    public static Order Instance => lazyInstance.Value;
     
     // 模擬從資料庫中加載 Order 的方法
     private Order LoadOrderFromDatabase(string customerId)
     {
         // 在這裡可以實際查詢資料庫，這裡只是一個示例
-        Thread.Sleep(2000); // 模擬耗時的資料庫查詢
+        // Thread.Sleep(2000); // 模擬耗時的資料庫查詢
         return new Order { OrderNumber = "12345", Price = "999" };
     }
 
     static void Main()
     {
         Customer customer  = new("850720","珮綺");
+        Customer Customer0 = Customer.Instance;
         // 在這裡訪問 Order 屬性，它將觸發從資料庫加載
         Console.WriteLine($"Customer ID: {customer.ID}, Name: {customer.Name}, Order Number: {customer.Order.OrderNumber}");
     }
