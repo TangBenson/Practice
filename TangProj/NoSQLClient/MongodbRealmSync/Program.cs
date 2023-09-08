@@ -47,13 +47,13 @@ var realm = await Realm.GetInstanceAsync(config); //在本機文件夾建立defa
 
 var myCars = realm.All<MotorRent>();
 // Console.WriteLine($"***{myCars.Result.Count()}****");
-Console.WriteLine($"***{myCars.Count()}****");
-// while (true)
-// {
-//     Thread.Sleep(1000);
-//     Console.WriteLine($"***{myCars.Result.Count()}****");
-//     Console.WriteLine($"***{myCars.Count()}****");
-// }
+// Console.WriteLine($"***{myCars.Count()}****");
+while (true)
+{
+    Thread.Sleep(1000);
+    // Console.WriteLine($"***{myCars.Result.Count()}****");
+    Console.WriteLine($"***{myCars.Count()}****");
+}
 #endregion
 
 
