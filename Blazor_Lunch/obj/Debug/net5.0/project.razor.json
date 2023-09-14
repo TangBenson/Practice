@@ -13,33 +13,13 @@
   "RootNamespace": "Blazor_Lunch",
   "Documents": [
     {
-      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\Pages\\LEW.razor",
-      "TargetPath": "Pages\\LEW.razor",
-      "FileKind": "component"
-    },
-    {
-      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\Pages\\FetchData.razor",
-      "TargetPath": "Pages\\FetchData.razor",
-      "FileKind": "component"
-    },
-    {
-      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\Shared\\SurveyPrompt.razor",
-      "TargetPath": "Shared\\SurveyPrompt.razor",
-      "FileKind": "component"
-    },
-    {
-      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\App.razor",
-      "TargetPath": "App.razor",
-      "FileKind": "component"
+      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\_Imports.razor",
+      "TargetPath": "_Imports.razor",
+      "FileKind": "componentImport"
     },
     {
       "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\Pages\\Index.razor",
       "TargetPath": "Pages\\Index.razor",
-      "FileKind": "component"
-    },
-    {
-      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\Shared\\MainLayout.razor",
-      "TargetPath": "Shared\\MainLayout.razor",
       "FileKind": "component"
     },
     {
@@ -48,18 +28,38 @@
       "FileKind": "component"
     },
     {
-      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\_Imports.razor",
-      "TargetPath": "_Imports.razor",
-      "FileKind": "componentImport"
-    },
-    {
-      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\Pages\\Todo.razor",
-      "TargetPath": "Pages\\Todo.razor",
+      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\Pages\\LEW.razor",
+      "TargetPath": "Pages\\LEW.razor",
       "FileKind": "component"
     },
     {
       "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\Shared\\NavMenu.razor",
       "TargetPath": "Shared\\NavMenu.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\Shared\\MainLayout.razor",
+      "TargetPath": "Shared\\MainLayout.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\Pages\\FetchData.razor",
+      "TargetPath": "Pages\\FetchData.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\App.razor",
+      "TargetPath": "App.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\Shared\\SurveyPrompt.razor",
+      "TargetPath": "Shared\\SurveyPrompt.razor",
+      "FileKind": "component"
+    },
+    {
+      "FilePath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\Blazor_Lunch\\Pages\\Todo.razor",
+      "TargetPath": "Pages\\Todo.razor",
       "FileKind": "component"
     }
   ],

@@ -6,6 +6,7 @@
 
 建立Migration file (Migration的檔案是依照Model的定義及AppDbContext中的內容，來產生相關的資料表Sql Script，執行完成之後，
 專案目錄應該會增加一個Migrations的目錄，裡面放著三個檔案)
+=> dotnet tool install --global dotnet-ef  安裝dotnet ef tool
 => dotnet ef migrations add AddCustomerToDb
 
 承上，若想移除可用以下指令，但若已經create到db就不能移除了，因為已經綁訂了
