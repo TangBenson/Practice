@@ -7,7 +7,8 @@ public sealed class SingletonPatternLazyT
     {
     }
 
-    public static SingletonPatternLazyT Instance { get { return lazy.Value; } }
+    // public static SingletonPatternLazyT Instance { get { return lazy.Value; } }
+    public static SingletonPatternLazyT Instance => lazy.Value;
 
     static void Main()
     {
