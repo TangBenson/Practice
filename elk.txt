@@ -1,0 +1,346 @@
+.\bin\elasticsearch -E xpack.security.enabled=false =>啟動elasticsearch -- http://localhost:9200/
+.\bin\elasticsearch -E xpack.security.enabled=false -E node.name=xxx
+.\bin\kibana.bat =>啟動kibana -- http://localhost:5601/
+
+node概念不是硬體，而是一個process就是一個node
+
+同台機器上要跑兩個node，要用兩個目錄(C:\elasticsearch-8.9.2)去跑，以免共用設定....
+
+node之間溝通用9300 port
+
+9200 port是用來提供 rest api的 port
+
+一台機器開多個node只有在測試或memory很大時才這樣做
+
+遇到一些怪問題就把data資料夾清空，不然就重新解壓縮下載的檔案，直接重來
+
+同資料夾不能run兩次process
+
+新增資料到index要用put，並指定id。若不指定id則用post，比較符合rest api規則
+
+文件被修改無法復原，_version告訴你這個index的這個id被改幾次，增刪修都會一直累加
+
+query string是一種全文檢索的方式
+
+elk不能改欄位type，但可用fields去增加子欄位，再設定子欄位type
+
+資料加入elk若沒設定type，會用預設的(text/keyword)，若修改後要讓舊資料套用設定，
+需要重匯入data才會套用，但其實預設text type時，elk會另外又建立keyword
+
+term是資料寫入後被打碎的單位，token則是term加上一些metadata資訊，例如把fuck my gf存進去，fuck就會是一個term。
+
+資料搬遷以shard為最小單位去搬
+
+Dedicated coordinating node連資料都不存
+
+請問indexing文件後，inverted index會從memory轉到segment file且唯讀，但若這筆document被刪除，index資料就不會從segment刪了嗎?  因為segment唯讀，這樣不就浪費了空間?
+=> Ans : 確實不會從segment刪除，但會有另一個segment紀錄那些被刪除，之後segment做merge就知道哪些是被刪的
+
+刪一筆document不會釋放空間，要刪除index才會
+
+時間增長的資料建議用index來分，要刪就針對整個index刪就好
+
+資料寫入後無法立刻用_serch查到，因為是near real time，但用GET可以查到。因為index從memory buffer存到segment需要一些時間。
+
+bulk api的json格式特殊，是多個json用換行合併在一起
+
+查詢出的資料分頁呈現要用from + size，但這兩個相加值不能超過一萬(index.max_)
+
+segment file、data都會存在data資料夾下，所以關掉node再啟還是可以看到資料
+
+
+
+
+
+
+// 查有提供哪些_cat功能,_cat API提供清楚的格式以顯示諸如cluster,node與index狀態的資訊。
+GET _cat
+
+// 查有哪些node,加上?v可以顯示title
+GET _cat/nodes?v
+
+// 查有哪些index(database),以及有多少document等資訊
+GET _cat/indices?v
+
+// indexing(輸入)資料,index一定要給,若不存在就用預設值去建立index,id若不給則要用POST,系統會自建id。8.0 時已固定使用 _doc。_seq_no表示該id被異動過幾次
+PUT /movies/_doc/1
+{
+  "title": "Star Wars: Episode VII – The Force Awakens",
+  "director": "J.J. Abrams",
+  "year": 2015
+}
+POST /movies/_doc
+{
+  "title":"FF7",
+  "director":"SE",
+  "year":2016,
+  "genres":["Action","Advantage","Fantasy"]
+}
+
+// 更新資料加入欄位
+PUT /movies/_doc/1
+{
+"title": "Star Wars: Episode VII – The Force Awakens",
+"director": "J.J. Abrams",
+"year": 2015,
+"Genres": ["Action", "Adventure", "Fantasy"]
+}
+
+// 透過id取資料
+GET movies/_doc/1
+
+// 透過id取部分資料
+GET movies/_doc/1?_source=title,year
+
+// 透過id取不含metadata的資料
+GET movies/_source/1
+
+// 刪除資料
+DELETE movies/_doc/eU1KnYoBCYekMzJzTT47
+
+// 使用_search可指定想搜尋的index與type;若不指定,代表搜尋所有index。_search這個endpoint可以用GET或POST
+GET _search
+POST movies/_search
+
+// DSL之 query string,OR是關鍵字。_search這個endpoint可以用GET或POST
+GET _search
+{
+  "query": {
+    "query_string": {
+      "query": "FF7 OR star",
+      "fields": ["title"]
+    }
+  }
+}
+POST _search
+{
+  "query": {
+    "query_string": {
+      "query": "FF7"
+    }
+  }
+}
+
+// 同上,也是query string
+GET movies/_search?q=title:FF7 OR star
+GET movies/_search?q=FF7
+
+// match_all是查尋類型,和query_string差別? 設定_source表示只顯示title,director
+POST /movies/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "_source": ["title","director"]
+}
+
+// 在進行 query 時如要套用 filter,通常會使用bool query 與 filter 參數搭配使用。
+POST /movies/_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "query_string": {
+           "fields": ["title"],
+           "query": "kill"
+        }
+      },
+      "filter": {
+        "term": {
+          "year": "2003"
+        }
+      }
+    }
+  }
+}
+POST /movies/_search
+{
+  "query": {
+    "bool": { 
+      "filter": {
+        "term": {
+          "year": "2014"
+        }
+      }
+    }
+  }
+}
+POST _search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match_all": {}
+      }, 
+      "filter": {
+        "term": {
+          "year": "2014"
+        }
+      }
+    }
+  }
+}
+POST movies/_search
+{
+  "query": {
+    "bool": {
+      "filter": {
+        "term": {
+          "year": 2014
+        }
+        
+      }
+    }
+  }
+}
+GET movies/_search
+{
+  "query": {
+    "bool": {
+      "filter": {
+        "term": {
+          "genres": "Crime"
+        }
+      }
+    }
+  }
+}
+GET movies/_search
+{
+  "query":{
+    "term":{
+      "director":{
+        "value":"abrams"
+      }
+    }
+  }
+}
+GET movies/_search
+{
+  "query":{
+    "term":{
+      "director.keyword":{
+        "value":"J.J. Abrams"
+      }
+    }
+  }
+}
+
+
+POST /movies/_mapping
+{
+  "properties":{
+    "director":{
+      "type":"text",
+      "fields":{
+        "original":{
+          "type":"keyword"
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+PUT /games
+{
+  "settings": {
+    "number_of_shards": 1
+  },
+  "mappings": {
+    "_source": {
+      "enabled": false
+    },
+    "properties": {
+      "director": {
+        "type": "text",
+        "fields": {
+          "original": {
+            "type": "keyword"
+          }
+        }
+      }
+    }
+  }
+}
+
+GET _search
+PUT games/_create/8
+{
+  "title": "Star Wars: Episode VII – The Force Awakens",
+  "director": "J.J. Abrams",
+  "year": 2015,
+  "Genres": [
+    "Action",
+    "Adventure",
+    "Fantasy"
+  ]
+}
+DELETE /movies
+PUT games/_doc/8
+{
+  "title":"FF7",
+  "director":"SE",
+  "year":2016,
+  "genres":["Action","Advantage","Fantasy"]
+}
+PUT games/_doc/8?op_type=create
+{
+  "title": "Star Wars: Episode VII – The Force Awakens",
+  "director": "J.J. Abrams",
+  "year": 2015,
+  "Genres": [
+    "Action",
+    "Adventure",
+    "Fantasy"
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PUT movies/_doc/1
+{"title":"Star Wars: Episode VII – The Force Awakens","director":"J.J. Abrams","year":2015,"genres":["Action","Adventure","Fantasy"]}
+
+PUT movies/_doc/2
+{"title":"The Godfather","director":"Francis Ford Coppola","year":1972,"genres":["Crime","Drama"]}
+
+PUT movies/_doc/3
+{"title":"Kill Bill: Vol. 1","director":"Quentin Tarantino","year":2003,"genres":["Action","Crime","Thriller"]}
+
+PUT movies/_doc/4
+{"title":"To Kill a Mockingbird","director":"Robert Mulligan","year":1962,"genres":["Crime","Drama","Mystery"]}
+
+PUT movies/_doc/5
+{"title":"Apocalypse Now","director":"Francis Ford Coppola","year":1979,"genres":["Drama","War"]}
+
+PUT movies/_doc/6
+{"title":"Kill Bill: Vol. 2","director":"Quentin Tarantino","year":2004,"genres":["Action","Crime","Thriller"]}
+
+PUT movies/_doc/7
+{"title":"The Assassination of Jesse James by the Coward Robert Ford","director":"Andrew Dominik","year":2007,"genres":["Biography","Crime","Drama"]}
+
+PUT movies/_doc/8
+{"title":"Interstellar","director":"Christopher Nolan","year":2014,"genres":["Adventure","Sci-Fi"]}
+
+PUT movies/_doc/9
+{"title":"The Dark Knight","director":"Christopher Nolan","year":2008,"genres":["Action","Crime","Drama"]}
+
+PUT movies/_doc/10
+{"title":"Lawrence of Arabia","director":"David Lean","year":1962,"genres":["Adventure","Biography","Drama"]}
+
