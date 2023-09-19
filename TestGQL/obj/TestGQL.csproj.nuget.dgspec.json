@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TestGQL\\TestGQL.csproj": {}
+    "c:\\Users\\benson922\\Documents\\Github_Mine\\TestGQL\\TestGQL.csproj": {}
   },
   "projects": {
-    "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TestGQL\\TestGQL.csproj": {
+    "c:\\Users\\benson922\\Documents\\Github_Mine\\TestGQL\\TestGQL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TestGQL\\TestGQL.csproj",
+        "projectUniqueName": "c:\\Users\\benson922\\Documents\\Github_Mine\\TestGQL\\TestGQL.csproj",
         "projectName": "TestGQL",
-        "projectPath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TestGQL\\TestGQL.csproj",
-        "packagesPath": "C:\\Users\\benso\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\benso\\OneDrive\\文件\\dotnetProject\\Practice\\TestGQL\\obj\\",
+        "projectPath": "c:\\Users\\benson922\\Documents\\Github_Mine\\TestGQL\\TestGQL.csproj",
+        "packagesPath": "C:\\Users\\benson922\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\benson922\\Documents\\Github_Mine\\TestGQL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\benso\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\benson922\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -73,24 +75,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
