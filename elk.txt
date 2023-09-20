@@ -48,6 +48,21 @@ bulk api的json格式特殊，是多個json用換行合併在一起
 
 segment file、data都會存在data資料夾下，所以關掉node再啟還是可以看到資料
 
+elastic過往把index對應database，type對應table，後來發現type沒有意義，所以從7.0不再支持
+
+elastic中的index的schema就稱為Mapping
+
+字段類型keyword : 要完全匹配才能查
+字段類型text : 可以被分詞後查詢
+
+在Elasticsearch（ELK的一部分）中，"_score"是指搜索結果中每個文檔的相關性分數（relevance score）。當你執行一個查詢時，Elasticsearch會為每個匹配的文檔計算一個相對於查詢的相關性分數，該分數反映了文檔與查詢的匹配程度。"_score"分數越高，表示文檔與查詢越匹配
+
+根據文檔的ID，如果具有相同ID的文檔已存在，將被用新文檔替換。Re-indexing實際上是一個刪除和索引操作的組合
+
+但若使用_create，若文件已存在會跳錯誤409，而不會Re-indexing
+
+_seq_no應該是針對index的異動次數記錄，_version是針對單筆document
+
 
 
 
@@ -62,19 +77,33 @@ GET _cat/nodes?v
 // 查有哪些index(database),以及有多少document等資訊
 GET _cat/indices?v
 
-// indexing(輸入)資料,index一定要給,若不存在就用預設值去建立index,id若不給則要用POST,系統會自建id。8.0 時已固定使用 _doc。_seq_no表示該id被異動過幾次
+// indexing(輸入)資料,index一定要給,若不存在就用預設值去建立index,id若不給則要用POST,系統會自建id。8.0 時已固定使用 _doc。_seq_no表示該index被異動過幾次
 PUT /movies/_doc/1
 {
   "title": "Star Wars: Episode VII – The Force Awakens",
   "director": "J.J. Abrams",
   "year": 2015
 }
-POST /movies/_doc
+POST /games/_doc
 {
   "title":"FF7",
   "director":"SE",
   "year":2016,
   "genres":["Action","Advantage","Fantasy"]
+}
+POST /games/_doc/1
+{
+  "title":"FFXVI",
+  "director":"SE",
+  "year":2023,
+  "genres":["Action","Bloody","Fantasy"]
+}
+POST /games/_doc/2
+{
+  "title":"RO",
+  "director":"Korean",
+  "year":2003,
+  "genres":["Action","Cute","Online"]
 }
 
 // 更新資料加入欄位
@@ -102,30 +131,33 @@ DELETE movies/_doc/eU1KnYoBCYekMzJzTT47
 GET _search
 POST movies/_search
 
+// 刪除index
+DELETE /movies
+
 // DSL之 query string,OR是關鍵字。_search這個endpoint可以用GET或POST
 GET _search
 {
   "query": {
     "query_string": {
-      "query": "FF7 OR star",
+      "query": "ff7 OR star",
       "fields": ["title"]
     }
   }
 }
-POST _search
+POST /games/_search
 {
   "query": {
     "query_string": {
-      "query": "FF7"
+      "query": "advantage"
     }
   }
 }
 
 // 同上,也是query string
-GET movies/_search?q=title:FF7 OR star
-GET movies/_search?q=FF7
+GET /_search?q=title:ff7 OR star
+GET /games/_search?q=advantage
 
-// match_all是查尋類型,和query_string差別? 設定_source表示只顯示title,director
+// match_all 是 Elasticsearch中的一種查詢類型，它的主要用途是匹配索引中的所有文檔，而不應用任何過濾條件或搜索條件。設定_source表示只顯示title,director
 POST /movies/_search
 {
   "query": {
@@ -133,8 +165,14 @@ POST /movies/_search
   },
   "_source": ["title","director"]
 }
+POST /games/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
 
-// 在進行 query 時如要套用 filter,通常會使用bool query 與 filter 參數搭配使用。
+// 在進行 query 時如要套用 filter,通常會使用bool query 與 filter 參數搭配使用。本例使用了"term" filter。Term filter 會檢查 query 結果,並只回傳所指定欄位中資料值符合的文件。
 POST /movies/_search
 {
   "query": {
@@ -150,6 +188,17 @@ POST /movies/_search
           "year": "2003"
         }
       }
+    }
+  }
+}
+
+// 以下3個結果一樣，後兩個差在有無用query,當查詢的條件是必須參考Score的分數來取得較好的結果,這種查詢條件使用Query。其他的時候都使用Filter。
+GET /movies/_search
+{
+  "query": {
+    "query_string": {
+      "query": "2014",
+      "fields": ["year"]
     }
   }
 }
@@ -180,19 +229,8 @@ POST _search
     }
   }
 }
-POST movies/_search
-{
-  "query": {
-    "bool": {
-      "filter": {
-        "term": {
-          "year": 2014
-        }
-        
-      }
-    }
-  }
-}
+
+// 查不到,除非改成crime,因為打碎的token會存小寫。或是用後面教的_mapping
 GET movies/_search
 {
   "query": {
@@ -205,46 +243,88 @@ GET movies/_search
     }
   }
 }
-GET movies/_search
+
+// 打碎的token會個別單字存小寫,所以查完整的J.J. Abrams無效
+POST _search
 {
-  "query":{
-    "term":{
-      "director":{
-        "value":"abrams"
-      }
+  "query": {
+    "term": {
+      "director": "J.J. Abrams"
     }
   }
 }
-GET movies/_search
+POST _search
 {
-  "query":{
-    "term":{
-      "director.keyword":{
-        "value":"J.J. Abrams"
-      }
+  "query": {
+    "term": {
+      "director.keyword": "J.J. Abrams"
+    }
+  }
+}
+POST _search
+{
+  "query": {
+    "term": {
+      "director": "abrams"
     }
   }
 }
 
-
+// 對於movies各document的”director“欄位視為keyword型別,不做文字處理(保留原始內容)。但目前_doc type已經有了所使用的mapping,而且director欄位的設定與新的設定衝突,因此無法更新mapping。可以在既有mapping上添加新欄位的設定
 POST /movies/_mapping
 {
-  "properties":{
-    "director":{
-      "type":"text",
-      "fields":{
-        "original":{
-          "type":"keyword"
+  "properties": {
+    "director": {
+      "type": "keyword"
+    }
+  }
+}
+POST /movies/_mapping
+{
+  "properties": {
+     "director": {
+        "type": "text",
+        "fields": {
+            "original": {"type": "keyword"} 
         }
-      }
+     }
+  }
+}
+
+// 重新index電影資料後,就能透過 term query以"director.original": "J.J. Abrams"這樣的條件來查詢了。
+// Mapping 是 Elasticsearch 處理 document 的依據。如要更改 mapping,較佳的作法是將 index 整體刪除後,以備份資料套用新 mapping 重建。
+// 因此,在使用Elasticsearch前,必須先確定資料的格式與使用方式,謹慎設計 mapping 後再做document indexing。
+PUT /movies/_doc/1
+{
+  "title": "Star Wars: Episode VII – The Force Awakens",
+  "director": "J.J. Abrams",
+  "year": 2015,
+  "genres": ["Action", "Adventure", "Fantasy"]
+}
+POST /movies/_search
+{
+  "query": {
+    "term": {
+      "director.original": "J.J. Abrams"
+    }
+  }
+}
+GET /movies/_search
+{
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "genres.keyword": "Crime"
+          }
+        }
+      ]
     }
   }
 }
 
-
-
-
-
+// Create Index
 PUT /games
 {
   "settings": {
@@ -267,7 +347,7 @@ PUT /games
   }
 }
 
-GET _search
+// 前兩者一樣,只做新增,第3個會判斷存在則做修改
 PUT games/_create/8
 {
   "title": "Star Wars: Episode VII – The Force Awakens",
@@ -278,14 +358,6 @@ PUT games/_create/8
     "Adventure",
     "Fantasy"
   ]
-}
-DELETE /movies
-PUT games/_doc/8
-{
-  "title":"FF7",
-  "director":"SE",
-  "year":2016,
-  "genres":["Action","Advantage","Fantasy"]
 }
 PUT games/_doc/8?op_type=create
 {
@@ -298,17 +370,121 @@ PUT games/_doc/8?op_type=create
     "Fantasy"
   ]
 }
+PUT games/_doc/8
+{
+  "title":"FF7",
+  "director":"SE",
+  "year":2016,
+  "genres":["Action","Advantage","Fantasy"]
+}
 
+// Get API
+GET /movies/_doc/1
 
+// Exists API
+HEAD /movies/_doc/1
 
+// Delete API
+DELETE /movies/_doc/1
 
+// Delete by Query API,刪除games index的所有資料
+POST /games/_delete_by_query
+{
+  "query": { "match_all": {} } 
+}
 
+// Update API
+POST /movies/_update/1
+{
+  "doc":{
+    "likes": 12345
+  }
+}
 
+// Multi Get API
+GET /_mget
+{
+  "docs": [
+    {
+      "_index": "movies",
+      "_id": "1"
+    },
+    {
+      "_index": "movies",
+      "_id": "2"
+    }
+  ]
+}
+GET /movies/_mget
+{ 
+  "ids": ["1","2"]
+}
 
+// Bulk API
+PUT /_bulk
+{
+}
 
-
-
-
+// Search API
+GET /movies/_search?q=star
+GET /movies/_search?q=star+OR+kill
+GET /movies/_search?q=(star+OR+kill)+AND+year:[2003+TO+*]
+POST /movies/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "star OR kill"
+          }
+        }
+      ],
+      "filter": {
+        "range": {
+          "year": {
+            "gte": 2003
+          }
+        }
+      }
+    }
+  }
+}
+# Enable sort & profile
+POST /movies/_search
+{
+  "from": 0, 
+  "size": 20, 
+  "sort": [
+    {
+      "year": {
+        "order": "asc"
+      }
+    }
+  ], 
+  "profile": true,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "title": {
+              "query": "star kill",
+              "operator": "or"
+            }
+          }
+        }
+      ],
+      "filter": {
+        "range": {
+          "year": {
+            "gte": 2003
+          }
+        }
+      }
+    }
+  }
+}
 
 
 
