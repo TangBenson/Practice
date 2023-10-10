@@ -80,83 +80,192 @@ ngram是用空間換時間，用很多細微token減少搜尋時間
 
 
 
-// 查有提供哪些_cat功能,_cat API提供清楚的格式以顯示諸如cluster,node與index狀態的資訊。
+// _cat : 查有提供哪些_cat功能,_cat API提供清楚的格式以顯示諸如cluster,node與index狀態的資訊。
 GET _cat
-
 // 查有哪些node,加上?v可以顯示title
 GET _cat/nodes?v
-
-// 查有哪些index(database),以及有多少document等資訊
+// 查有哪些index,以及有多少document等資訊
 GET _cat/indices?v
 
-// indexing(輸入)資料,index一定要給,若不存在就用預設值去建立index,id若不給則要用POST,系統會自建id。8.0 時已固定使用 _doc。_seq_no表示該index被異動過幾次
-PUT /movies/_doc/1
+
+
+// indexing(輸入)資料,index一定要給,若不存在就用預設值去建立index,id若不給則要用POST,系統會自建id。8.0 時已固定使用_doc。_seq_no表示該index被異動過幾次(所有 primary shard 上的 operation 都+1)。_version可以讓使用者知道文件被修改的次數。_primary_term: primary shard 改變時會+1。
+PUT /games/_doc/1
 {
-  "title": "Star Wars: Episode VII – The Force Awakens",
-  "director": "J.J. Abrams",
-  "year": 2015
+  "title": "FF I",
+  "director": "Square",
+  "year": 1987
 }
 POST /games/_doc
 {
-  "title":"FF7",
-  "director":"SE",
-  "year":2016,
+  "title":"FF type-0",
+  "director":"SquareEnix",
+  "year":2011,
   "genres":["Action","Advantage","Fantasy"]
 }
-POST /games/_doc/1
+PUT /games/_doc/2
 {
-  "title":"FFXVI",
-  "director":"SE",
-  "year":2023,
+  "title":"FF II",
+  "director":"Square",
+  "year":1988,
   "genres":["Action","Bloody","Fantasy"]
 }
-POST /games/_doc/2
+PUT /games/_doc/3
 {
-  "title":"RO",
-  "director":"Korean",
-  "year":2003,
-  "genres":["Action","Cute","Online"]
+  "title":"FF III",
+  "director":"Square",
+  "year":1990,
+  "genres":["Action","Cute","Fantasy"]
 }
-
 // 更新資料加入欄位
-PUT /movies/_doc/1
+PUT /games/_doc/1
 {
-"title": "Star Wars: Episode VII – The Force Awakens",
-"director": "J.J. Abrams",
-"year": 2015,
-"Genres": ["Action", "Adventure", "Fantasy"]
+  "title": "FF I",
+  "director": "Square",
+  "year": 1987,
+  "Genres": ["Action", "Adventure", "Fantasy"]
 }
+// bulk批量操作,用index可以修改或新增，create只能新增
+POST /games/_bulk
+{"create": {"_index": "games","_id":"4"}}
+{"title":"FF IV","director":"Square","year":1991}
+{"create": {"_index": "games","_id":"5"}}
+{"title":"FF V","director":"Square","year":1992}
+{"create": {"_index": "games","_id":"6"}}
+{"title":"FF VI","director":"Square","year":1994}
+POST /games/_bulk
+{"index": {"_index": "games","_id":"7"}}
+{"title":"FF VII","director":"Square","year":1997,"comment": ["看表哥玩驚為天人"]}
+{"index": {"_index": "games","_id":"8"}}
+{"title":"FF VIII","director":"Square","year":1999,"comment": ["王菲主題曲好聽"]}
+{"index": {"_index": "games","_id":"9"}}
+{"title":"FF IX","director":"Square","year":2000,"comment": ["看電玩節目感覺讚"]}
+{"index": {"_index": "games","_id":"10"}}
+{"title":"FF X","director":"Square","year":2001,"comment": ["女主超正"]}
+{"index": {"_index": "games","_id":"11"}}
+{"title":"FF XI","director":"Square","year":2002,"comment": ["線上版評價高"]}
+{"index": {"_index": "games","_id":"12"}}
+{"title":"FF XII","director":"Square","year":2006,"comment": ["第一次接觸"]}
+{"index": {"_index": "games","_id":"13"}}
+{"title":"FF XIII","director":"Square","year":2009,"comment": ["第一款破關"]}
+{"index": {"_index": "games","_id":"14"}}
+{"title":"FF IX","director":"Square","year":2010,"comment": ["死裡回生"]}
+{"index": {"_index": "games","_id":"15"}}
+{"title":"FF XV","director":"Square","year":2016,"comment": ["劇情亂做"]}
+{"index": {"_index": "games","_id":"16"}}
+{"title":"FF XVI","director":"Square","year":2023,"comment": ["相信吉田"]}
+POST /四季溯溪/_bulk
+{"create": {"_index": "四季溯溪","_id":"1"}}
+{"隊友":"A","year":[2018,2019]}
+{"create": {"_index": "四季溯溪","_id":"2"}}
+{"隊友":"B","year":[2019,2020]}
+{"create": {"_index": "四季溯溪","_id":"3"}}
+{"隊友":"C","year":[2020,2021,2022]}
+{"create": {"_index": "四季溯溪","_id":"4"}}
+{"隊友":"D","year":[2021,2022]}
+{"create": {"_index": "四季溯溪","_id":"5"}}
+{"隊友":"E","year":[2022]}
+{"create": {"_index": "四季溯溪","_id":"6"}}
+{"隊友":"F","year":[2023]}
+PUT movies/_doc/1
+{
+  "title":"Star Wars: Episode VII – The Force Awakens",
+  "director":"J.J. Abrams",
+  "year":2015,"genres":["Action","Adventure","Fantasy"]
+}
+PUT movies/_bulk
+{"create": {"_index": "movies","_id":"2"}}
+{
+  "title":"The Godfather",
+  "director":"Francis Ford Coppola",
+  "year":1972,
+  "genres":["Crime","Drama"]}
+{"create": {"_index": "movies","_id":"3"}}
+{
+  "title":"Kill Bill: Vol. 1",
+  "director":"Quentin Tarantino",
+  "year":2003,
+  "genres":["Action","Crime","Thriller"]}
+{"create": {"_index": "movies","_id":"4"}}
+{
+  "title":"To Kill a Mockingbird",
+  "director":"Robert Mulligan",
+  "year":1962,
+  "genres":["Crime","Drama","Mystery"]}
+{"create": {"_index": "movies","_id":"5"}}
+{
+  "title":"Apocalypse Now",
+  "director":"Francis Ford Coppola",
+  "year":1979,
+  "genres":["Drama","War"]}
+{"create": {"_index": "movies","_id":"6"}}
+{
+  "title":"Kill Bill: Vol. 2",
+  "director":"Quentin Tarantino",
+  "year":2004,
+  "genres":["Action","Crime","Thriller"]}
+{"create": {"_index": "movies","_id":"7"}}
+{
+  "title":"The Assassination of Jesse James by the Coward Robert Ford",
+  "director":"Andrew Dominik",
+  "year":2007,
+  "genres":["Biography","Crime","Drama"]}
+{"create": {"_index": "movies","_id":"8"}}
+{
+  "title":"Interstellar",
+  "director":"Christopher Nolan",
+  "year":2014,
+  "genres":["Adventure","Sci-Fi"]}
+{"create": {"_index": "movies","_id":"9"}}
+{
+  "title":"The Dark Knight",
+  "director":"Christopher Nolan",
+  "year":2008,
+  "genres":["Action","Crime","Drama"]}
+{"create": {"_index": "movies","_id":"10"}}
+{
+  "title":"Lawrence of Arabia",
+  "director":"David Lean",
+  "year":1962,
+  "genres":["Adventure","Biography","Drama"]}
+
+
 
 // 透過id取資料
-GET movies/_doc/1
-
+GET games/_doc/1
 // 透過id取部分資料
-GET movies/_doc/1?_source=title,year
-
+GET games/_doc/1?_source=title,year
 // 透過id取不含metadata的資料
-GET movies/_source/1
+GET games/_source/1
+
+
 
 // 刪除資料
-DELETE movies/_doc/eU1KnYoBCYekMzJzTT47
-
-// 使用_search可指定想搜尋的index與type;若不指定,代表搜尋所有index。_search這個endpoint可以用GET或POST
-GET _search
-POST movies/_search
-
+DELETE games/_doc/1
 // 刪除index
-DELETE /movies
+DELETE /games
 
-// DSL之 query string,OR是關鍵字。_search這個endpoint可以用GET或POST
+
+
+// _search為"搜尋"功能的API endpoint,可指定想搜尋的index與type;若不指定代表搜尋所有index。可以用GET或POST
 GET _search
+GET games/_search
+GET movies/_search
+GET 四季溯溪/_search
+
+
+
+// DSL之 query string
+POST _search // 同GET /_search?q=title:ff7 OR star
 {
   "query": {
     "query_string": {
-      "query": "ff7 OR star",
+      "query": "ff V",
       "fields": ["title"]
     }
   }
 }
-POST /games/_search
+POST /games/_search   // 同GET /games/_search?q=advantage
 {
   "query": {
     "query_string": {
@@ -164,69 +273,67 @@ POST /games/_search
     }
   }
 }
-
-// 同上,也是query string
-GET /_search?q=title:ff7 OR star
-GET /games/_search?q=advantage
-
-// match_all 是 Elasticsearch中的一種查詢類型，它的主要用途是匹配索引中的所有文檔，而不應用任何過濾條件或搜索條件。設定_source表示只顯示title,director
-POST /movies/_search
-{
-  "query": {
-    "match_all": {}
-  },
-  "_source": ["title","director"]
-}
-POST /games/_search
-{
-  "query": {
-    "match_all": {}
-  }
-}
-
 // 在進行 query 時如要套用 filter,通常會使用bool query 與 filter 參數搭配使用。本例使用了"term" filter。Term filter 會檢查 query 結果,並只回傳所指定欄位中資料值符合的文件。
-POST /movies/_search
+POST /games/_search
 {
   "query": {
     "bool": {
       "must": {
         "query_string": {
-           "fields": ["title"],
-           "query": "kill"
+           "query": "ff V",
+           "fields": ["title"]
         }
       },
       "filter": {
         "term": {
-          "year": "2003"
+          "year": "1992"
         }
       }
     }
   }
 }
 
+
+
+// match_all 是 Elasticsearch中的一種查詢類型，它的主要用途是匹配索引中的所有文檔，而不應用任何過濾條件或搜索條件。設定_source表示只顯示title,director
+POST /四季溯溪/_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "_source": ["隊友"]
+}
+POST /四季溯溪/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+
+
 // 以下3個結果一樣，後兩個差在有無用query,當查詢的條件是必須參考Score的分數來取得較好的結果,這種查詢條件使用Query。其他的時候都使用Filter。
-GET /movies/_search
+POST /四季溯溪/_search
 {
   "query": {
     "query_string": {
-      "query": "2014",
-      "fields": ["year"]
+      "query": 2022
     }
   }
 }
-POST /movies/_search
+POST /四季溯溪/_search
 {
   "query": {
     "bool": { 
       "filter": {
         "term": {
-          "year": "2014"
+          "year": 2022
         }
       }
     }
   }
 }
-POST _search
+POST 四季溯溪/_search
 {
   "query": {
     "bool": {
@@ -235,12 +342,14 @@ POST _search
       }, 
       "filter": {
         "term": {
-          "year": "2014"
+          "year": 2022
         }
       }
     }
   }
 }
+
+
 
 // 查不到,除非改成crime,因為打碎的token會存小寫。或是用後面教的_mapping
 GET movies/_search
@@ -255,7 +364,6 @@ GET movies/_search
     }
   }
 }
-
 // 打碎的token會個別單字存小寫,所以查完整的J.J. Abrams無效
 POST _search
 {
@@ -281,6 +389,107 @@ POST _search
     }
   }
 }
+
+
+
+// 我自己測試總結
+POST /_search
+{
+  "query": {
+    "query_string": {
+      "query": "第一次"
+    }
+  }
+}
+POST /_search
+{
+  "query": {
+    "term": {
+          "title": "ff"
+    }
+  }
+}
+POST /_search
+{
+  "query": {
+    "bool": { 
+      "filter": {
+        "term": {
+          "title": "ff"
+        }
+      }
+    }
+  }
+}
+POST /_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "match_all": {}
+      }, 
+      "filter": {
+        "term": {
+          "title": "ff"
+        }
+      }
+    }
+  }
+}
+POST /_search
+{
+  "query": {
+    "bool": {
+      "must": {
+        "query_string": {
+           "query": "隊"
+        }
+      },
+      "filter": {
+        "term": {
+          "year": "2020"
+        }
+      }
+    }
+  }
+}
+POST /_search
+{
+  "query": {
+    "match_all": {}
+  },
+  "_source": ["隊友"]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 對於movies各document的”director“欄位視為keyword型別,不做文字處理(保留原始內容)。但目前_doc type已經有了所使用的mapping,而且director欄位的設定與新的設定衝突,因此無法更新mapping。可以在既有mapping上添加新欄位的設定
 POST /movies/_mapping
@@ -497,38 +706,4 @@ POST /movies/_search
     }
   }
 }
-
-
-
-
-
-PUT movies/_doc/1
-{"title":"Star Wars: Episode VII – The Force Awakens","director":"J.J. Abrams","year":2015,"genres":["Action","Adventure","Fantasy"]}
-
-PUT movies/_doc/2
-{"title":"The Godfather","director":"Francis Ford Coppola","year":1972,"genres":["Crime","Drama"]}
-
-PUT movies/_doc/3
-{"title":"Kill Bill: Vol. 1","director":"Quentin Tarantino","year":2003,"genres":["Action","Crime","Thriller"]}
-
-PUT movies/_doc/4
-{"title":"To Kill a Mockingbird","director":"Robert Mulligan","year":1962,"genres":["Crime","Drama","Mystery"]}
-
-PUT movies/_doc/5
-{"title":"Apocalypse Now","director":"Francis Ford Coppola","year":1979,"genres":["Drama","War"]}
-
-PUT movies/_doc/6
-{"title":"Kill Bill: Vol. 2","director":"Quentin Tarantino","year":2004,"genres":["Action","Crime","Thriller"]}
-
-PUT movies/_doc/7
-{"title":"The Assassination of Jesse James by the Coward Robert Ford","director":"Andrew Dominik","year":2007,"genres":["Biography","Crime","Drama"]}
-
-PUT movies/_doc/8
-{"title":"Interstellar","director":"Christopher Nolan","year":2014,"genres":["Adventure","Sci-Fi"]}
-
-PUT movies/_doc/9
-{"title":"The Dark Knight","director":"Christopher Nolan","year":2008,"genres":["Action","Crime","Drama"]}
-
-PUT movies/_doc/10
-{"title":"Lawrence of Arabia","director":"David Lean","year":1962,"genres":["Adventure","Biography","Drama"]}
 
