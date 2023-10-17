@@ -4,7 +4,7 @@ import (
 	"myapi/controllers"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/gorilla/mux" //golang 的套件，提供路由
 )
 
 type Route struct {

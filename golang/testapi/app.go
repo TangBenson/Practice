@@ -8,5 +8,5 @@ import (
 func main() {
 	r := routes.NewRouter()
 
-	http.ListenAndServe(":8080", r)
+	http.ListenAndServe(":8080", r) //根據 mux.NewRouter() 起服務
 }
