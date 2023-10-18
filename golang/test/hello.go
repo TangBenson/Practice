@@ -94,6 +94,12 @@ func main() {
 	for _, elememt := range arr4 {
 		fmt.Println(`elememt:`, elememt)
 	}
+
+	fmt.Println("interface接口-----------------------------------")
+
+	dog := Dog{Name: "Kenny"}
+	ShowEat(&dog)
+	ShowRun(&dog)
 }
 
 func show(max int) {
