@@ -2,7 +2,7 @@ package main //可執行程式必須使用 main 封包，若是寫套件就不�
 
 import (
 	"fmt" //載入內建的 fmt 封包，做輸出輸入
-	myfunc "mytest/funcs"
+	myfunc "mymod/funcs"
 )
 
 func main() {
