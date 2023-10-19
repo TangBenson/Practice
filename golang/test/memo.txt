@@ -22,3 +22,5 @@ go mod init <module name> - <module name>可填可不填，不填的話預設就
 只要有開啟go modules功能，go get 就不會像以前一樣在GOPATH/src下放置套件檔案，
 而是會放在GOPATH/pkg/mod裡面，並且go.mod會寫好引入。
 go mod tidy - 引用项目需要的依赖增加到go.mod文件 & 去掉go.mod文件中项目不需要的依赖
+
+所有新的Go專案第一件事就是執行go mod init ......
