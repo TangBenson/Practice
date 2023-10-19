@@ -1,0 +1,24 @@
+go env - 查看GOROOT和GOPATH路徑
+GOPATH - C:\Users\benson922\go (預設會是使用者目錄下的go資料夾)
+GOROOT - C:\Program Files\Go (安裝Golang語言的路徑)
+go run <xx.go> - 編譯並產生執行檔，存在特定的暫存資料夾，當運行完此程式就會自動刪除
+GOROOT路徑下的src資料夾存放官方的程式庫
+
+Go Modules問世之前:
+通常開發Golang，會重新設定GOPATH的位置 : set GOPATH=<PATH>。
+並包含以下的資料夾分層:bin、pkg、src。
+我們要在GOPATH路徑下主動新增src資料夾，也就是放我們開發Golang程式碼的相關專案的原始碼。
+例如:D:\GolangProject\src\webDemo ---> controller
+                                  ---> model
+                                  ---> main.go
+
+Go Modules問世之後:
+採用Go Modules，下載下來的第三方套件都在GOPATH/pkg/mod資料夾裡面。
+go mod init <module name> - <module name>可填可不填，不填的話預設就是採用專案資料夾的名稱。
+假設現在我要引入GitHub上的gin-gonic/gin的套件，就在mod檔定義一行require github.com/gin-gonic/gin v1.5.0
+再執行指令：go mod download，會將需要的套件安裝在GOPATH/pkg/mod資料夾裡面。
+而且會發現出現一個go.sum的檔案，這個檔案基本上用來記錄套件版本的關係。
+或是～～直接下載套件而不用在go.mod中定義：go get github.com/gin-gonic/gin@v1.5.0
+只要有開啟go modules功能，go get 就不會像以前一樣在GOPATH/src下放置套件檔案，
+而是會放在GOPATH/pkg/mod裡面，並且go.mod會寫好引入。
+go mod tidy - 引用项目需要的依赖增加到go.mod文件 & 去掉go.mod文件中项目不需要的依赖

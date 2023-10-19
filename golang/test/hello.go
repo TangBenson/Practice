@@ -2,7 +2,7 @@ package main //可執行程式必須使用 main 封包，若是寫套件就不�
 
 import (
 	"fmt" //載入內建的 fmt 封包，做輸出輸入
-	myfunc "mymod/funcs"
+	"mymod/myfunc"
 )
 
 func main() {
@@ -51,6 +51,7 @@ func main() {
 	fmt.Println("Function呼叫-----------------------------------")
 
 	show(10)
+	sayHi()
 	var x3 int
 	var s2 string
 	x3, s2 = myfunc.Test(5, 2)
@@ -109,4 +110,29 @@ func show(max int) {
 		result += n
 	}
 	fmt.Println(result)
+}
+
+type Animal interface {
+	Eat()
+	Run()
+}
+
+type Dog struct {
+	Name string
+}
+
+func (d *Dog) Eat() {
+	fmt.Printf("%s is eating\n", d.Name)
+}
+
+func (d *Dog) Run() {
+	fmt.Printf("%s is running\n", d.Name)
+}
+
+func ShowEat(animal Animal) {
+	animal.Eat()
+}
+
+func ShowRun(animal Animal) {
+	animal.Run()
 }
