@@ -25,6 +25,8 @@ func main() {
 		gin 是一个用 Go 编写的 HTTP server 框架
 		gin 是一套用 golang 原生的 net/http package 封裝過後的框架，效能完全有保證，還有各種方便的 data binding 機制
 		gin.Context 裡面包含有 request 以及 response 的內容與操作，並且支援直接回傳 JSON 自動進行轉換
+
+		參考:https://bingdoal.github.io/backend/2022/03/golang-gin-gonic-intro/
 	*/
 
 	server := gin.Default()

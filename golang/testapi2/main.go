@@ -11,14 +11,12 @@ import (
 
 func main() {
 	/*
-		gin FrameWork:
-		gin 是一个用 Go 编写的 HTTP server 框架
-		gin 是一套用 golang 原生的 net/http package 封裝過後的框架，效能完全有保證，還有各種方便的 data binding 機制
-		gin.Context 裡面包含有 request 以及 response 的內容與操作，並且支援直接回傳 JSON 自動進行轉換
+		參考:https://www.readfog.com/a/1661117854566682624
 	*/
 
 	r := gin.Default()
 
+	//創建了一個session存儲引擎，並設置了session選項，如最大過期時間、路徑、安全性等
 	store := sessions.NewCookieStore([]byte("dashdjkasdhaksda"))
 	store.Options(sessions.Options{
 		MaxAge:   7200,
@@ -26,7 +24,10 @@ func main() {
 		Secure:   true,
 		HttpOnly: true,
 	})
+
+	//將session中間件添加到Gin引擎中，它使用先前設置的存儲引擎，並分配一個名為"mydemo"的會話
 	r.Use(sessions.Sessions("mydemo", store))
+	//設置了一個處理404（Not Found）錯誤的處理程序，當請求的路由未找到時，返回一個JSON響應
 	r.NoRoute(func(c *gin.Context) { c.JSON(http.StatusNotFound, "Invaild api request") })
 
 	//設定路由
@@ -35,6 +36,7 @@ func main() {
 		v1.POST("/login", HandleLogin)
 		v1.GET("/articles", HandleGetArticles)
 
+		//將一個中間件Auth應用到v1路由組，這個中間件可能用於身份驗證或授權
 		v1Auth := v1.Use(Auth)
 		{
 			v1Auth.POST("/logout", HandleLogout)
@@ -79,6 +81,7 @@ type LoginParams struct {
 // HandleLogin doc
 func HandleLogin(c *gin.Context) {
 	param := &LoginParams{}
+	// body json帶空{}也成功，完全不帶{}才失敗
 	if err := c.BindJSON(param); err != nil {
 		c.JSON(http.StatusBadRequest, &Resp{Error: "parameters error"})
 		return
