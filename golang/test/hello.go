@@ -47,16 +47,19 @@ func main() {
 	// }
 	// fmt.Println(p1.Age, p1.Name)
 
-	fmt.Println("陣列-------------------------------------------")
-	goarray()
+	// fmt.Println("陣列-------------------------------------------")
+	// goarray()
 
 	// fmt.Println("for range--------------------------------------")
 	// frange()
 
-	// fmt.Println("interface接口-----------------------------------")
+	// fmt.Println("interface接口----------------------------------")
 	// dog := Dog{Name: "Kenny"}
 	// ShowEat(&dog)
 	// ShowRun(&dog)
+
+	fmt.Println("map鍵值對---------------------------------------")
+	gomap()
 }
 
 func show(max int) {
