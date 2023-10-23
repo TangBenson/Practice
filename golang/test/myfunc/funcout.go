@@ -2,12 +2,12 @@ package myfunc
 
 import "fmt"
 
-func Gcd(m, n int) int {
-	if n == 0 {
-		return m
-	} else {
-		return Gcd(n, m%n)
+func Sum(numbers ...int) int {
+	var sum int
+	for _, number := range numbers {
+		sum += number
 	}
+	return sum
 }
 
 func Test(n1 int, n2 int) (int, string) {

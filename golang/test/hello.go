@@ -17,6 +17,8 @@ func main() {
 	// var s2 string
 	// x3, s2 = myfunc.Test(5, 2)
 	// fmt.Println(x3, s2)
+	numbers := []int{1, 2, 3, 4, 5}
+	fmt.Println(Sum(numbers...)) // 15
 	myfunc.Test2()
 
 	// fmt.Println("宣告變數 & f-string-----------------------------")

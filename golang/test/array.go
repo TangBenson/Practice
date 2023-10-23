@@ -15,9 +15,9 @@ Length：該 slice 中的元素數目
 
 func goarray() {
 	//Array
-	var scores [3]int
-	scores[0] = 35
-	fmt.Println(len(scores), scores, cap(scores))
+	var arr0 [3]int
+	arr0[0] = 35
+	fmt.Println(len(arr0), arr0, cap(arr0))
 	arr1 := [3]int{5, 6, 7}
 	arr2 := [...]int{4, 5, 6, 7, 8, 9} //編譯器自動判斷數量
 	fmt.Println(arr1, arr2)
