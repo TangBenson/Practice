@@ -24,3 +24,6 @@ go mod init <module name> - <module name>可填可不填，不填的話預設就
 go mod tidy - 引用项目需要的依赖增加到go.mod文件 & 去掉go.mod文件中项目不需要的依赖
 
 所有新的Go專案第一件事就是執行go mod init ......
+
+在建立函式庫套件時，我們會讓專案目錄名稱和套件名稱一致，套件使用者才不會搞混。
+像是 julienschmidt/httprouter 這個輕量級的網頁伺服器路徑套件，專案目錄為 httprouter ，套件名稱也是 httprouter。

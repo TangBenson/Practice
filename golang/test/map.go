@@ -3,6 +3,8 @@ package main
 import "fmt"
 
 func gomap() {
+	// map是成對鍵值資料結構
+
 	friendlist := make(map[string]int) //建立空map
 	// friendlist := map[string]int{} //同上
 	fmt.Println(friendlist)      // map[]

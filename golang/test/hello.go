@@ -17,8 +17,8 @@ func main() {
 	// var s2 string
 	// x3, s2 = myfunc.Test(5, 2)
 	// fmt.Println(x3, s2)
-	numbers := []int{1, 2, 3, 4, 5}
-	fmt.Println(Sum(numbers...)) // 15
+	// numbers := []int{1, 2, 3, 4, 5}
+	// fmt.Println(myfunc.Sum(numbers...)) // 15
 	myfunc.Test2()
 
 	// fmt.Println("宣告變數 & f-string-----------------------------")
@@ -56,14 +56,62 @@ func main() {
 	// frange()
 
 	// fmt.Println("interface接口----------------------------------")
-	// dog := Dog{Name: "Kenny"}
-	// ShowEat(&dog)
-	// ShowRun(&dog)
+	// dog := myfunc.Dog{Name: "Kenny"}
+	// myfunc.ShowEat(&dog)
+	// myfunc.ShowRun(&dog)
 
-	fmt.Println("map鍵值對---------------------------------------")
-	gomap()
+	// fmt.Println("map鍵值對---------------------------------------")
+	// gomap()
+
+	fmt.Println("Function進階---------------------------------------")
+	// //函式作為值
+	// t1 := f1
+	// fmt.Println(t1(10))
+	// //函式變數宣告一
+	// var t2 func(int) int
+	// t2 = f1
+	// fmt.Println(t2(10))
+	// //函式變數宣告二
+	// type BiFunc = func(int) int //定義新型態 (Go 1.9版之前)
+	// var t3 BiFunc
+	// t3 = f1
+	// fmt.Println(t3(10))
+	// //函式變數宣告二
+	// type BiFunc2 func(int) int //型態別名宣告 (Go 1.9版之後)，BiFunc2 只是 func(int, int) int 的另一個名稱，而不是新的型態
+	// var t4 BiFunc2
+	// t4 = f1
+	// fmt.Println(t4(10))
+	// fmt.Println(&t4) //函式變數既然是個變數，也就可以對它取指標
+	// //函式當作值傳遞(我用匿名函式)
+	// data := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	// fmt.Println(filter(data, func(n int) bool {
+	// 	return n > 7
+	// }))
+	// //函式中建立匿名函式，並將之傳回
+	// fmt.Println(f2()(2)) //12
+	//閉包
+	numbers := []int{1, 2, 3, 4, 5}
+	sum := 0
+	MyforEach(numbers, func(elem int) {
+		sum += elem
+	})
+	fmt.Println(sum) // 15
+
+	numbers2 := []int{1, 2, 3, 4, 5}
+	sum2 := 0
+	for _, elem := range numbers2 {
+		sum2 += elem
+	}
+	fmt.Println(sum2) // 15
 }
 
+type Consumer = func(int)
+
+func MyforEach(elems []int, consumer Consumer) {
+	for _, elem := range elems {
+		consumer(elem)
+	}
+}
 func show(max int) {
 	var result int = 0
 	var n int
@@ -72,28 +120,27 @@ func show(max int) {
 	}
 	fmt.Println(result)
 }
-
-type Animal interface {
-	Eat()
-	Run()
+func f1(a int) int {
+	return a + 97
 }
 
-type Dog struct {
-	Name string
+type Predicate = func(int) bool
+
+func filter(origin []int, predicate Predicate) []int {
+	filtered := []int{}
+	for _, elem := range origin {
+		if predicate(elem) {
+			filtered = append(filtered, elem)
+		}
+	}
+	return filtered
 }
 
-func (d *Dog) Eat() {
-	fmt.Printf("%s is eating\n", d.Name)
-}
+type Func1 = func(int) int
 
-func (d *Dog) Run() {
-	fmt.Printf("%s is running\n", d.Name)
-}
-
-func ShowEat(animal Animal) {
-	animal.Eat()
-}
-
-func ShowRun(animal Animal) {
-	animal.Run()
+func f2() Func1 {
+	x := 10
+	return func(n int) int {
+		return x + n
+	}
 }
