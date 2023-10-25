@@ -1,3 +1,5 @@
+# 这个脚本是一个 Bash 脚本，是build.ps1的bash版
+
 #!/usr/bin/env bash
 set -euo pipefail
 

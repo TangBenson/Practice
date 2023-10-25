@@ -1,3 +1,5 @@
+# 用于删除指定位置的文件或目录
+
 Remove-Item $env:USERPROFILE\.nuget\packages\identityserver4\ -Recurse -ErrorAction SilentlyContinue 
 Remove-Item $env:USERPROFILE\.nuget\packages\identityserver4.storage\ -Recurse -ErrorAction SilentlyContinue 
 Remove-Item $env:USERPROFILE\.nuget\packages\identityserver4.entityframework\ -Recurse -ErrorAction SilentlyContinue 
