@@ -64,54 +64,30 @@ func main() {
 	// gomap()
 
 	fmt.Println("Function進階---------------------------------------")
-	// //函式作為值
-	// t1 := f1
-	// fmt.Println(t1(10))
-	// //函式變數宣告一
-	// var t2 func(int) int
-	// t2 = f1
-	// fmt.Println(t2(10))
-	// //函式變數宣告二
-	// type BiFunc = func(int) int //定義新型態 (Go 1.9版之前)
-	// var t3 BiFunc
-	// t3 = f1
-	// fmt.Println(t3(10))
-	// //函式變數宣告二
-	// type BiFunc2 func(int) int //型態別名宣告 (Go 1.9版之後)，BiFunc2 只是 func(int, int) int 的另一個名稱，而不是新的型態
-	// var t4 BiFunc2
-	// t4 = f1
-	// fmt.Println(t4(10))
-	// fmt.Println(&t4) //函式變數既然是個變數，也就可以對它取指標
-	// //函式當作值傳遞(我用匿名函式)
-	// data := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	// fmt.Println(filter(data, func(n int) bool {
-	// 	return n > 7
-	// }))
-	// //函式中建立匿名函式，並將之傳回
-	// fmt.Println(f2()(2)) //12
-	//閉包
-	numbers := []int{1, 2, 3, 4, 5}
-	sum := 0
-	MyforEach(numbers, func(elem int) {
-		sum += elem
-	})
-	fmt.Println(sum) // 15
+	gofunc()
 
-	numbers2 := []int{1, 2, 3, 4, 5}
-	sum2 := 0
-	for _, elem := range numbers2 {
-		sum2 += elem
-	}
-	fmt.Println(sum2) // 15
+	fmt.Println("defer、panic、recover--------------------------------")
+	//defer:在函式 return 前執行，而且一定會被執行
+	/*
+		就某些意義來說，defer 的角色類似於例外處理機制中 finally 的機制，畢竟Go沒有例外處理機制
+		將資源清除的函式，藉由 defer 來處理，一方面大概也是為了在程式碼閱讀上，強調出資源清除的重要性
+	*/
+	//panic:中斷函式的流程
+	/*
+		如果在函式中執行 panic，那麼函式的流程就會中斷，若 A 函式呼叫了 B 函式，而 B 函式中呼叫了 panic，
+		那麼 B 函式會從呼叫了 panic 的地方中斷，而 A 函式也會從呼叫了 B 函式的地方中斷，若有更深層的呼叫鏈，panic 的效應也會一路往回傳播。
+		（如果你有例外處理的經驗，這就相當於被拋出的例外都沒有處理的情況。）
+	*/
+	//recover
+	/*
+		如果發生了 panic，而你必須做一些處理，可以使用 recover，這個函式必須在被 defer 的函式中執行才有效果，
+		若在被 defer 的函式外執行，recover 一定是傳回 nil。
+		如果有設置 defer 函式，在發生了 panic 的情況下，被 defer 的函式一定會被執行，若當中執行了 recover，
+		那麼 panic 就會被捕捉並作為 recover 的傳回值，那麼 panic 就不會一路往回傳播，除非你又呼叫了 panic。
+	*/
+
 }
 
-type Consumer = func(int)
-
-func MyforEach(elems []int, consumer Consumer) {
-	for _, elem := range elems {
-		consumer(elem)
-	}
-}
 func show(max int) {
 	var result int = 0
 	var n int
@@ -122,25 +98,4 @@ func show(max int) {
 }
 func f1(a int) int {
 	return a + 97
-}
-
-type Predicate = func(int) bool
-
-func filter(origin []int, predicate Predicate) []int {
-	filtered := []int{}
-	for _, elem := range origin {
-		if predicate(elem) {
-			filtered = append(filtered, elem)
-		}
-	}
-	return filtered
-}
-
-type Func1 = func(int) int
-
-func f2() Func1 {
-	x := 10
-	return func(n int) int {
-		return x + n
-	}
 }

@@ -15,14 +15,14 @@ func Test(n1 int, n2 int) (int, string) {
 }
 
 func Test2() {
-	//defer 會等到周圍的 function 都執行完成後，再執行
-	fmt.Println("counting")
+	//defer 會等到周圍的 function 都執行完成後，return 之前再執行
+	fmt.Println("A")
 
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 2; i++ {
 		defer fmt.Println(i)
 	}
 
-	fmt.Println("done")
+	fmt.Println("B")
 }
 
 type Person struct {
