@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDarkThread", "TestDarkThread.csproj", "{8EFE9BB4-1698-4330-991D-6D0F0250F575}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EFE9BB4-1698-4330-991D-6D0F0250F575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EFE9BB4-1698-4330-991D-6D0F0250F575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EFE9BB4-1698-4330-991D-6D0F0250F575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EFE9BB4-1698-4330-991D-6D0F0250F575}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99B7F783-2ADD-4376-9551-5E379D9B083A}
+	EndGlobalSection
+EndGlobal
