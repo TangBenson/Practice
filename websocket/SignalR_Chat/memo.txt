@@ -1,0 +1,7 @@
+安裝前端js函式庫呼叫signalr建立websocket連線
+1.安裝LibMan
+=> dotnet tool install -g Microsoft.Web.LibraryManager.Cli
+2.安裝js函式庫
+=> libman install @microsoft/signalr -p unpkg
+
+建立Hubs/ChatHub.cs
