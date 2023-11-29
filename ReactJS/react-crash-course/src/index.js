@@ -3,7 +3,7 @@ import React from "react"; //類似jquery的包，一些API
 import ReactDOM from "react-dom/client"; // react系統訊息建議的新版的寫法
 import "./index.css";
 import Home from "./pages/Home"; //首頁
-// import Page1 from "./pages/Page1";
+import Page1 from "./pages/Page1";
 
 // 舊式寫法
 // ReactDOM.render(
@@ -17,8 +17,8 @@ import Home from "./pages/Home"; //首頁
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* <Page1 /> */}
-    <Home />
+    <Page1 />
+    {/* <Home /> */}
   </React.StrictMode>
 );
 
