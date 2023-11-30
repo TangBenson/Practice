@@ -24,14 +24,17 @@
     </div>
     <div id="chatBox"></div>
     <script>
+        //設定連線資訊，連到某個hub (可以有好幾個hub)
         var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
+        //設定接收訊息事件ReceiveMessage (SignalR回呼函式)
         connection.on("ReceiveMessage", function (user, message) {
             var encodedUser = $("<div />").text(user).html();
             var encodedMsg = $("<div />").text(message).html();
             $("#chatBox").append("<p><strong>" + encodedUser + "</strong>: " + encodedMsg + "</p>");
         });
 
+        //設定按下按鈕事件，client段呼叫server端的SendMessage方法
         $("#sendButton").click(function () {
             var user = $("#username").val();
             var message = $("#message").val();
@@ -39,6 +42,7 @@
             $("#message").val("").focus();
         });
 
+        //開始連線
         connection.start().then(function () {
             console.log("Connected!");
         }).catch(function (err) {
