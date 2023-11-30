@@ -1,5 +1,5 @@
 安裝react開發包
-npx create-react-app react-crash-course
+npx create-react-app 專案名稱
 初始會有：node_modules、public、src、package-lock.json、package.json、README.md
 
 開啟站台:npm run start
