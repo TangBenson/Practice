@@ -18,7 +18,7 @@ builder.Services
     .AddType<OrderType>()
     .AddSorting()
     .AddFiltering()
-    .AddInMemorySubscriptions(); ;
+    .AddInMemorySubscriptions();
 
 
 builder.Services.AddPooledDbContextFactory<AppDbContext>(options =>
