@@ -1,0 +1,19 @@
+JS的function的this在嚴格模式下是null，在一般模式則是windows
+
+js class宣告的方法是原型方法，宣告在prototype裡面，所有實例共用
+
+global function 的 this是指呼叫者，也就是 window (第二堂上午10:25~10:30)
+
+class內的 function 的 this是指呼叫者，也就是 react事件 (第二堂上午10:30~10:40)
+
+箭頭函式的 this不是呼叫者的 this，而是上一層 class (第二堂上午10:38~10:42)
+
+react組件若寫 constructor，不能省略 super(props)
+
+用到 ref絕大部分是 form的元素，例如 input...
+
+第二堂上午11:12~11:15
+
+每個 html標籤定義的 ref不能一樣
+
+xx綁定 & js重點語法 (第二堂上午11:28~11:38)

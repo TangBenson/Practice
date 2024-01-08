@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset=utf-8"UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 準備好一個「容器」 -->
+    <div id="test"></div>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+
+    <style>
+        .list {
+            width: 200px;
+            height: 150px;
+            background-color: skyblue;
+            overflow: auto;
+        }
+        .news {
+            height: 30px;
+        }
+    </style>
+
+    <!-- 引入react核心庫 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用於支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入babel，用於將jsx轉為js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 範例7用的，要做屬性限制，必需額外引入prop-types.js程式庫 -->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+    <script type="text/babel"> /* 此處一定要寫babel */
+        // #region 1.創建虛擬DOM
+        // // const VDOM = <h1>Hello,React</h1> /* 此處一定不要寫引號，因為不是字符串 */
+        // const VDOM = (
+        //     <h1 id="title">
+        //         <span>Hello,Reassssct</span>
+        //     </h1>
+        // ) /* 多行時可以用括號包覆! */
+        // ReactDOM.render(VDOM, document.getElementById('test')) // 渲染組件到頁面
+        // // VDOM vs DOM
+        // const TDOM = document.getElementById('demo')
+        // console.log('虛擬DOM', VDOM);
+        // console.dir('真實DOM', TDOM); //要看JS物件所有LOG請改用DIR
+        // // debugger;
+        // console.log(typeof VDOM);
+        // console.log(typeof TDOM);
+        // console.log(VDOM instanceof Object);
+        // #endregion
+
+        // #region 2.建立函數式組件
+        // function MyComponent() {
+        //     console.log(this); //此處的this是undefined，因為babel編譯後開啟了嚴格模式
+        //     return <h2>我是用函數定義的組件(適用於【簡單組件】的定義)</h2>
+        // }
+        // ReactDOM.render(<MyComponent />, document.getElementById('test')) // 渲染組件到頁面
+        // #endregion
+
+        // #region 3.創建類式組件
+        // class MyComponent extends React.Component {
+        //     render() {
+        //         //render是放在哪裡的？—— MyComponent的原型對像上，供實例使用。
+        //         //render中的this是誰？—— MyComponent的實例對像 <=> MyComponent組件實例對象。
+        //         console.log('render中的this:', this);
+        //         return <h2>我是用類定義的組件(適用於【複雜組件】的定義)</h2>
+        //     }
+        // }
+        // ReactDOM.render(<MyComponent />, document.getElementById('test')) // 渲染組件到頁面
+        // #endregion
+
+        // #region 4.創建組件
+        // class Weather extends React.Component {
+        //     //建構式被呼叫幾次？ ———— 1次
+        //     constructor(props) { //建構式傳的參數是由react固定傳入一個props的內容
+        //         console.log('constructor');
+        //         super(props) //必要動作，將props參數傳給父類別
+        //         //初始化狀態
+        //         this.state = { isHot: false, wind: '微風' } //這是父類提供存放狀態的屬性（必需是物件類型）
+        //         console.log(this);
+        //         debugger;
+        //         //解決changeWeather中this指向問題，請參考事件綁定章節的說明
+        //         this.changeWeather = this.changeWeather.bind(this)
+        //         console.log(this);
+        //     }
+        //     //render呼叫幾次？ ———— 1+n次 1是初始化的那次 n是狀態更新的次數
+        //     render() {
+        //         console.log('render');
+        //         //讀取狀態
+        //         const { isHot, wind } = this.state // 透過解構賦值，將state的內容取出
+        //         return <h1 onClick={this.changeWeather}>今天天氣很{isHot ? '炎熱' : '涼爽'}，{wind}</h1> // 請參考事件綁定章節的說明
+        //     }
+        //     //changeWeather呼叫幾次？ ———— 點幾次調幾次
+        //     changeWeather() {
+        //         //changeWeather放在哪裡？ ———— Weather的原型對像上，供實例使用
+        //         //由於changeWeather是作為onClick的回調，所以不是通過實例呼叫的，是直接呼叫
+        //         //類中的方法預設開啟了局部的嚴格模式，所以changeWeather中的this為undefined
+        //         console.log('changeWeather');
+        //         //獲取原來的isHot值
+        //         const isHot = this.state.isHot
+        //         //嚴重注意：狀態必須通過setState進行更新,且更新是一種合併，不是替換。
+        //         this.setState({ isHot: !isHot })
+        //         console.log(this);
+        //         //嚴重注意：狀態(state)不可直接更改，下面這行就是直接更改！！！
+        //         //this.state.isHot = !isHot //這是錯誤的寫法
+        //     }
+        // }
+        // ReactDOM.render(<Weather />, document.getElementById('test')) // 渲染組件到頁面
+        // #endregion
+
+        // #region 5.上例的改良版
+        // class Weather extends React.Component {
+        //     //初始化狀態
+        //     state = { isHot: false, wind: '微風' }
+        //     render() {
+        //         console.log('render');
+        //         const { isHot, wind } = this.state
+        //         return <h1 onClick={this.changeWeather}>今天天氣很{isHot ? '炎熱' : '涼爽'}，{wind}</h1> //加上this.，只為了能取用到類別裡的方法
+        //     }
+        //     //自定義方法————要用賦值語句的形式+箭頭函數。箭頭函數的最大特性之一是，它沒有本身的this，而是直接沿用外層的this
+        //     changeWeather = () => {
+        //         console.log('changeWeather');
+        //         const isHot = this.state.isHot
+        //         this.setState({ isHot: !isHot })
+        //     }
+        // }
+        // // 渲染組件到頁面
+        // ReactDOM.render(<Weather />, document.getElementById('test'))
+        // #endregion
+
+        // #region 6.props的基本使用
+        // class Person extends React.Component {
+        //     render() {
+        //         // console.log(this);
+        //         const { name, age, sex } = this.props // this.props也是react父類別中的唯讀屬性，它會自行收集由JSX組件中的所有屬性（名稱及值）
+        //         return (
+        //             <ul>
+        //                 <li>姓名：{name}</li>
+        //                 <li>性別：{sex}</li>
+        //                 <li>年齡：{age + 1}</li>
+        //             </ul>
+        //         )
+        //     }
+        // }
+        // //渲染組件到頁面
+        // ReactDOM.render(<Person name="jerry" age={19} sex="男" />, document.getElementById('test1'))
+        // ReactDOM.render(<Person name="tom" age={18} sex="女" />, document.getElementById('test2'))
+        // const p = { name: '老劉', age: 18, sex: '女' }
+        // // ReactDOM.render(<Person name={p.name} age={p.age} sex={p.sex}/>,document.getElementById('test3'))
+        // ReactDOM.render(<Person {...p} />, document.getElementById('test3')) // 如果帶入的屬性非常的多，這裡展示如果以一個物件來傳入的方式
+        // #endregion
+
+        // #region 7.對props進行限制
+        //創建組件
+        // class Person extends React.Component {
+        //     render() {
+        //         // console.log(this);
+        //         const { name, age, sex } = this.props
+        //         //props是唯讀的
+        //         //this.props.name = 'jack' //此行程式碼會報錯，因為props是唯讀的
+        //         return (
+        //             <ul>
+        //                 <li>姓名：{name}</li>
+        //                 <li>性別：{sex}</li>
+        //                 <li>年齡：{age + 1}</li>
+        //             </ul>
+        //         )
+        //     }
+        // }
+        // //對標籤屬性進行類型、必要性的限制
+        // Person.propTypes = {
+        //     name: PropTypes.string.isRequired, //限制 name必傳，且為字符串
+        //     sex: PropTypes.string,//限制 sex為字符串
+        //     age: PropTypes.number,//限制 age為數值
+        //     speak: PropTypes.func,//限制 speak為函數
+        // }
+        // //指定預設標籤屬性值
+        // Person.defaultProps = {
+        //     sex: '男',//sex預設值為男
+        //     age: 18 //age預設值為18
+        // }
+        // //渲染組件到頁面
+        // ReactDOM.render(<Person name="tom2" speak={speak} />, document.getElementById('test1'))
+        // ReactDOM.render(<Person name="tom" age={18} sex="女" />, document.getElementById('test2'))
+        // const p = { name: '老劉', age: 18, sex: '女' }
+        //     // console.log('@',...p);
+        //     // ReactDOM.render(< Person name = { p.name } age = { p.age } sex = { p.sex } />, document.getElementById('test3'))
+        // ReactDOM.render(<Person {...p} />, document.getElementById('test3'))
+        // function speak() {
+        //     console.log('我說話了');
+        // }
+        // #endregion
+
+        // #region 8.上例的改良版
+        // class Person extends React.Component {
+        //     constructor(props) {
+        //         //構造器是否接收props，是否傳遞給super，取決於：是否希望在構造器中通過this訪問props
+        //         // console.log(props);
+        //         super(props)
+        //         console.log('constructor', this.props);
+        //     }
+        //     //對標籤屬性進行類型、必要性的限制
+        //     static propTypes = {
+        //         name: PropTypes.string.isRequired, //限制name必傳，且為字符串
+        //         sex: PropTypes.string,//限制sex為字符串
+        //         age: PropTypes.number,//限制age為數值
+        //     }
+        //     //指定默認標籤屬性值
+        //     static defaultProps = {
+        //         sex: '男',//sex默認值為男
+        //         age: 18 //age默認值為18
+        //     }
+        //     render() {
+        //         // console.log(this);
+        //         const { name, age, sex } = this.props
+        //         //props是只讀的
+        //         //this.props.name = 'jack' //此行代碼會報錯，因為props是只讀的
+        //         return (
+        //             <ul>
+        //                 <li>姓名：{name}</li>
+        //                 <li>性別：{sex}</li>
+        //                 <li>年齡：{age + 1}</li>
+        //             </ul>
+        //         )
+        //     }
+        // }
+        // //渲染組件到頁面
+        // ReactDOM.render(<Person name={100} speak={speak} />, document.getElementById('test1'))
+        // ReactDOM.render(<Person name="tom" age={18} sex="女" />, document.getElementById('test2'))
+        // const p = { name: '老劉', age: 18, sex: '女' }
+        // ReactDOM.render(<Person {...p} />, document.getElementById('test3'))
+        // function speak() {
+        //     console.log('我說話了');
+        // }
+        // #endregion
+
+        // #region 9.函式組件的props (props是三大核心屬性中唯一個可以用在函式組件中的屬性)
+        // function Person(props) {
+        //     const { name, age, sex } = props
+        //     return (
+        //         <ul>
+        //             <li>姓名：{name}</li>
+        //             <li>性別：{sex}</li>
+        //             <li>年齡：{age}</li>
+        //         </ul>
+        //     )
+        // }
+        // Person.propTypes = {
+        //     name: PropTypes.string.isRequired, //限制name必傳，且為字符串
+        //     sex: PropTypes.string,//限制sex為字符串
+        //     age: PropTypes.number,//限制age為數值
+        // }
+        // //指定默認標籤屬性值
+        // Person.defaultProps = {
+        //     sex: '男',//sex默認值為男
+        //     age: 18 //age默認值為18
+        // }
+        // //渲染組件到頁面
+        // ReactDOM.render(<Person name="jerry" />, document.getElementById('test1'))
+        // #endregion
+
+        // React提出一種Refs概念，使用這個方法，我們就可以抓取到react裡面的DOM元素
+
+        // #region 10.字符串形式的ref
+        // class Demo extends React.Component {
+        //     //展示左側輸入框的數據
+        //     showData = () => {
+        //         const { input1 } = this.refs
+        //         alert(input1.value)
+        //     }
+        //     //展示右側輸入框的數據
+        //     showData2 = () => {
+        //         const { input2 } = this.refs
+        //         alert(input2.value)
+        //     }
+        //     render() {
+        //         return (
+        //             <div>
+        //                 <input ref="input1" type="text" placeholder="點擊按鈕提示數據" />&nbsp;
+        //                 <button onClick={this.showData}>點我提示左側的數據</button>&nbsp;
+        //                 <input ref="input2" onBlur={this.showData2} type="text" placeholder="失去焦點提示數據" />
+        //             </div>
+        //         )
+        //     }
+        // }
+        // //渲染組件到頁面
+        // ReactDOM.render(<Demo a="1" b="2" />, document.getElementById('test'))
+        // #endregion
+
+        // #region 11.CallBack形態的ref
+        // class Demo extends React.Component {
+        //     //展示左側輸入框的數據
+        //     showData = () => {
+        //         const { input1 } = this
+        //         alert(input1.value)
+        //     }
+        //     //展示右側輸入框的數據
+        //     showData2 = () => {
+        //         const { input2 } = this
+        //         alert(input2.value)
+        //     }
+        //     render() {
+        //         return (
+        //             <div>
+        //                 <input ref={c => this.input1 = c} type="text" placeholder="點擊按鈕提示數據" />&nbsp;
+        //                 <button onClick={this.showData}>點我提示左側的數據</button>&nbsp;
+        //                 <input onBlur={this.showData2} ref={c => this.input2 = c} type="text"
+        //                     placeholder="失去焦點提示數據" />&nbsp;
+        //             </div>
+        //         )
+        //     }
+        // }
+        // //渲染組件到頁面
+        // ReactDOM.render(<Demo a="1" b="2" />, document.getElementById('test'))
+        // #endregion
+
+        // #region 12.createRef() API
+        // class Demo extends React.Component {
+        //     /*
+        //         React.createRef調用後可以返回一個容器，該容器可以存儲被ref所標識的節點,該容器是「專人專用」的
+        //     */
+        //     myRef = React.createRef()
+        //     myRef2 = React.createRef()
+        //     //展示左側輸入框的數據
+        //     showData = () => {
+        //         alert(this.myRef.current.value);
+        //     }
+        //     //展示右側輸入框的數據
+        //     showData2 = () => {
+        //         alert(this.myRef2.current.value);
+        //     }
+        //     render() {
+        //         return (
+        //             <div>
+        //                 <input ref={this.myRef} type="text" placeholder="點擊按鈕提示數據" />&nbsp;
+        //                 <button onClick={this.showData}>點我提示左側的數據</button>&nbsp;
+        //                 <input onBlur={this.showData2} ref={this.myRef2} type="text" placeholder="失去焦點提示數據" />&nbsp;
+        //             </div>
+        //         )
+        //     }
+        // }
+        // //渲染組件到頁面
+        // ReactDOM.render(<Demo a="1" b="2" />, document.getElementById('test'))
+        // #endregion
+
+        // #region 13.非受控組件 (用 ref)
+        //創建組件
+        // class Login extends React.Component {
+        //     handleSubmit = (event) => {
+        //         event.preventDefault() //阻止表單提交
+        //         const { username, password } = this
+        //         alert(`你輸入的用戶名是：${username.value},你輸入的密碼是：${password.value}`)
+        //     }
+        //     render() {
+        //         return (
+        //             <form onSubmit={this.handleSubmit}>
+        //                 用戶名：<input ref={c => this.username = c} type="text" />
+        //                 密碼：<input ref={c => this.password = c} type="password" />
+        //                 <button>登錄</button>
+        //             </form>
+        //         )
+        //     }
+        // }
+        // //渲染組件
+        // ReactDOM.render(<Login />, document.getElementById('test'))
+        // #endregion
+
+        // #region 14.受控組件 (用 state，使 state成為唯一的資料來源地，而非自行去 DOM裡找資料！這是 react的核心思想，非常的重要！)
+        // class Login extends React.Component {
+        //     //初始化狀態
+        //     state = {
+        //         username: '', //用戶名
+        //         password: '' //密碼
+        //     }
+        //     //保存用戶名到狀態中
+        //     saveUsername = (event) => {
+        //         this.setState({ username: event.target.value })
+        //     }
+        //     //保存密碼到狀態中
+        //     savePassword = (event) => {
+        //         this.setState({ password: event.target.value })
+        //     }
+        //     //表單提交的回調
+        //     handleSubmit = (event) => {
+        //         event.preventDefault() //阻止表單提交
+        //         const { username, password } = this.state
+        //         alert(`你輸入的用戶名是：${username},你輸入的密碼是：${password}`)
+        //     }
+        //     render() {
+        //         return (
+        //             <form onSubmit={this.handleSubmit}>
+        //                 用戶名：<input onChange={this.saveUsername} type="text" />
+        //                 密碼：<input onChange={this.savePassword} type="password" />
+        //                 <button>登錄</button>
+        //             </form>
+        //         )
+        //     }
+        // }
+        // ReactDOM.render(<Login />, document.getElementById('test'))
+        // #endregion
+
+        // #region 15.受控組件改良版1
+        // class Login extends React.Component {
+        //     //初始化狀態
+        //     state = {
+        //         username: '', //用戶名
+        //         password: '' //密碼
+        //     }
+        //     //保存表單數據到狀態中
+        //     saveFormData = (dataType) => {
+        //         return (event) => {
+        //             this.setState({ [dataType]: event.target.value })
+        //         }
+        //     }
+        //     //表單提交的回調
+        //     handleSubmit = (event) => {
+        //         event.preventDefault() //阻止表單提交
+        //         const { username, password } = this.state
+        //         alert(`你輸入的用戶名是：${username},你輸入的密碼是：${password}`)
+        //     }
+        //     render() {
+        //         return (
+        //             <form onSubmit={this.handleSubmit}>
+        //                 用戶名：<input onChange={this.saveFormData('username')} type="text" />
+        //                 密碼：<input onChange={this.saveFormData('password')} type="password" />
+        //                 <button>登錄</button>
+        //             </form>
+        //         )
+        //     }
+        // }
+        // ReactDOM.render(<Login />, document.getElementById('test'))
+        // #endregion
+
+        // #region 16.受控組件改良版1的變形
+        // class Login extends React.Component {
+        //     //初始化狀態
+        //     state = {
+        //         username: '', //用戶名
+        //         password: '' //密碼
+        //     }
+        //     //保存表單數據到狀態中
+        //     saveFormData = (dataType, event) => {
+        //         this.setState({ [dataType]: event.target.value })
+        //     }
+        //     //表單提交的回調
+        //     handleSubmit = (event) => {
+        //         event.preventDefault() //阻止表單提交
+        //         const { username, password } = this.state
+        //         alert(`你輸入的用戶名是：${username},你輸入的密碼是：${password}`)
+        //     }
+        //     render() {
+        //         return (
+        //             <form onSubmit={this.handleSubmit}>
+        //                 用戶名：<input onChange={event => this.saveFormData('username', event)} type="text" />
+        //                 密碼：<input onChange={event => this.saveFormData('password', event)} type="password" />
+        //                 <button>登錄</button>
+        //             </form>
+        //         )
+        //     }
+        // }
+        // ReactDOM.render(<Login />, document.getElementById('test'))
+        // #endregion
+
+        // #region 17.受控組件改良版3 (完全不用高階函式)
+        // class Login extends React.Component {
+        //     //初始化狀態
+        //     state = {
+        //         username: '', //用戶名
+        //         password: '' //密碼
+        //     }
+        //     //保存表單數據到狀態中
+        //     saveFormData = (event) => {
+        //         const target = event.target;
+        //         const value = target.type === 'checkbox' ? target.checked : target.value;
+        //         const name = target.name;
+        //         this.setState({ [name]: value })
+        //     }
+        //     //表單提交的回調
+        //     handleSubmit = (event) => {
+        //         event.preventDefault() //阻止表單提交
+        //         const { username, password } = this.state
+        //         alert(`你輸入的用戶名是：${username},你輸入的密碼是：${password}`)
+        //     }
+        //     render() {
+        //         return (
+        //             <form onSubmit={this.handleSubmit}>
+        //                 用戶名：<input onChange={this.saveFormData} type="text" name="username" />
+        //                 密碼：<input onChange={this.saveFormData} type="password" name="password" />
+        //                 <button>登錄</button>
+        //             </form>
+        //         )
+        //     }
+        // }
+        // ReactDOM.render(<Login />, document.getElementById('test'))
+        // #endregion
+
+        // #region 18.無限迴圈的範例
+        //生命週期回調函數 <=> 生命週期鉤子函數 <=> 生命週期函數 <=> 生命週期鉤子
+        // class Life extends React.Component {
+        //     state = { opacity: 1 }
+        //     death = () => {
+        //         //卸載組件
+        //         ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+        //     }
+        //     //初始化渲染、狀態更新之後
+        //     render() {
+        //         console.log('render');
+        //         setInterval(() => {
+        //             //獲取原狀態
+        //             let { opacity } = this.state
+        //             //減小0.1
+        //             opacity -= 0.1
+        //             if (opacity <= 0) opacity = 1
+        //             //設置新的透明度
+        //             this.setState({ opacity }) // 這行造成無限迴圈，運行setState()會使render()被觸發進而更新DOM
+        //         }, 200);
+        //         return (
+        //             <div>
+        //                 <h2 style={{ opacity: this.state.opacity }}>React學不會怎麼辦？</h2>
+        //                 <button onClick={this.death}>不活了</button>
+        //             </div>
+        //         )
+        //     }
+        // }
+        // ReactDOM.render(<Life />, document.getElementById('test'))
+        // #endregion
+
+        // #region 19.部份生命週期的範例
+        /*
+        生命週期回調函數 <=> 生命週期鉤子函數 <=> 生命週期函數 <=> 生命週期鉤子(Hooks)
+        我說明：程式一開始把組件被render到DOM中後，componentDidMount()會被呼叫，然後 setInterval每2秒
+        執行一次 setState，每當 setState被執行，render()會被觸發進而更新DOM，
+        組件被更新完成後，componentDidUpdate()這個方法會被呼叫。
+        */
+        // class Life extends React.Component {
+        //     state = { opacity: 1 }
+        //     death = () => {
+        //         //卸載組件
+        //         ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+        //     }
+        //     //組件掛完畢
+        //     componentDidMount() { //僅會在第一次組件載入後被執行
+        //         console.log('componentDidMount');
+        //         this.timer = setInterval(() => {
+        //             //獲取原狀態
+        //             let { opacity } = this.state
+        //             //減小0.1
+        //             opacity -= 0.1
+        //             if (opacity <= 0) opacity = 1
+        //             //設置新的透明度
+        //             this.setState({ opacity }) //運行setState()會使render()被觸發進而更新DOM，而當一個組件被render到DOM中時，componentDidMount()會被呼叫
+        //         }, 2000);
+        //     }
+        //     //組件將要卸載
+        //     componentWillUnmount() { //定時器在組件被缷載後，也要一起被清除，否則會產生更新錯誤的訊息
+        //         console.log('componentWillUnmount');
+        //         //清除定時器
+        //         clearInterval(this.timer)
+        //     }
+        //     componentDidUpdate(){
+        //         console.log('componentDidUpdate');
+        //     }
+        //     //初始化渲染、狀態更新之後
+        //     render() {
+        //         console.log('render');
+        //         return (
+        //             <div>
+        //                 <h2 style={{ opacity: this.state.opacity }}>React學不會怎麼辦？</h2>
+        //                 <button onClick={this.death}>不活了</button>
+        //             </div>
+        //         )
+        //     }
+        // }
+        // ReactDOM.render(<Life />, document.getElementById('test'))
+        // #endregion
+
+        // #region 20.getSnapshotBeforeUpdate()使用案例
+        // class NewsList extends React.Component {
+        //     state = { newsArr: [] }
+        //     componentDidMount() {
+        //         console.log('componentDidMount');
+        //         setInterval(() => {
+        //             //取得原狀態
+        //             const { newsArr } = this.state
+        //             //模擬一條新聞
+        //             const news = '新聞' + (newsArr.length + 1)
+        //             //更新狀態
+        //             this.setState({ newsArr: [news, ...newsArr] })
+        //         }, 5000);
+        //     }
+        //     getSnapshotBeforeUpdate() { // componentDidUpdate之前被呼叫
+        //         console.log('getSnapshotBeforeUpdate');
+        //         return this.refs.list.scrollHeight // 這裡在更新之前，取得元素捲動高度(scrollHeight)，並將其傳給componentDidUpdate
+        //     }
+        //     componentDidUpdate(preProps, preState, height) {
+        //         console.log('componentDidUpdate');
+        //         this.refs.list.scrollTop += this.refs.list.scrollHeight - height
+        //     }
+        //     render() {
+        //         console.log('render');
+        //         return (
+        //             <div className="list" ref="list">
+        //                 {
+        //                     this.state.newsArr.map((n, index) => {
+        //                         return <div key={index} className="news">{n}</div>
+        //                     })
+        //                 }
+        //             </div>
+        //         )
+        //     }
+        // }
+        // ReactDOM.render(<NewsList />, document.getElementById('test'))
+        // #endregion
+
+        // #region 21.
+        // #endregion
+
+        // #region 22.
+        // #endregion
+
+        // #region 23.
+        // #endregion
+
+        // #region 24.
+        // #endregion
+
+        // #region 25.
+        // #endregion
+
+    </script>
+</body>
+
+</html>

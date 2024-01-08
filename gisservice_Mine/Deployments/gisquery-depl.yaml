@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gisquery-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gisqueryservice
+  template:
+    metadata:
+      labels:
+        app: gisqueryservice
+    spec:
+      containers:
+        - name: gisqueryservice
+          image: jihlihuang/gisqueryservice:latest
+      imagePullSecrets:
+        - name: regsecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gisquery-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: gisqueryservice
+  ports:
+  - name: gisqueryservice
+    protocol: TCP
+    port: 80
+    targetPort: 80

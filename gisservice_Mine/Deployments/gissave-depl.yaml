@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gissave-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gissaveservice
+  template:
+    metadata:
+      labels:
+        app: gissaveservice
+    spec:
+      containers:
+        - name: gissaveservice
+          image: jihlihuang/gissaveservice:latest
+      imagePullSecrets:
+        - name: regsecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gissave-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: gissaveservice
+  ports:
+  - name: gissaveservice
+    protocol: TCP
+    port: 80
+    targetPort: 80

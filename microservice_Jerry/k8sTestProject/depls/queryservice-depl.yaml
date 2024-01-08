@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: queryservice-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: queryservice
+  template:
+    metadata:
+      labels:
+        app: queryservice
+    spec:
+      containers:
+        - name: queryservice
+          image: jihlihuang/queryservice:latest
+
+#ClusterIP定義區塊
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: queryservice-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: queryservice
+  ports:
+  - name: queryservice
+    protocol: TCP
+    port: 80
+    targetPort: 80

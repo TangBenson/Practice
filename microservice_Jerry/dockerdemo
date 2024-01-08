@@ -1,0 +1,17 @@
+下載db的image後
+啟動db容器
+docker run --name=sqlserver -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Aa%*1234' -p 1433:1433 -d mcr.microsoft.com/mssql/server
+docker exec -it 2db /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Aa%*1234 (進入sqlcommend的界面)
+
+建好db和table後再包成image
+docker commit 90eb tangmssql:1.0.0
+
+啟動db容器
+docker run --name=sqlserver -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Aa%*1234' -p 1433:1433 -d tangmssql:1.0.0
+docker exec -it f19 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Aa%*1234 (進入sqlcommend的界面)
+
+把app包成image
+docker build -t console_docker:1.0.0 .
+
+啟動app容器
+docker run -it --link sqlserver:localhost console_docker:1.0.0 (別名要設定localhost才能寫進sql容器，因為app程式碼設定的server是localhost)

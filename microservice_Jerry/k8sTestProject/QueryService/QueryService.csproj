@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.2.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <!-- 用Jerry的yo語法建該service後，自動建一個參考的動作 -->
+  <ItemGroup>
+    <ProjectReference Include="..\CommonService\CommonService.csproj" />
+  </ItemGroup>
+
+</Project>
+
+<!-- CommonService的Utilities是連ssapi用的功能，QueryService有個小func叫CommonService，透過CommonService去聯ssapi，CommonService只是一個http post的架構 -->
+<!-- CommonService可以再加很多功能，如匯出excel、接地圖、發信、台新界接、irent基礎服務.....，這些都不會變的功能 -->
+<!-- build之前不會有bin、obj等目錄 -->

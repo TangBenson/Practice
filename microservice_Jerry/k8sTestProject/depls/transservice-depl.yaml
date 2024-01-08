@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transservice-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transservice
+  template:
+    metadata:
+      labels:
+        app: transservice
+    spec:
+      containers:
+        - name: transservice
+          image: jihlihuang/transservice:latest

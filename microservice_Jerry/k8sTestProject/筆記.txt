@@ -1,0 +1,9 @@
+Jerry希望未來系統做資料存儲或交換都用queue的模式做訊息傳遞處理，Sam介紹MassTransit的library，
+優點是降低db負載衝擊、也可做非同步，只要套了這介面，不管用rabbitmq做訊息的發送跟訂閱，
+也可用kafka或signalR，統合了所有訊息處理，前提要對queue了解。
+
+第2堂36分鐘打的api我沒收到回傳內容....但是200ok
+
+TransService也是用yo himsk8s:service建，但MD檔似乎沒寫
+
+yo himsk8s:asyncsubscriber的service name打TransService，另一個一樣是addrtrigger(和前面設定同名)，MD檔似乎沒寫

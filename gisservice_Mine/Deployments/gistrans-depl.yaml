@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gistrans-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gistransservice
+  template:
+    metadata:
+      labels:
+        app: gistransservice
+    spec:
+      containers:
+        - name: gistransservice
+          image: jihlihuang/gistransservice:latest
+      imagePullSecrets:
+        - name: regsecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gistrans-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: gistransservice
+  ports:
+  - name: gistransservice
+    protocol: TCP
+    port: 80
+    targetPort: 80

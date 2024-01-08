@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset=utf-8"UTF-8">
+    <title>hello_react</title>
+</head>
+
+<body>
+    <!-- 準備好一個「容器」 -->
+    <div id="test"></div>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+    <div id="test4"></div>
+    <div id="test5"></div>
+
+    <script type="text/javascript" src="js/react.development.js"></script><!-- 引入react核心庫 -->
+    <script type="text/javascript" src="js/react-dom.development.js"></script><!-- 引入react-dom，用於支持react操作DOM -->
+    <script type="text/javascript" src="js/babel.min.js"></script><!-- 引入babel，用於將jsx轉為js -->
+    <script type="text/javascript" src="js/prop-types.js"></script>
+    <script type="text/babel"> /* 此處一定要寫babel */
+        const VDOM = <h1>Hello,React</h1> /* 此處一定不要寫引號，因為不是字符串 */
+        const VDOM2 = (
+            <h1 id="title">
+                <span>Hello,ReactJS</span>
+            </h1>
+        ) /* 多行時可以用括號包覆! */
+        ReactDOM.render(VDOM, document.getElementById('test')) // 渲染組件到頁面
+        ReactDOM.render(VDOM2, document.getElementById('test1')) // 渲染組件到頁面
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+        class DemoRef extends React.Component {
+            /*
+                React.createRef調用後可以返回一個容器，該容器可以存儲被ref所標識的節點,該容器是「專人專用」的
+            */
+            myRef = React.createRef()
+            changeColor = () => {
+                if (this.myRef.current.style.color == "red") {
+                    console.log(1)
+                    this.myRef.current.style.color = "blue";
+                }
+                else {
+                    console.log(2)
+                    this.myRef.current.style.color = "red";
+                }
+            }
+            render() {
+                return (
+                    <div>
+                        <h1 ref={this.myRef} >四季溯溪</h1>&nbsp;
+                        <button onClick={this.changeColor}>改變字體顏色</button>&nbsp;
+                    </div>
+                )
+            }
+        }
+        ReactDOM.render(<DemoRef />, document.getElementById('test2'))
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+        class MyComponent extends React.Component {
+            state = { color: 'black' };
+            render() {
+                return <h1 style={{ color: this.state.color }} onClick={() => this.setState({ color: 'red' })}>Hello World(點我變紅色)</h1>;
+            }
+        }
+        ReactDOM.render(<MyComponent />, document.getElementById('test3'))
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+        class MyComponent2 extends React.Component {
+            state = { color: 'blue', tf: true };
+            handleMouseEnter = (gg) => {
+                gg.target.style.cursor = "pointer";
+            }
+            handleMouseLeave = (e) => {
+                e.target.style.cursor = "default";
+            }
+            render() {
+                const color = this.state.color
+                return <h1 style={{ color: this.state.color }} onClick={this.changeColor} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>做人不要太自負</h1>
+            }
+            changeColor = () => {
+                const { color, tf } = this.state
+                console.log(tf)
+                this.setState({ tf: !tf })
+                console.log(tf)
+                if (tf) {
+                    this.setState({ color: 'blue' })
+                }
+                else {
+                    this.setState({ color: 'red' })
+                }
+            }
+        }
+        ReactDOM.render(<MyComponent2 />, document.getElementById('test4'))
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+        class MyComponent3 extends React.Component {
+            myRef = React.createRef()
+            state = { a: '我是預設值' }
+            updateHtml = () => {
+                this.setState({ a: this.myRef.current.value })
+                // this.props.game = this.myRef.current.value //此行代碼會報錯，因為props是只讀的
+            }
+            static defaultProps = {
+                game: '啥遊戲'
+            }
+            render() {
+                const { game, company, price } = this.props
+                return (
+                    <div >
+                        ------------------------------------------------------<br />
+                        <input ref={this.myRef} type="text" placeholder="點擊按鈕提示數據" />&nbsp;
+                        <h3 >{this.state.a}</h3>
+                        <h3 >{game},{company},{price}</h3>
+                        <button onClick={this.updateHtml}>變動</button>&nbsp;<br />
+                        ------------------------------------------------------
+                    </div>
+                )
+            }
+        }
+        const p = { company: 'SE', price: 1790 } //game: 'FF16', 
+        ReactDOM.render(<MyComponent3 {...p} />, document.getElementById('test5'))
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+    </script>
+
+    <script type="text/javascript">
+        // function Test() {
+        //     console.log('1:', this)
+        // }
+        // Test()
+        // let test = function () { console.log('2:', this.name, this) }
+        // let test2 = () => { console.log('3:', this.name, this) } // 箭頭函式(Lambda表達式)
+        // name = 'hello';
+        // const obj = {
+        //     name: 'world'
+        // }
+        // test();
+        // test2();
+        // console.log('------------------------------------------')
+        // test.call(obj);
+        // test2.call(obj);
+
+        /*
+        function.prototype裡頭提供了三個非常相似且常常讓人感到迷茫的 3個方法，分別是 call 、 apply 、 bind ，這三個功能可以改變函數的動態 this。
+        call：執行 function且明確指定 this，有別於()執行 function是無法指定 this的
+        apply：基本上，call 跟 apply 就是個雙胞胎，他們的執行後的功能一模一樣，但參數不同
+        bind：第二以後的參數會作為往後傳進目標函式的參數，會回傳包裹後的目標函式
+
+        對於 JavaScript 來說，this 就不是那麼直覺的東西了，他真正的內容是 取決於 Function 的執行情境與方式，也就是 JavaScript 中的 this 是執行時期決定的，
+        因為執行 Function 的方式不同，也會連帶影響到 Function 中的 this 指向的內容
+
+        JavaScript this 的五種繫結：
+        預設繫結：最陽春的()呼叫函式，而不是被當作物件的方法被調用的
+        隱含繫結：被當作物件的方法執行
+        明確繫結：使用 call、apply、bind執行 Function 時，就會套用明確繫結
+        new 繫結：當我們使用 new 執行 Function 時，就會套用 new 繫結。this 的內容會是 new 新建出來的物件本身
+        語彙繫結：當我們使用箭號函式 () => {} 執行 Function 時。this 的內容與包裹他的 Function 的 this 相同
+        優先順序：語彙繫結 -> new 繫結 -> 明確繫結 -> 隱含繫結 -> 預設繫結
+        */
+
+        // call的範例
+        // function add(a, b) {
+        //     console.log(this)
+        //     return a + b;
+        // }
+        // var objtang = {}
+        // console.log(add(1, 2));
+        // console.log(add.call(objtang, 1, 2)); // 第一個參數：輸入的物件會被指定為目標函式中的 this
+
+        // apply的範例
+        // var list = [1, 5, 8];
+        // function add() {
+        //     // from()：把類陣列物件轉換成陣列
+        //     // arguments：代表傳入目標 Function 的所有參數
+        //     // reduce()：把陣列收束成單一值
+        //     return Array.from(arguments).reduce(function (sum, num) {
+        //         return sum + num;
+        //     });
+        // }
+        // console.log(add.call(null, 1, 2));
+        // console.log(add.apply(null, list));	 // 只有兩個參數，第2個是陣列
+
+        // bind的範例
+        // function add(a, b) {
+        //     return a + b;
+        // }
+        // add.call(null, 1, 2);			// 3
+        // add.call(null, 1, 4);			// 5
+        // add.apply(null, [1, 2]);		    // 3
+        // add.apply(null, [1, 4]);		    // 5
+        // var add1 = add.bind(null, 1);
+        // console.log(add1(2));			// 3
+        // console.log(add1(4));			// 5
+
+
+        // 預設繫結 => 在非嚴格模式下，this 的內容就會是 global 物件。在嚴格模式下，this 的內容就會是 undefined
+        // var myString = 'hello global';
+        // function logMyString() {
+        //     var myString = 'hello local';
+        //     console.log(this.myString);
+        // }
+        // logMyString.myString = 'hello function';
+        // logMyString(); // "hello global"
+
+        // 隱含繫結 => this 的內容是最終擁有方法的物件
+        // var myString = 'hello global';
+        // var innerObj = { log: logMyString, myString: 'hello inner object' };
+        // var obj = { log: logMyString, myString: 'hello object', innerObj: innerObj };
+        // function logMyString() {
+        //     console.log(this.myString);
+        // }
+        // logMyString.myString = 'hello function';
+        // logMyString();  // "hello global"
+        // obj.log();     // "hello object"
+        // obj.innerObj.log();    // "hello inner object"
+        // var logMyString2 = obj.log;
+        // logMyString2(); // "hello global"
+
+        // 明確繫結
+
+        // new 繫結
+        // var myString = 'hello global';
+        // function logMyString() {
+        //     this.myString = 'hello new object';
+        // }
+        // logMyString.myString = 'hello function';
+        // var newObj = new logMyString();
+        // console.log(newObj.myString); // "hello new object"
+
+        // 語彙繫結
+        // var myString = 'hello global',
+        //     obj = {};
+        // function outer() {
+        //     this.myString = 'hello outer';
+        //     return () => {
+        //         this.myString = 'hello arrow function';
+        //     }
+        // }
+        // var arrowFn = outer.call(obj);
+        // console.log(arrowFn);
+        // console.log(obj.myString);      // "hello outer"
+        // console.log('----');
+        // arrowFn();
+        // console.log('--DD--');
+        // console.log(window.myString);   // "hello global"
+        // console.log(obj.myString);      // "hello arrow function"
+    </script>
+</body>
+
+</html>
